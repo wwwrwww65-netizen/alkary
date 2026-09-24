@@ -1,23 +1,38 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="refresh" content="0; url=$(link-login)" />
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="-1">
-    <title>Internet hotspot - Error</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>شبكة الكاري نت اللاسلكية | جاري التوجيه...</title>
+    <style>
+        html, body {
+            background-color: #2b000e;
+            background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        var target = "$(link-login)";
+        if (!target || target.indexOf("$(") !== -1) {
+            target = "login.html";
+        }
+        window.location.replace(target);
+    </script>
 </head>
-
-<body>
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Hotspot error: $(error)</h1>
-                <p class="info">Log in page: <a href="$(link-login)">$(link-login)</a></p>
-            </div>
-        </div>
+<body style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh; margin: 0;">
+    <div style="padding: 20px;">
+        <p style="font-size: 15px; color: #F5D77F;">جاري العودة لصفحة تسجيل الدخول...</p>
     </div>
 </body>
-
 </html>

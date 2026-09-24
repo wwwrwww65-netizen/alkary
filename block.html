@@ -1,51 +1,311 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
-	<meta charset="windows-1256" />
-	<meta name="theme-color" content="#673ab7" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" href="assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="theme-color" content="#24020a" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>ط´ط¨ظƒط© ط§ظ„ظƒط§ط±ظٹ ظ†طھ ط§ظ„ظ„ط§ط³ظ„ظƒظٹط© | طھظ… ط¥ظٹظ‚ط§ظپ ط§ظ„ظ…ط­ط§ظˆظ„ط§طھ ظ…ط¤ظ‚طھط§ظ‹</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fontawesome-webfont.ttf" as="font" type="font/ttf" crossorigin>
 
-    <title>تسجيل الدخول</title>
-	
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
+    <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    
+    <script defer src="assets/js/hotBlocker.min.js"></script>
 
-	<link rel="stylesheet" href="assets/css/assets.css" />
-	<link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
-	<script src="assets/js/hotBlocker.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Almarai';
+            font-style: normal;
+            font-weight: 300 900;
+            font-display: swap;
+            src: url('assets/fonts/Almarai.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'FontAwesome';
+            src: url('assets/fonts/fontawesome-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
 
-<body>
-    <!-- سكربت خاص بالساعة-->
-<div id="clock">Loading...</div>  <script type="text/javascript">  function refrClock()  {  var d=new Date();  var s=d.getSeconds();  var m=d.getMinutes();  var h=d.getHours();  var day=d.getDay();  var date=d.getDate();  var month=d.getMonth();  var year=d.getFullYear();  var days=new Array("الاحد","الاثنين","الثلاثاء","الاربعاء","الخميس","الجمعة","السبت");  var months=new Array("يناير","فبراير","مارس","ابريل","ماي","يونيو","يوليو","اغسطس","سبتمبر","اكتوبر","نوفمبر","ديسمبر");  var am_pm;  if (s<10) {s="0" + s}  if (m<10) {m="0" + m}  if (h>12) {h-=12;am_pm = "مساءً."}  else {am_pm="صباحاً."}  if (h<10) {h="0" + h}  document.getElementById("clock").innerHTML=days[day] + " " + date + " من " + months[month] + " " + year + "   |   الساعة الان " + h + ":" + m + ":" + s + " " + am_pm;  setTimeout("refrClock()",1000);  }  refrClock();</script>
+        :root {
+            --bg-primary: #1a0108;
+            --bg-card: rgba(55, 4, 18, 0.88);
+            --bg-card-border: rgba(245, 215, 127, 0.35);
+            --gold-champagne: #F5D77F;
+            --ruby-btn: #c41e3a;
+            --text-main: #ffffff;
+        }
 
- <!-- نهاية الكود-->
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    <div class="form">
-                <img width="200" src="img/zzz.gif">
-                <h1 class="copyright">لقد تم حظرك بسبب محاولات تسجيل الدخول الكثيرة الخاطئة</h1>
-                <p class="">
-                    <span>بقي على فك الحظر: </span>
-                    <span count-down-span></span>
-                </p>
-				<!-- لا تحذف هذه السطور تحت اي ظروف حقوق الملكية  كود الملكية @@محترف سوريا@@أبو رواد-->
-  <footer class="copyright2">
-		<tr>
-			<td style="height: 20px;" align="center" valign="center">
-				<font style="background:rgba(0,0,0,0.4);color: #FFF;font-size: 11px;">
-					Developed &amp; Powered By 
-				<a target="_blank" style="color: lime;" href="https://www.mhtrfsyria.com">
-				MHTRF SYRIA &copy; 2022</a>
-					<b style="color: #FFFF00; font-size: 9px;"><br />[we are not 
-				responsible for any kind of misuse by this app]</b>
-				</font>
-			</td>
-		</tr>
-  </footer>
-<!-- /نهاية كود الملكية @@محترف سوريا@@أبو رواد-->
+        body {
+            background-color: #2b000e !important;
+            background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
+            min-height: 100vh;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .block-card {
+            background: #24020a;
+            border: 1px solid var(--bg-card-border);
+            border-radius: 24px;
+            padding: 28px 20px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top Brand Header */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .brand-badge {
+            background: rgba(245, 215, 127, 0.15);
+            color: #F5D77F;
+            border: 1px solid rgba(245, 215, 127, 0.4);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .starlink-tag {
+            background: linear-gradient(135deg, #F5D77F 0%, #e6be53 100%);
+            color: #1a0108;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Pulsing Shield Icon Container */
+        .icon-glow-wrap {
+            position: relative;
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 18px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-glow-pulse {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: rgba(196, 30, 58, 0.3);
+            animation: shieldPulse 2s infinite ease-in-out;
+        }
+
+        .icon-core {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #4a0018 0%, #24020a 100%);
+            border: 2px solid #c41e3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff5252;
+            font-size: 32px;
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.6);
+        }
+
+        @keyframes shieldPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.85;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 19px;
+            color: #F5D77F;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .block-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 0 8px;
+        }
+
+        /* Countdown Box */
+        .countdown-container {
+            background: rgba(15, 0, 7, 0.7);
+            border: 1px solid rgba(245, 215, 127, 0.3);
+            border-radius: 16px;
+            padding: 16px 14px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .countdown-timer {
+            font-size: 18px;
+            font-weight: 800;
+            color: #F5D77F;
+            letter-spacing: 0.5px;
+            direction: ltr;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(245, 215, 127, 0.4);
+        }
+
+        .countdown-timer span[count-down-span] {
+            color: #F5D77F;
+            direction: rtl;
+            display: inline-block;
+        }
+
+        /* Info notice */
+        .notice-pill {
+            background: rgba(245, 215, 127, 0.08);
+            border: 1px solid rgba(245, 215, 127, 0.2);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.5;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: right;
+        }
+
+        .notice-pill i {
+            color: #F5D77F;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Footer Info */
+        .network-footer {
+            border-top: 1px solid rgba(245, 215, 127, 0.15);
+            padding-top: 14px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .network-footer a {
+            color: #F5D77F;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh; margin: 0;">
+
+    <div class="block-card">
+        
+        <!-- Brand Header -->
+        <div class="brand-header">
+            <div class="brand-badge">
+                <i class="fa fa-wifi"></i>
+                <span>ط´ط¨ظƒط© ط§ظ„ظƒط§ط±ظٹ ظ†طھ ط§ظ„ظ„ط§ط³ظ„ظƒظٹط©</span>
+                <span class="starlink-tag">STARLINK</span>
             </div>
         </div>
-    </div>
-</body>
 
+        <!-- Pulsing Core Icon -->
+        <div class="icon-glow-wrap">
+            <div class="icon-glow-pulse"></div>
+            <div class="icon-core">
+                <i class="fa fa-shield"></i>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <h1>
+            <span>طھظ… ط¥ظٹظ‚ط§ظپ ط§ظ„ظ…ط­ط§ظˆظ„ط§طھ ظ…ط¤ظ‚طھط§ظ‹</span>
+        </h1>
+
+        <!-- Description -->
+        <p class="block-desc">
+            ظ„ظ‚ط¯ ظ‚ظ…طھ ط¨ط¥ط¯ط®ط§ظ„ ظƒط±ظˆطھ ط؛ظٹط± طµط­ظٹط­ط© ظ„ط¹ط¯ط© ظ…ط±ط§طھ ظ…طھطھط§ظ„ظٹط©. طھظ… طھظپط¹ظٹظ„ ظ†ط¸ط§ظ… ط§ظ„ط­ظ…ط§ظٹط© ط§ظ„ظ…ط¤ظ‚طھ ظ„ط­ظ…ط§ظٹط© ط­ط³ط§ط¨ط§طھ ط§ظ„ظ…ط´طھط±ظƒظٹظ† ظ…ظ† ظ…ط­ط§ظˆظ„ط§طھ ط§ظ„طھط®ظ…ظٹظ†.
+        </p>
+
+        <!-- Live Countdown Box -->
+        <div class="countdown-container">
+            <div class="countdown-label">
+                <i class="fa fa-clock-o" style="color: #ff5252;"></i>
+                <span>ط§ظ„ظˆظ‚طھ ط§ظ„ظ…طھط¨ظ‚ظٹ ظ„ط¥ط¹ط§ط¯ط© ظپطھط­ ط§ظ„ظ…ط­ط§ظˆظ„ط§طھ طھظ„ظ‚ط§ط¦ظٹط§ظ‹:</span>
+            </div>
+            <div class="countdown-timer">
+                <span count-down-span>ط¬ط§ط±ظٹ ط­ط³ط§ط¨ ط§ظ„ظˆظ‚طھ...</span>
+            </div>
+        </div>
+
+        <!-- Helpful Advice -->
+        <div class="notice-pill">
+            <i class="fa fa-info-circle"></i>
+            <span>ط³طھطھظ… ط¥ط¹ط§ط¯طھظƒ طھظ„ظ‚ط§ط¦ظٹط§ظ‹ ظ„طµظپط­ط© طھط³ط¬ظٹظ„ ط§ظ„ط¯ط®ظˆظ„ ظپظˆط± ط§ظ†طھظ‡ط§ط، ظ‡ط°ط§ ط§ظ„ظˆظ‚طھ ط¯ظˆظ† ط§ظ„ط­ط§ط¬ط© ظ„ط£ظٹ ط¥ط¬ط±ط§ط، ظ…ظ†ظƒ.</span>
+        </div>
+
+        <!-- Footer -->
+        <div class="network-footer">
+            <span>ظ…ظ†ط¸ظˆظ…ط© ط§ظ„ط­ظ…ط§ظٹط© ط§ظ„ط°ظƒظٹط© Mikrotik Hotspot</span>
+            <a href="tel:777174640">
+                <i class="fa fa-phone"></i>
+                <span>ط§ظ„ط¯ط¹ظ… ط§ظ„ظپظ†ظٹ: 777174640</span>
+            </a>
+        </div>
+
+    </div>
+
+</body>
 </html>

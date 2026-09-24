@@ -1,19 +1,58 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
+<html lang="ar" dir="rtl" style="background-color: #2b000e;">
 <head>
   <meta charset="utf-8" />
   <meta name="theme-color" content="#24020a" />
-  <meta name="view-transition" content="same-origin" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <title>شبكة الكاري نت اللاسلكية | تم تسجيل الخروج</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  
-  <link rel="prefetch" href="login.html">
-  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/fontawesome-webfont.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    /* Match exact background seamlessly to avoid any white flash or layout shift */
+    html, body {
+      background-color: #2b000e !important;
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #ffffff;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+    }
+  </style>
+  <script type="text/javascript">
+    // Instantaneous Execution before HTML parsing
+    var target = "$(link-login)";
+    if (!target || target.indexOf("$(") !== -1) {
+      target = "login.html";
+    }
+    if (target.indexOf("?") !== -1) {
+      target += "&logout=success";
+    } else {
+      target += "?logout=success";
+    }
 
+    // Check exit mode
+    var exitMode = "";
+    try {
+      exitMode = sessionStorage.getItem("alkary_exit_mode") || "";
+    } catch(e) {}
+
+    // If explicit disconnect was NOT requested, redirect immediately without rendering
+    if (exitMode !== "disconnect") {
+      try {
+        sessionStorage.setItem("just_logged_out", "1");
+      } catch(e) {}
+      window.location.replace(target);
+    } else {
+      // It is a disconnect: make body visible smoothly
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.display = 'flex';
+      });
+    }
+  </script>
+
+  <link rel="prefetch" href="login.html" />
+  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
-  <link rel="stylesheet" href="assets/css/fontello.css" />
   <link rel="stylesheet" href="assets/css/font-awesome.css" />
 
   <style>
@@ -25,14 +64,10 @@
     }
 
     body {
-      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
-      background-color: #2b000e !important;
-      color: #ffffff;
-      min-height: 100vh;
-      padding: 16px;
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
+      padding: 16px;
     }
 
     .logout-container {
@@ -53,13 +88,13 @@
       width: 64px;
       height: 64px;
       border-radius: 18px;
-      background: linear-gradient(135deg, #00d2ff, #0055b3);
+      background: linear-gradient(135deg, #ff1744, #a81c3c);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 30px;
       margin: 0 auto;
-      box-shadow: 0 4px 20px rgba(0, 140, 255, 0.4);
+      box-shadow: 0 4px 20px rgba(255, 23, 68, 0.45);
     }
 
     .logout-title {
@@ -133,11 +168,10 @@
 
     .support-text {
       font-size: 11.5px;
-      color: #6486a8;
+      color: #cbd5e1;
     }
   </style>
 </head>
-
 <body>
 
   <div class="logout-container">
@@ -197,7 +231,10 @@
       }
       var target = '$(link-login)';
       if (!target || target.indexOf('$(') !== -1) target = 'login.html';
-      window.location.href = target;
+      try {
+        sessionStorage.removeItem("alkary_exit_mode");
+      } catch(err) {}
+      window.location.replace(target);
       return false;
     }
   </script>

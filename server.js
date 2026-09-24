@@ -211,9 +211,26 @@ function getSession(req) {
 
 // Route: Root & Login page
 app.get(['/', '/login.html', '/login'], (req, res) => {
-  // If the URL has an error query param from a previous test, redirect to clean URL
-  if (req.query.error) {
-    return res.redirect('/login.html');
+  // If GET has username query parameter (e.g. login?username=...), handle login!
+  if (req.query.username) {
+    const username = req.query.username.trim();
+    const sessionId = 'hs_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    const durationSecs = 10 * 3600;
+    const quotaBytes = 1000 * 1024 * 1024;
+    sessions.set(sessionId, {
+      id: sessionId,
+      username: username,
+      ip: req.ip.replace('::ffff:', '') || '192.168.88.254',
+      mac: 'D4:6E:5C:' + Math.floor(Math.random() * 89 + 10) + ':' + Math.floor(Math.random() * 89 + 10) + ':' + Math.floor(Math.random() * 89 + 10),
+      startTime: Date.now() - 35 * 60 * 1000,
+      durationSecs: durationSecs,
+      quotaBytes: quotaBytes,
+      baseDownloaded: 114 * 1024 * 1024,
+      baseUploaded: 14.5 * 1024 * 1024
+    });
+    res.cookie('hotspot_session', sessionId, { maxAge: 24 * 3600 * 1000, httpOnly: true });
+    res.cookie('username', username, { maxAge: 24 * 3600 * 1000 });
+    return res.redirect('/status');
   }
 
   const session = getSession(req);
@@ -223,8 +240,8 @@ app.get(['/', '/login.html', '/login'], (req, res) => {
       return res.status(500).send('Error loading login template: ' + err.message);
     }
     let rendered = renderMikrotikTemplate(data, {
-      username: session ? session.username : (req.query.username || ''),
-      error: '',
+      username: session ? session.username : '',
+      error: req.query.error || '',
       'logged-in': session ? 'yes' : 'no',
       'link-login-only': '/login'
     });
@@ -261,6 +278,7 @@ app.post(['/login', '/login.html'], (req, res) => {
   });
 
   res.cookie('hotspot_session', sessionId, { maxAge: 86400 * 1000, httpOnly: true });
+  res.cookie('username', username, { maxAge: 86400 * 1000 });
   if (req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || req.headers.accept?.includes('application/json')) {
     return res.json({ success: true, redirect: '/status.html' });
   }
@@ -271,10 +289,10 @@ app.post(['/login', '/login.html'], (req, res) => {
 app.get('/status.html', (req, res) => {
   let session = getSession(req);
   if (!session) {
-    // default demo active session so visitors immediately see the status dashboard
+    const fallbackUsername = req.cookies.username || req.cookies.uname || '100';
     session = {
-      username: '100',
-      ip: '192.168.88.254',
+      username: fallbackUsername,
+      ip: req.ip.replace('::ffff:', '') || '192.168.88.254',
       mac: 'D4:6E:5C:8B:12:3A',
       uptime: '00:35:12',
       'session-time-left': '2h 24m 48s',
@@ -310,10 +328,17 @@ app.all(['/logout', '/logout.html'], (req, res) => {
     'bytes-out-nice': '15.4 MB'
   };
 
+  const eraseCookie = req.query['erase-cookie'] || (req.body && req.body['erase-cookie']);
   const sessionId = req.cookies.hotspot_session;
   if (sessionId) {
     sessions.delete(sessionId);
     res.clearCookie('hotspot_session');
+  }
+
+  // If normal logout (erase-cookie != 'on'), MikroTik redirects immediately to login.html with logout notice
+  // This completely eliminates any intermediate page, black screen or flicker
+  if (eraseCookie !== 'on') {
+    return res.redirect('/login.html?logout=success');
   }
 
   const filePath = path.join(__dirname, 'logout.html');

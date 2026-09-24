@@ -277,19 +277,21 @@ app.post(['/login', '/login.html'], (req, res) => {
     baseUploaded: 14.5 * 1024 * 1024
   });
 
-  res.cookie('hotspot_session', sessionId, { maxAge: 86400 * 1000, httpOnly: true });
-  res.cookie('username', username, { maxAge: 86400 * 1000 });
+  res.cookie('hotspot_session', sessionId, { maxAge: 86400 * 1000, httpOnly: true, sameSite: 'lax', path: '/' });
+  res.cookie('username', username, { maxAge: 86400 * 1000, sameSite: 'lax', path: '/' });
   if (req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || req.headers.accept?.includes('application/json')) {
-    return res.json({ success: true, redirect: '/status.html' });
+    return res.json({ success: true, redirect: '/status.html?user=' + encodeURIComponent(username) });
   }
-  res.redirect('/status.html');
+  res.redirect('/status.html?user=' + encodeURIComponent(username));
 });
 
 // Route: Status page
-app.get('/status.html', (req, res) => {
+app.get(['/status.html', '/status'], (req, res) => {
   let session = getSession(req);
+  const queryUser = req.query.user || req.query.username;
+
   if (!session) {
-    const fallbackUsername = req.cookies.username || req.cookies.uname || '100';
+    const fallbackUsername = queryUser || req.cookies.username || req.cookies.uname || '100';
     session = {
       username: fallbackUsername,
       ip: req.ip.replace('::ffff:', '') || '192.168.88.254',
@@ -302,6 +304,8 @@ app.get('/status.html', (req, res) => {
       'bytes-out-nice': '14.2 MB',
       'logged-in': 'yes'
     };
+  } else if (queryUser && session.username !== queryUser) {
+    session.username = queryUser;
   }
 
   const filePath = path.join(__dirname, 'status.html');
@@ -356,20 +360,9 @@ app.all(['/logout', '/logout.html'], (req, res) => {
   });
 });
 
-// Route: Prices page
+// Route: Prices redirect to modal on login page
 app.get('/prices.html', (req, res) => {
-  const filePath = path.join(__dirname, 'prices.html');
-  fs.readFile(filePath, 'utf-8', (err, data) => {
-    if (err) {
-      return res.status(500).send('Error loading prices template');
-    }
-    const rendered = renderMikrotikTemplate(data, {
-      'link-login': '/login.html',
-      'link-status': '/status.html'
-    });
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.send(rendered);
-  });
+  res.redirect('/login.html');
 });
 
 // Route: Error page
@@ -452,9 +445,9 @@ app.get('/api/download-hotspot', (req, res) => {
   archive.pipe(res);
 
   const filesToInclude = [
-    'login.html', 'status.html', 'logout.html', 'prices.html',
+    'login.html', 'status.html', 'logout.html',
     'error.html', 'block.html', 'radvert.html', 'redirect.html',
-    'rlogin.html', 'alogin.html', 'api.json', 'md5.js', 'favicon.ico'
+    'rlogin.html', 'alogin.html', 'api.json', 'md5.js', 'favicon.ico', 'errors.txt'
   ];
 
   for (const f of filesToInclude) {

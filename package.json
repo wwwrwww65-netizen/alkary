@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "echo 'Static app ready'"
+    "build": "echo 'Static app ready'",
+    "lint": "node --check server.js"
   },
   "dependencies": {
     "archiver": "^7.0.1",

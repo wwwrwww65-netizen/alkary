@@ -251,38 +251,52 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 14px;
-      padding: 12px 16px;
+      padding: 12px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
     }
 
     .mpi-right {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .mpi-title {
       font-size: 14px;
       font-weight: 800;
       color: #ffffff;
+      line-height: 1.3;
     }
 
     .mpi-details {
       font-size: 11.5px;
       color: #F5D77F;
+      line-height: 1.4;
     }
 
     .mpi-price {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
       color: #FFE082;
       background: rgba(255, 213, 79, 0.15);
-      padding: 5px 12px;
+      padding: 6px 12px;
       border-radius: 10px;
       border: 1px solid rgba(255, 213, 79, 0.35);
+      white-space: nowrap !important;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      letter-spacing: 0.2px;
     }
 
     /* Top Bar & Large Success Welcome Hero */
@@ -430,16 +444,19 @@
       letter-spacing: 0.3px;
     }
 
-    /* User Profile Micro-bar */
+    /* User Profile Micro-bar (Responsive & Zero-Glitch for short and long vouchers) */
     .user-info-strip {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 8px 12px;
       background: rgba(10, 1, 4, 0.68);
       border-radius: 14px;
       padding: 10px 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
     }
 
     .user-pill-tag {
@@ -449,24 +466,37 @@
       color: #ffffff;
       font-size: 13.5px;
       font-weight: 800;
+      min-width: 0;
+      flex: 1 1 auto;
+      max-width: 100%;
     }
 
     .user-code-badge {
       background: rgba(245, 215, 127, 0.22);
       color: #FFE082;
       border: 1px solid rgba(245, 215, 127, 0.45);
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 8px;
-      font-family: monospace;
-      font-size: 14px;
+      font-family: 'Almarai', monospace;
+      font-size: 13.5px;
       font-weight: bold;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+      letter-spacing: 0.5px;
+      display: inline-block;
     }
 
     .user-network-details {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #cbd5e1;
       direction: ltr;
       font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     /* Modern Redesigned Metrics Grid */
@@ -1337,18 +1367,35 @@
       var codeBadge = document.querySelector(".user-code-badge");
       if (!codeBadge) return;
       var currentVal = codeBadge.textContent.trim();
-      if (!currentVal || currentVal === '100' || currentVal.indexOf('$(') !== -1) {
-        var saved = '';
-        try {
-          saved = localStorage.getItem('alkary_active_voucher') || localStorage.getItem('alkary_active_user') || '';
-        } catch(e) {}
-        if (!saved) {
-          var m = document.cookie.match(/(?:^|;\s*)(?:uname|username)=([^;]+)/);
-          if (m) saved = decodeURIComponent(m[1]);
+
+      // Priority 1: Direct query parameter from login redirect
+      try {
+        var urlParams = new URLSearchParams(window.location.search);
+        var queryUser = urlParams.get('user') || urlParams.get('username') || urlParams.get('uname');
+        if (queryUser && queryUser.trim()) {
+          var cleanUser = queryUser.trim();
+          codeBadge.textContent = cleanUser;
+          try {
+            sessionStorage.setItem('alkary_active_voucher', cleanUser);
+            localStorage.setItem('alkary_active_voucher', cleanUser);
+            localStorage.setItem('alkary_active_user', cleanUser);
+          } catch(e) {}
+          return;
         }
-        if (saved) {
-          codeBadge.textContent = saved;
-        }
+      } catch(e) {}
+
+      // Priority 2: Session and Local storage
+      var saved = '';
+      try {
+        saved = sessionStorage.getItem('alkary_active_voucher') || localStorage.getItem('alkary_active_voucher') || localStorage.getItem('alkary_active_user') || '';
+      } catch(e) {}
+      if (!saved) {
+        var m = document.cookie.match(/(?:^|;\s*)(?:uname|username)=([^;]+)/);
+        if (m) saved = decodeURIComponent(m[1]);
+      }
+
+      if (saved && (!currentVal || currentVal === '100' || currentVal.indexOf('$(') !== -1)) {
+        codeBadge.textContent = saved;
       }
     }
 
@@ -1687,30 +1734,37 @@
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 200 ريال</span>
-              <span class="mpi-details">10 ساعات • صلاحية 24 ساعة • 450MB</span>
+              <span class="mpi-details">10 ساعات • صلاحية 24 ساعة • 1.5GB</span>
             </div>
-            <span class="mpi-price">200 ر.ي</span>
+            <span class="mpi-price">200&nbsp;ر.ي</span>
           </div>
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 500 ريال</span>
               <span class="mpi-details">35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 1500MB</span>
             </div>
-            <span class="mpi-price">500 ر.ي</span>
+            <span class="mpi-price">500&nbsp;ر.ي</span>
           </div>
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 1000 ريال (الأكثر طلباً)</span>
-              <span class="mpi-details">160 ساعة (6 أيام و 16 ساعة) • صلاحية 10 أيام • 3.4GB</span>
+              <span class="mpi-details">160 ساعة (6 أيام و 16 ساعة) • صلاحية 10 أيام • 6GB</span>
             </div>
-            <span class="mpi-price">1000 ر.ي</span>
+            <span class="mpi-price">1000&nbsp;ر.ي</span>
           </div>
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 2500 ريال (الشهرية الفائقة)</span>
-              <span class="mpi-details">16 يوم (أسبوعين ويومين) • صلاحية 30 يوم • 6.4GB</span>
+              <span class="mpi-details">16 يوم (أسبوعين ويومين) • صلاحية 30 يوم • 15GB</span>
             </div>
-            <span class="mpi-price">2500 ر.ي</span>
+            <span class="mpi-price">2500&nbsp;ر.ي</span>
+          </div>
+          <div class="modal-price-item">
+            <div class="mpi-right">
+              <span class="mpi-title">باقة 5000 ريال (الشهرية الفائقة)</span>
+              <span class="mpi-details">720 ساعة • صلاحية 30 يوم • 40GB</span>
+            </div>
+            <span class="mpi-price">5000&nbsp;ر.ي</span>
           </div>
         </div>
       </div>

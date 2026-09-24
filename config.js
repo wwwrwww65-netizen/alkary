@@ -384,9 +384,17 @@ window.HOTSPOT_CONFIG = {
       if (sendinSpeed && defaultSpeedVal) {
         sendinSpeed.value = defaultSpeedVal;
       }
+      var sendinDomain = document.getElementById('sendin_domain');
+      if (sendinDomain && defaultSpeedVal) {
+        sendinDomain.value = defaultSpeedVal;
+      }
       var selectedProfile = document.getElementById('selected_profile');
       if (selectedProfile && defaultSpeedVal) {
         selectedProfile.value = defaultSpeedVal;
+      }
+      var selectedSpeed = document.getElementById('selected_speed');
+      if (selectedSpeed && defaultSpeedVal) {
+        selectedSpeed.value = defaultSpeedVal;
       }
       var displayProfile = document.getElementById('display-profile-name');
       if (displayProfile && defaultSpeedLabel) {

@@ -1636,11 +1636,12 @@
         </div>
 
         <!-- 7. Main Login Form -->
-        <form name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin(event)" style="display: flex; flex-direction: column; gap: 12px;">
+        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif) style="display: flex; flex-direction: column; gap: 12px;">
             
             <input type="hidden" name="dst" value="$(link-orig)" />
             <input type="hidden" name="popup" value="true" />
             <input type="hidden" name="domain" id="selected_profile" value="100M/100M" />
+            <input type="hidden" name="speed" id="selected_speed" value="100M/100M" />
 
             <!-- Input Card Box -->
             <div class="card-input-wrapper">
@@ -1712,7 +1713,8 @@
             <input type="hidden" name="password" />
             <input type="hidden" name="dst" value="$(link-orig)" />
             <input type="hidden" name="popup" value="true" />
-            <input type="hidden" name="domain" id="sendin_speed" value="100M/100M" />
+            <input type="hidden" name="domain" id="sendin_domain" value="100M/100M" />
+            <input type="hidden" name="speed" id="sendin_speed" value="100M/100M" />
         </form>
         $(endif)
 
@@ -1910,7 +1912,51 @@
             <div class="modal-title" style="color: #ff5252;"><i class="fa fa-exclamation-triangle" style="margin-left: 6px;"></i>تنبيه تسجيل الدخول</div>
             <div class="modal-body-content">
                 <div id="error-arabic-msg" style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 8px;">
-                    $(error)
+                    <script type="text/javascript">
+                        var error = "$(error)";
+                        if (error == "simultaneous session limit reached") {
+                            document.write("لا يمكن تسجيل الدخول أكثر من مرة");
+                        }
+                        else if (error == "invalid username or password") {
+                            document.write("خطأ في إسم المستخدم او كلمة المرور");
+                        }
+                        else if (error == "access denied at this time") {
+                            document.write("بطاقة لا يمكن استخدامها في هذا الوقت");
+                        }
+                        else if (error == "uptime limit reached") {
+                            document.write("عذرا لقد انتهى الوقت المتاح لك..");
+                        }
+                        else if (error == "invalid password") {
+                            document.write("تأكد من كتابة كلمة المرور بشكل صحيح");
+                        }
+                        else if (error == "no more sessions are allowed for user $(username)") {
+                            document.write("لا يمكن تسجيل الدخول اكثر من مرة");
+                        }
+                        else if (error == "no valid profile found") {
+                            document.write("لقد انتهت صلاحية هذه البطاقة");
+                        }
+                        else if (error == "transfer limit reached") {
+                            document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
+                        }
+                        else if (error == "user $(username) has reached traffic limit") {
+                            document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
+                        }
+                        else if (error == "invalid Calling-Station-Id") {
+                            document.write("هذا الحساب مقترن بجهاز آخر");
+                        }
+                        else if (error == "user $(username) is not allowed to log in from this MAC address") {
+                            document.write("هذا الحساب مقترن بجهاز آخر");
+                        }
+                        else if (error.search("not found") != -1) {
+                            document.write("اسم المستخدم غير موجود تأكد من كتابته بشكل صحيح");
+                        }
+                        else if (error == "radius timeout") {
+                            document.write("عزيزي المشترك نعتذر عن انقطاع الخدمة بسبب الصيانة");
+                        }
+                        else {
+                            document.write("$(error)");
+                        }
+                    </script>
                 </div>
                 <div style="font-size: 12px; color: #ffab91;">
                     يرجى التأكد من كتابة كود الكرت بالشكل الصحيح أو مراجعة خدمة العملاء.
@@ -1950,10 +1996,7 @@
         }
 
         // Standard MikroTik CHAP / PAP instant authentication handler
-        function doLogin(e) {
-            if (e && e.preventDefault) {
-                e.preventDefault();
-            }
+        function doLogin() {
             copyTextValue();
             var uField = document.getElementById("uname");
             var u = (uField ? uField.value : "").trim();
@@ -1965,69 +2008,47 @@
                 rem();
             }
 
+            var selSpeed = document.getElementById("selected_profile");
+            var speedVal = selSpeed ? selSpeed.value : "100M/100M";
+
             var btn = document.getElementById("submit_btn");
             if (btn) {
-                btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري الدخول الفوري...</span>';
+                btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري التحقق والدخول...</span>';
                 btn.style.opacity = "0.9";
             }
 
-            var loginUrl = (document.login && document.login.action) ? document.login.action : '/login';
-            var postData = new URLSearchParams();
-            var isChap = false;
+            // إذا كان التشفير CHAP مفعلاً في راوتر المايكروتك
+            var chapId = '$(chap-id)';
+            var chapChallenge = '$(chap-challenge)';
+            var isChapActive = (document.sendin && typeof hexMD5 === "function" && chapId && chapId.indexOf('$(') === -1 && chapChallenge && chapChallenge.indexOf('$(') === -1);
 
-            if (document.sendin && typeof hexMD5 === "function") {
-                isChap = true;
-                var chapId = '$(chap-id)';
-                var chapChallenge = '$(chap-challenge)';
-                var encPass = hexMD5(chapId + document.login.password.value + chapChallenge);
+            if (isChapActive) {
                 document.sendin.username.value = u;
-                document.sendin.password.value = encPass;
-                var selSpeed = document.getElementById("selected_profile");
-                if (selSpeed && document.sendin.domain) {
-                    document.sendin.domain.value = selSpeed.value;
+                document.sendin.password.value = hexMD5(chapId + document.login.password.value + chapChallenge);
+                if (document.sendin.domain) {
+                    document.sendin.domain.value = speedVal;
                 }
-                loginUrl = document.sendin.action || loginUrl;
-                postData.append("username", u);
-                postData.append("password", encPass);
-                postData.append("dst", "$(link-orig)");
-                postData.append("popup", "true");
-                postData.append("domain", selSpeed ? selSpeed.value : "100M/100M");
-            } else {
-                postData.append("username", u);
-                postData.append("password", (document.login && document.login.password.value) ? document.login.password.value : u);
-                postData.append("dst", "$(link-orig)");
-                postData.append("popup", "true");
-                var selSpeed = document.getElementById("selected_profile");
-                postData.append("domain", selSpeed ? selSpeed.value : "100M/100M");
-            }
-
-            // High-speed instant login submission
-            if (window.fetch) {
-                fetch(loginUrl, {
-                    method: "POST",
-                    body: postData,
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        "X-Requested-With": "XMLHttpRequest"
-                    },
-                    credentials: "include"
-                }).then(function() {
-                    var statusTarget = '$(link-status)';
-                    if (!statusTarget || statusTarget.indexOf('$(') !== -1) statusTarget = 'status.html';
-                    var targetUrl = statusTarget + (statusTarget.indexOf('?') === -1 ? '?' : '&') + 'user=' + encodeURIComponent(u);
-                    window.location.replace(targetUrl);
-                }).catch(function() {
-                    var statusTarget = '$(link-status)';
-                    if (!statusTarget || statusTarget.indexOf('$(') !== -1) statusTarget = 'status.html';
-                    var targetUrl = statusTarget + (statusTarget.indexOf('?') === -1 ? '?' : '&') + 'user=' + encodeURIComponent(u);
-                    window.location.replace(targetUrl);
-                });
-                return false;
-            }
-
-            if (isChap && document.sendin) {
+                if (document.sendin.speed) {
+                    document.sendin.speed.value = speedVal;
+                }
                 document.sendin.submit();
                 return false;
+            }
+
+            // نمط PAP أو المحاكي المحلي
+            if (document.login) {
+                if (document.login.domain) {
+                    document.login.domain.value = speedVal;
+                }
+                if (document.login.speed) {
+                    document.login.speed.value = speedVal;
+                }
+                var pField = document.getElementById("paswd");
+                if (pField && !pField.value) {
+                    pField.value = u;
+                }
+                // في السيرفر المحلي: إرسال النموذج مباشرة
+                return true;
             }
             return true;
         }
@@ -2040,7 +2061,12 @@
 
         // 3. Set Speed Profile
         function setSpeedProfile(profileCode, displayName, elem, isTurbo, isGaming) {
-            document.getElementById("selected_profile").value = profileCode;
+            var selProfile = document.getElementById("selected_profile");
+            if (selProfile) selProfile.value = profileCode;
+            var selSpeed = document.getElementById("selected_speed");
+            if (selSpeed) selSpeed.value = profileCode;
+            var sendinDomain = document.getElementById("sendin_domain");
+            if (sendinDomain) sendinDomain.value = profileCode;
             var sendinSpeed = document.getElementById("sendin_speed");
             if (sendinSpeed) sendinSpeed.value = profileCode;
 

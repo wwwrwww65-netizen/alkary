@@ -1528,10 +1528,10 @@
           <span>بث رياضي مباشر • سينما ومسلسلات 4K</span>
         </div>
       </div>
-      <button type="button" class="service-action-btn" onclick="openModal('cinema-modal')">
+      <a href="http://live.alkary.net" class="service-action-btn" target="_blank" rel="noopener" style="text-decoration: none;">
         <span>مشاهدة</span>
         <i class="fa fa-play-circle" style="font-size: 14px;"></i>
-      </button>
+      </a>
     </div>
 
     <!-- 2. Metrics Header Section -->
@@ -1815,26 +1815,7 @@
     </div>
   </div>
 
-  <!-- Modal 4: Live Cinema & Matches -->
-  <div id="cinema-modal" class="modal-overlay" onclick="closeModal('cinema-modal')">
-    <div class="modal-card" onclick="event.stopPropagation()">
-      <button class="modal-close-btn" onclick="closeModal('cinema-modal')"><i class="fa fa-times"></i></button>
-      <div class="modal-title"><i class="fa fa-film" style="color: #00e676;"></i> سيرفر السينما والبث المباشر 4K</div>
-      <div class="modal-body-content">
-        <p>استمتع بمشاهدة مباريات اليوم بجودة عالية وأحدث الأفلام والمسلسلات مجاناً وبسرعة محلية فائقة دون استهلاك باقة الإنترنت الأساسية على شبكة الكاري نت.</p>
-        <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
-          <button class="refresh-btn" style="height: 44px; font-size: 14px; background: linear-gradient(135deg, #00c853, #00796b);" onclick="alert('جاري فتح قنوات البث المباشر BeIN Sports...');">
-            <i class="fa fa-play-circle" style="margin-left: 5px;"></i>
-            <span>فتح قنوات المباريات المباشرة</span>
-          </button>
-          <button class="refresh-btn" style="height: 44px; font-size: 14px; background: linear-gradient(135deg, #0091ea, #1565c0);" onclick="alert('جاري فتح مكتبة الأفلام والمسلسلات 4K...');">
-            <i class="fa fa-video-camera" style="margin-left: 5px;"></i>
-            <span>فتح مكتبة الأفلام والمسلسلات</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <script type="text/javascript">
     function openModal(id) {

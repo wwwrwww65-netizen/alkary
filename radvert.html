@@ -1,40 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
-<meta http-equiv="refresh" content="2; url=$(link-orig)">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />   
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<title>Internet hotspot - Advertisement</title>
-<link rel="stylesheet" href="css/style.css">
-<script>
-
-    var popup = '';
-    function openOrig() {
-	if (window.focus) popup.focus();
-	location.href = unescape('$(link-orig-esc)');
-    }
-    function openAd() {
-	location.href = unescape('$(link-redirect-esc)');
-    }
-    function openAdvert() {
-	if (window.name != 'hotspot_advert') {
-		popup = open('$(link-redirect)', 'hotspot_advert', '');
-		setTimeout("openOrig()", 1000);
-		return;
-	}
-	setTimeout("openAd()", 1000);
-    }
-</script>
+    <meta http-equiv="refresh" content="2; url=$(link-orig)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>شبكة الكاري نت اللاسلكية | إعلان</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+        }
+        body {
+            background-color: #2b000e;
+            background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            text-align: center;
+        }
+        .ad-card {
+            background: rgba(36, 2, 10, 0.95);
+            border: 1px solid rgba(245, 215, 127, 0.35);
+            border-radius: 20px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+        .ad-title {
+            color: #F5D77F;
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .ad-link {
+            color: #00e676;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        var popup = '';
+        function openOrig() {
+            if (window.focus) popup.focus();
+            location.href = unescape('$(link-orig-esc)');
+        }
+        function openAd() {
+            location.href = unescape('$(link-redirect-esc)');
+        }
+        function openAdvert() {
+            if (window.name != 'hotspot_advert') {
+                popup = open('$(link-redirect)', 'hotspot_advert', '');
+                setTimeout("openOrig()", 1000);
+                return;
+            }
+            setTimeout("openAd()", 1000);
+        }
+    </script>
 </head>
 <body onLoad="openAdvert()">
-    <div class="ie-fixMinHeight">
-        <div class="main">
-            <div class="wrap">
-                <h1>Advertisement</h1>
-                <p class="info">If nothing happens, open <a href="$(link-redirect)" target="hotspot_advert">advertisement</a> manually.</p>
-            </div>
-        </div>
+    <div class="ad-card">
+        <div class="ad-title">إعلان من إدارة الشبكة</div>
+        <p style="font-size: 13px; color: #e2e8f0; line-height: 1.6;">
+            إذا لم يتم فتح الرابط تلقائياً، <a href="$(link-redirect)" target="hotspot_advert" class="ad-link">اضغط هنا لفتح الإعلان</a> يدوياً.
+        </p>
     </div>
 </body>
 </html>

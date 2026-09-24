@@ -299,44 +299,19 @@ alkary-net-hotspot/
 │   │   ├── 📄 hotCookie.min.js   # محرك حفظ البيانات في الكوكيز وتسجيل الدخول التلقائي
 │   │   ├── 📄 hotInImprover.min.js # محرك تنظيف المدخلات وتحويل الأرقام للمشتركين
 │   │   ├── 📄 jquery-1.11.2.min.js# مكتبة جي كويري الأساسية
-│   │   ├── 📄 label.js           # تأثيرات الحقول العائمة والنوافذ المنبثقة والقوائم
-│   │   └── 📄 mine.js            # دوال تعريب الوقت والأحجام وتشفير أرقام الكروت
+│   │   └── 📄 label.js           # تأثيرات الحقول العائمة والنوافذ المنبثقة والقوائم
 │   ├── 📁 css/                   # ملفات التنسيق المتقدمة:
-│   │   ├── 📄 assets.css         # التنسيقات الأساسية للقوالب الحديثة
-│   │   ├── 📄 chik.css           # تنسيق أزرار التبديل والوضع الليلي (iOS Toggle)
-│   │   ├── 📄 font-awesome.css   # أيقونات FontAwesome
-│   │   ├── 📄 fontello.css       # أيقونات Fontello المخصصة
-│   │   └── 📄 style.css          # الأنماط العامة لواجهة المستخدم
+│   │   └── 📄 font-awesome.css   # مكتبة أيقونات FontAwesome
 │   ├── 📁 fonts/                 # خطوط الويب الحديثة:
 │   │   ├── 📄 Almarai.css        # استدعاء خط المراعي العربي
 │   │   ├── 📄 Almarai.woff2      # ملف خط المراعي مضغوط
 │   │   └── 📄 fontawesome-webfont.ttf # ملف خط أيقونات FontAwesome
-│   ├── 📁 font/                  # خطوط أيقونات Fontello بصيغ متعددة:
-│   │   ├── 📄 fontello.eot
-│   │   ├── 📄 fontello.svg
-│   │   ├── 📄 fontello.ttf
-│   │   ├── 📄 fontello.woff
-│   │   └── 📄 fontello.woff2
 │   └── 📁 img/                   # الرسومات المتجهة والأيقونات:
 │       ├── 📄 logo.svg           # شعار الشبكة
 │       ├── 📄 labtop.svg         # أيقونة الحاسوب المحمول
 │       ├── 📄 favicon.png        # أيقونة التفضيل
 │       ├── 📄 smiley-icon.svg    # أيقونة الرضا
 │       └── 📄 sad-icon.svg       # أيقونة الخطأ
-│
-├── 📁 css/                       # ملفات التنسيق الكلاسيكية لقالب Bootstrap:
-│   ├── 📄 bootstrap.css          # إطار عمل بوتستراب 3 مخصص للبوابة
-│   └── 📄 style.css              # التنسيقات الكلاسيكية المتوافقة مع أجهزة المايكروتك
-│
-├── 📁 fonts/                     # خطوط Droid Arabic Kufi الكلاسيكية:
-│   ├── 📄 DroidKufi-Regular.eot, woff, woff2
-│   └── 📄 DroidKufi-Bold.eot, ttf, woff, woff2
-│
-├── 📁 images/                    # صور الخلفيات والروابط الاجتماعية والإعلانات:
-│   ├── 📄 bg-clouds.png, bg-clouds2.png # خلفيات السحب المتحركة
-│   ├── 📄 ads.gif                # شريط البنر الإعلاني
-│   ├── 📄 m.jpg                  # صورة توضيحية
-│   └── 📄 facebook-b.png, twitter-b.png, dribbble-b.png, forrst-b.png
 │
 └── 📁 img/                       # الصور المتحركة وأيقونات الحقول:
     ├── 📄 user.svg               # أيقونة اسم المستخدم

@@ -172,11 +172,8 @@ app.get('/assets/js/label.js', (req, res) => {
   });
 });
 
-// Serve static directory files (assets, css, fonts, images, img, xml, etc.)
+// Serve static directory files (assets, img, xml, etc.)
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
-app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/xml', express.static(path.join(__dirname, 'xml')));
 app.use('/favicon.ico', express.static(path.join(__dirname, 'favicon.ico')));
@@ -457,7 +454,7 @@ app.get('/api/download-hotspot', (req, res) => {
     }
   }
 
-  const dirsToInclude = ['assets', 'css', 'fonts', 'images', 'img', 'xml'];
+  const dirsToInclude = ['assets', 'img', 'xml'];
   for (const d of dirsToInclude) {
     const fullPath = path.join(__dirname, d);
     if (fs.existsSync(fullPath)) {

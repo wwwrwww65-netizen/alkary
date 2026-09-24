@@ -1,0 +1,7 @@
+{
+  "name": "Alkary Net Hotspot",
+  "description": "MikroTik Hotspot captive portal and network dashboard for Alkary Net Wireless Network",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

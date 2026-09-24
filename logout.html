@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/fontello.css" />
+  <link rel="stylesheet" href="assets/css/font-awesome.css" />
 
   <style>
     * {
@@ -90,7 +91,7 @@
     }
 
     .info-label {
-      color: #f7a8b8;
+      color: #ffffff;
       font-weight: 600;
     }
 
@@ -134,7 +135,9 @@
 
   <div class="logout-container">
 
-    <div class="brand-icon">⚡</div>
+    <div class="brand-icon">
+      <i class="fa fa-power-off" style="color: #ffffff;"></i>
+    </div>
     
     <div>
       <h2 class="logout-title">تم قطع الاتصال بنجاح</h2>
@@ -143,37 +146,38 @@
 
     <div class="session-card">
       <div class="info-row">
-        <span class="info-label">اسم المشترك:</span>
+        <span class="info-label"><i class="fa fa-user" style="margin-left: 5px;"></i>اسم المشترك:</span>
         <span class="info-val">$(username)</span>
       </div>
       <div class="info-row">
-        <span class="info-label">عنوان IP:</span>
+        <span class="info-label"><i class="fa fa-desktop" style="margin-left: 5px;"></i>عنوان IP:</span>
         <span class="info-val" style="direction: ltr;">$(ip)</span>
       </div>
       <div class="info-row">
-        <span class="info-label">عنوان MAC:</span>
+        <span class="info-label"><i class="fa fa-microchip" style="margin-left: 5px;"></i>عنوان MAC:</span>
         <span class="info-val" style="direction: ltr;">$(mac)</span>
       </div>
       <div class="info-row">
-        <span class="info-label">مدة الاتصال:</span>
+        <span class="info-label"><i class="fa fa-clock-o" style="margin-left: 5px;"></i>مدة الاتصال:</span>
         <span class="info-val" style="color: #00d2ff;">$(uptime)</span>
       </div>
       <div class="info-row">
-        <span class="info-label">البيانات المستلمة:</span>
+        <span class="info-label"><i class="fa fa-download" style="margin-left: 5px;"></i>البيانات المستلمة:</span>
         <span class="info-val" style="color: #00e676;">$(bytes-in-nice)</span>
       </div>
       <div class="info-row">
-        <span class="info-label">البيانات المرسلة:</span>
+        <span class="info-label"><i class="fa fa-upload" style="margin-left: 5px;"></i>البيانات المرسلة:</span>
         <span class="info-val" style="color: #FFE082;">$(bytes-out-nice)</span>
       </div>
     </div>
 
     <a href="$(link-login)" class="relogin-btn">
-      <span>⚡ تسجيل الدخول مجدداً</span>
+      <i class="fa fa-sign-in" style="font-size: 16px;"></i>
+      <span>تسجيل الدخول مجدداً</span>
     </a>
 
     <div class="support-text">
-      خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
+      <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
     </div>
 
   </div>

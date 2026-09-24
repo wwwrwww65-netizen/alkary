@@ -11,6 +11,7 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/fontello.css" />
+  <link rel="stylesheet" href="assets/css/font-awesome.css" />
 
   <style>
     * {
@@ -110,7 +111,7 @@
 
     .user-ip-mac {
       font-size: 11px;
-      color: #f7a8b8;
+      color: #ffffff;
       direction: ltr;
       text-align: right;
     }
@@ -232,7 +233,8 @@
     <!-- Top Bar -->
     <div class="top-bar">
       <div class="brand-pill">
-        <span>⚡ شبكة الكاري نت اللاسلكية</span>
+        <i class="fa fa-bolt" style="color: #F5D77F;"></i>
+        <span>شبكة الكاري نت اللاسلكية</span>
       </div>
       <div class="status-badge">
         <span style="display: inline-block; width: 7px; height: 7px; background: #00e676; border-radius: 50%;"></span>
@@ -243,7 +245,7 @@
     <!-- User Card -->
     <div class="user-card">
       <div class="user-avatar">
-        <span>👤</span>
+        <i class="fa fa-user" style="color: #ffffff; font-size: 24px;"></i>
       </div>
       <div class="user-meta">
         <div class="user-name">$(username)</div>
@@ -256,13 +258,13 @@
       
       <!-- Metric 1: Uptime -->
       <div class="metric-card">
-        <div class="m-label">⏱️ الوقت المستهلك:</div>
+        <div class="m-label"><i class="fa fa-clock-o" style="color: #00d2ff; margin-left: 4px;"></i>الوقت المستهلك:</div>
         <div class="m-val val-uptime">$(uptime)</div>
       </div>
 
       <!-- Metric 2: Time Left -->
       <div class="metric-card">
-        <div class="m-label">⏳ الوقت المتبقي:</div>
+        <div class="m-label"><i class="fa fa-hourglass-half" style="color: #FFE082; margin-left: 4px;"></i>الوقت المتبقي:</div>
         <div class="m-val val-timeleft">
           $(if session-time-left)
             $(session-time-left)
@@ -274,7 +276,7 @@
 
       <!-- Metric 3: Total Downloaded -->
       <div class="metric-card">
-        <div class="m-label">📊 الاستهلاك الكلي:</div>
+        <div class="m-label"><i class="fa fa-bar-chart" style="color: #F5D77F; margin-left: 4px;"></i>الاستهلاك الكلي:</div>
         <div class="m-val val-consumed">
           <script type="text/javascript">
             document.write(readablizeBytes("$(bytes-total)"));
@@ -284,7 +286,7 @@
 
       <!-- Metric 4: Remaining Traffic -->
       <div class="metric-card">
-        <div class="m-label">💾 الرصيد المتبقي:</div>
+        <div class="m-label"><i class="fa fa-database" style="color: #00e676; margin-left: 4px;"></i>الرصيد المتبقي:</div>
         <div class="m-val val-remain">
           <script type="text/javascript">
             var remBytes = "$(remain-bytes-total)";
@@ -302,18 +304,20 @@
     <!-- Actions -->
     <div class="actions-group">
       <button type="button" class="refresh-btn" onclick="location.reload();">
-        <span>🔄 تحديث العدادات والرصيد</span>
+        <i class="fa fa-refresh" style="font-size: 16px;"></i>
+        <span>تحديث العدادات والرصيد</span>
       </button>
 
       <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
         <button type="submit" class="logout-btn">
-          <span>🚪 تسجيل الخروج وقطع الاتصال</span>
+          <i class="fa fa-sign-out" style="font-size: 16px;"></i>
+          <span>تسجيل الخروج وقطع الاتصال</span>
         </button>
       </form>
     </div>
 
     <div class="footer-phones">
-      خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
+      <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
     </div>
 
   </div>

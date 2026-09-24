@@ -261,6 +261,9 @@ app.post(['/login', '/login.html'], (req, res) => {
   });
 
   res.cookie('hotspot_session', sessionId, { maxAge: 86400 * 1000, httpOnly: true });
+  if (req.xhr || req.headers['x-requested-with'] === 'XMLHttpRequest' || req.headers.accept?.includes('application/json')) {
+    return res.json({ success: true, redirect: '/status.html' });
+  }
   res.redirect('/status.html');
 });
 

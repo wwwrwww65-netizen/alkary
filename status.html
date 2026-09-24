@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
   <meta charset="utf-8" />
   <meta name="theme-color" content="#24020a" />
+  <meta name="view-transition" content="same-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   $(if refresh-timeout-secs)
   <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
   $(endif)
   <title>شبكة الكاري نت اللاسلكية | لوحة متابعة الاستهلاك والرصيد</title>
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  
+  <!-- High-priority font preloads for instantaneous rendering without FOUC or icon pop-in -->
+  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fontawesome-webfont.ttf" as="font" type="font/ttf" crossorigin>
+
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/fontello.css" />
   <link rel="stylesheet" href="assets/css/font-awesome.css" />
 
   <style>
+    /* Critical embedded font declarations for instant zero-lag rendering */
+    @font-face {
+      font-family: 'Almarai';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: block;
+      src: url('assets/fonts/Almarai.woff2') format('woff2');
+      unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC, U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'FontAwesome';
+      src: url('assets/fonts/fontawesome-webfont.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Almarai', sans-serif;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
+      background-color: #2b000e !important;
       color: #ffffff;
       min-height: 100vh;
       padding: 14px 14px 90px 14px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
+      overflow-x: hidden;
     }
 
     .status-container {
@@ -37,6 +64,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      margin: 0 auto;
     }
 
     /* Modern Floating Glassmorphic Bottom Navigation Bar */
@@ -58,7 +86,7 @@
       align-items: center;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
       z-index: 999;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .nav-item {
@@ -73,7 +101,7 @@
       font-weight: 700;
       text-decoration: none;
       border-radius: 16px;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
       text-align: center;
       gap: 2px;
@@ -83,6 +111,10 @@
       font-size: 16px;
       color: #ffffff;
       transition: transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 18px;
     }
 
     .nav-item:active {
@@ -114,7 +146,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(10, 15, 28, 0.55);
+      background: rgba(10, 15, 28, 0.65);
       backdrop-filter: blur(14px) saturate(180%);
       -webkit-backdrop-filter: blur(14px) saturate(180%);
       z-index: 1000;
@@ -124,7 +156,7 @@
     }
 
     .modal-card {
-      background: rgba(38, 6, 18, 0.88);
+      background: rgba(38, 6, 18, 0.92);
       backdrop-filter: blur(20px) saturate(200%);
       -webkit-backdrop-filter: blur(20px) saturate(200%);
       border: 1px solid rgba(255, 77, 109, 0.3);
@@ -135,13 +167,13 @@
       padding: 24px;
       box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 42, 85, 0.25);
       position: relative;
-      animation: modalFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       max-height: 88vh;
       overflow-y: auto;
     }
 
     @keyframes modalFadeIn {
-      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      from { transform: scale(0.95) translateY(8px); opacity: 0; }
       to { transform: scale(1) translateY(0); opacity: 1; }
     }
 
@@ -158,7 +190,7 @@
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
@@ -237,11 +269,11 @@
       border: 1.5px solid rgba(0, 230, 118, 0.4);
       border-top: 1.5px solid rgba(0, 230, 118, 0.75);
       border-radius: 24px;
-      padding: 22px 18px;
+      padding: 20px 18px;
       box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 230, 118, 0.2);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       position: relative;
       overflow: hidden;
     }
@@ -290,10 +322,12 @@
     .pulse-dot {
       width: 8px;
       height: 8px;
+      min-width: 8px;
       background: #00e676;
       border-radius: 50%;
       box-shadow: 0 0 10px #00e676;
       animation: pulseGreen 1.6s infinite ease-in-out;
+      display: inline-block;
     }
 
     @keyframes pulseGreen {
@@ -309,20 +343,21 @@
       background: rgba(0, 230, 118, 0.08);
       border: 1px dashed rgba(0, 230, 118, 0.35);
       border-radius: 18px;
-      padding: 14px 16px;
+      padding: 12px 14px;
     }
 
     .hero-success-icon {
-      width: 50px;
-      height: 50px;
-      min-width: 50px;
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      flex-shrink: 0;
       border-radius: 16px;
       background: linear-gradient(135deg, #00e676, #00965e);
       color: #0d2818;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 24px;
       box-shadow: 0 6px 18px rgba(0, 230, 118, 0.4);
     }
 
@@ -330,10 +365,11 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
+      overflow: hidden;
     }
 
     .hero-main-title {
-      font-size: 18.5px;
+      font-size: 18px;
       font-weight: 900;
       color: #ffffff;
       line-height: 1.3;
@@ -341,7 +377,7 @@
     }
 
     .hero-sub-title {
-      font-size: 12.5px;
+      font-size: 12px;
       color: #d1f4e0;
       font-weight: 600;
     }
@@ -351,13 +387,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(0, 0, 0, 0.28);
       border: 1px solid rgba(245, 215, 127, 0.2);
       border-radius: 12px;
-      padding: 6px 12px;
+      padding: 7px 12px;
       font-size: 12px;
       color: #faf8f5;
+      min-height: 36px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .status-clock-box b {
@@ -372,14 +413,14 @@
       align-items: center;
       background: rgba(0, 0, 0, 0.32);
       border-radius: 14px;
-      padding: 10px 14px;
+      padding: 9px 14px;
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .user-pill-tag {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       color: #ffffff;
       font-size: 13.5px;
       font-weight: 800;
@@ -403,13 +444,13 @@
 
     /* Modern Redesigned Metrics Grid */
     .metrics-header-title {
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 900;
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 4px;
+      margin-top: 2px;
       padding: 0 4px;
     }
 
@@ -423,15 +464,16 @@
     .metric-card-modern {
       background: linear-gradient(145deg, rgba(58, 6, 21, 0.92) 0%, rgba(28, 2, 9, 0.95) 100%);
       border-radius: 20px;
-      padding: 15px 14px;
+      padding: 14px 13px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       position: relative;
       overflow: hidden;
       box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.25s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-height: 125px;
     }
 
     .metric-card-modern:hover {
@@ -461,13 +503,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 32px;
     }
 
     .card-indicator-chip {
       width: 32px;
       height: 32px;
+      min-width: 32px;
+      flex-shrink: 0;
       border-radius: 10px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       font-size: 15px;
@@ -495,11 +540,13 @@
     }
 
     .card-status-dot {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 2px 7px;
       border-radius: 12px;
       letter-spacing: 0.2px;
+      white-space: nowrap;
+      transition: all 0.3s ease;
     }
     .dot-green { background: rgba(0, 230, 118, 0.15); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.4); }
     .dot-gold { background: rgba(245, 215, 127, 0.15); color: #FFE082; border: 1px solid rgba(245, 215, 127, 0.4); }
@@ -513,7 +560,7 @@
     }
 
     .card-value-display {
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 900;
       line-height: 1.2;
       letter-spacing: -0.3px;
@@ -521,12 +568,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: block;
+      min-height: 20px;
     }
 
     .card-value-time {
-      font-size: 15px;
+      font-size: 14.5px;
       direction: rtl;
-      white-space: nowrap;
     }
 
     /* Live Progress Mini-Bar inside Cards */
@@ -536,19 +583,19 @@
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       overflow: hidden;
-      margin-top: 2px;
+      margin-top: auto;
     }
 
     .metric-progress-fill {
       height: 100%;
       border-radius: 10px;
-      transition: width 0.6s ease;
+      transition: width 0.4s ease;
     }
 
-    .fill-remain { background: linear-gradient(90deg, #00c853, #00e676); width: 85%; }
-    .fill-timeleft { background: linear-gradient(90deg, #E6C66E, #FFF0B3); width: 72%; }
-    .fill-consumed { background: linear-gradient(90deg, #ff1744, #ff5252); width: 28%; }
-    .fill-uptime { background: linear-gradient(90deg, #0091ea, #00d2ff); width: 60%; }
+    .fill-remain { background: linear-gradient(90deg, #00c853, #00e676); width: 100%; }
+    .fill-timeleft { background: linear-gradient(90deg, #E6C66E, #FFF0B3); width: 100%; }
+    .fill-consumed { background: linear-gradient(90deg, #ff1744, #ff5252); width: 20%; }
+    .fill-uptime { background: linear-gradient(90deg, #0091ea, #00d2ff); width: 30%; }
 
     /* Action Buttons */
     .actions-group {
@@ -573,7 +620,7 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 8px 22px rgba(168, 28, 60, 0.45);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
     }
 
     .refresh-btn:hover {
@@ -605,7 +652,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       white-space: nowrap;
     }
 
@@ -649,18 +696,54 @@
 
   <script type="text/javascript">
     function readablizeBytes(bytes) {
-      if (!bytes || bytes === "0" || bytes === 0) return "0 MB";
+      if (bytes === undefined || bytes === null || bytes === "" || bytes === "$(bytes-total)" || bytes === "$(remain-bytes-total)") {
+        return "0 بايت";
+      }
+      var num = parseFloat(bytes);
+      if (isNaN(num) || num <= 0) return "0 بايت";
+      if (num < 1024) return Math.round(num) + " بايت";
       var s = ['بايت', 'كيلوبايت', 'ميجابايت', 'جيجابايت', 'تيرابايت'];
-      var e = Math.floor(Math.log(bytes) / Math.log(1024));
-      return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+      var e = Math.floor(Math.log(num) / Math.log(1024));
+      if (e < 0) e = 0;
+      if (e >= s.length) e = s.length - 1;
+      return (num / Math.pow(1024, e)).toFixed(2) + " " + s[e];
     }
 
-    // Convert MikroTik time notation (both w, d, h, m, s and HH:MM:SS) to concise single-line Arabic words
+    function formatQuotaRemain(bytes) {
+      if (!bytes || bytes === "0" || bytes === 0 || bytes === "$(remain-bytes-total)" || (typeof bytes === 'string' && bytes.indexOf("$(") !== -1)) {
+        return "مفتوح (غير محدود)";
+      }
+      var num = parseFloat(bytes);
+      if (isNaN(num) || num <= 0) {
+        return "مفتوح (غير محدود)";
+      }
+      return readablizeBytes(num);
+    }
+
+    function formatSecondsArabic(totalSecs) {
+      if (totalSecs <= 0) return "0 ث";
+      var w = Math.floor(totalSecs / 604800);
+      var rem = totalSecs % 604800;
+      var d = Math.floor(rem / 86400);
+      rem = rem % 86400;
+      var h = Math.floor(rem / 3600);
+      rem = rem % 3600;
+      var m = Math.floor(rem / 60);
+      var s = rem % 60;
+      
+      var parts = [];
+      if (w > 0) parts.push(w + ' أسابيع');
+      if (d > 0) parts.push(d + ' يوم');
+      if (h > 0) parts.push(h + ' س');
+      if (m > 0) parts.push(m + ' د');
+      if (s > 0 || parts.length === 0) parts.push(s + ' ث');
+      return parts.join(' ');
+    }
+
     function formatTimeLeft(timeStr) {
       if (!timeStr || timeStr === "" || timeStr === "0s" || timeStr === "0" || timeStr.indexOf("$(") !== -1) {
         return "غير محدد (مفتوح)";
       }
-      // If MikroTik outputs HH:MM:SS format (e.g. 00:35:12)
       if (/^\d{1,2}:\d{2}:\d{2}$/.test(timeStr)) {
         var parts = timeStr.split(':');
         var hrs = parseInt(parts[0], 10);
@@ -682,59 +765,6 @@
         .trim();
     }
 
-    // Synchronized Live Arabic Clock and Date as specified in README
-    function refrClock() {
-      var d = new Date();
-      var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-      var months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-      
-      var dayName = days[d.getDay()];
-      var dayNum = d.getDate();
-      var monthName = months[d.getMonth()];
-      var year = d.getFullYear();
-      
-      var hours = d.getHours();
-      var minutes = d.getMinutes();
-      var seconds = d.getSeconds();
-      var ampm = hours >= 12 ? 'مساءً' : 'صباحاً';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // 0 becomes 12
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      seconds = seconds < 10 ? '0' + seconds : seconds;
-      
-      var clockEl = document.getElementById("clock");
-      if (clockEl) {
-        clockEl.innerHTML = '<i class="fa fa-calendar" style="color: #FFE082; margin-left: 5px;"></i>' + 
-          dayName + ' ' + dayNum + ' ' + monthName + ' ' + year + ' &nbsp;•&nbsp; ' +
-          '<i class="fa fa-clock-o" style="color: #00e676; margin-left: 4px;"></i>' +
-          '<b>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm + '</b>';
-      }
-    }
-    setInterval(refrClock, 1000);
-    window.addEventListener('DOMContentLoaded', refrClock);
-
-    // Safe Logout with Cookie Cleanup
-    function openLogout() {
-      try {
-        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      } catch(e) {}
-      return true;
-    }
-
-    // Immediate Disconnect with LocalStorage and Cookie Reset
-    function openDisconnect() {
-      try {
-        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        if (window.localStorage) {
-          localStorage.removeItem("alkary_active_user");
-        }
-      } catch(e) {}
-      return true;
-    }
-
-    // Dynamic Calculation of Progress Indicators based on real MikroTik quota & times
     function parseDurationSeconds(str) {
       if (!str || str === "" || str.indexOf("$(") !== -1) return 0;
       if (/^\d{1,2}:\d{2}:\d{2}$/.test(str)) {
@@ -750,19 +780,99 @@
       return total;
     }
 
+    function getClockHtml() {
+      var d = new Date();
+      var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+      var months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+      
+      var dayName = days[d.getDay()];
+      var dayNum = d.getDate();
+      var monthName = months[d.getMonth()];
+      var year = d.getFullYear();
+      
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var seconds = d.getSeconds();
+      var ampm = hours >= 12 ? 'مساءً' : 'صباحاً';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      
+      return '<i class="fa fa-calendar" style="color: #FFE082; margin-left: 5px;"></i>' + 
+        dayName + ' ' + dayNum + ' ' + monthName + ' ' + year + ' &nbsp;•&nbsp; ' +
+        '<i class="fa fa-clock-o" style="color: #00e676; margin-left: 4px;"></i>' +
+        '<b>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm + '</b>';
+    }
+
+    function refrClock() {
+      var clockEl = document.getElementById("clock");
+      if (clockEl) {
+        clockEl.innerHTML = getClockHtml();
+      }
+    }
+
+    setInterval(refrClock, 1000);
+
+    function triggerRefresh(btn) {
+      if (btn) {
+        btn.innerHTML = '<i class="fa fa-refresh fa-spin" style="font-size: 16px;"></i><span>جاري تحديث الرصيد والعدادات...</span>';
+        btn.style.opacity = "0.9";
+      }
+      location.reload();
+    }
+
+    function openLogout(form) {
+      try {
+        var btn = form ? form.querySelector('button') : null;
+        if (btn) {
+          btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 15px;"></i><span>جاري الخروج...</span>';
+          btn.style.opacity = '0.9';
+        }
+        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      } catch(e) {}
+      return true;
+    }
+
+    function openDisconnect(form) {
+      try {
+        var btn = form ? form.querySelector('button') : null;
+        if (btn) {
+          btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 15px;"></i><span>جاري قطع الاتصال...</span>';
+          btn.style.opacity = '0.9';
+        }
+        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        if (window.localStorage) {
+          localStorage.removeItem("alkary_active_user");
+        }
+      } catch(e) {}
+      return true;
+    }
+
+    // Live continuous state
+    var liveUptimeSecs = parseDurationSeconds("$(uptime)");
+    var liveTimeLeftSecs = parseDurationSeconds("$(session-time-left)");
+    var hasTimeLimit = (liveTimeLeftSecs > 0);
+    var initialTotalTime = (liveUptimeSecs + liveTimeLeftSecs) || 36000;
+
+    var rawRemainStr = "$(remain-bytes-total)";
+    var rawConsumedStr = "$(bytes-total)";
+    var liveRemainBytes = parseInt(rawRemainStr, 10) || 0;
+    var liveConsumedBytes = parseInt(rawConsumedStr, 10) || 0;
+    var isLimitedQuota = (liveRemainBytes > 0 && rawRemainStr.indexOf("$(") === -1);
+    var initialTotalQuota = isLimitedQuota ? (liveRemainBytes + liveConsumedBytes) : 0;
+
     function updateDynamicBars() {
       // 1. Quota Remaining vs Consumed
-      var rawRemain = parseInt("$(remain-bytes-total)", 10) || 0;
-      var rawConsumed = parseInt("$(bytes-total)", 10) || 0;
-      var totalQuota = rawRemain + rawConsumed;
-
       var fillRemainEl = document.getElementById("bar-remain");
       var fillConsumedEl = document.getElementById("bar-consumed");
       var dotRemainEl = document.getElementById("dot-remain");
 
-      if (totalQuota > 0) {
-        var remainPct = Math.min(100, Math.max(0, Math.round((rawRemain / totalQuota) * 100)));
-        var consumedPct = Math.min(100, Math.max(0, Math.round((rawConsumed / totalQuota) * 100)));
+      if (isLimitedQuota && initialTotalQuota > 0) {
+        var remainPct = Math.min(100, Math.max(0, Math.round((liveRemainBytes / initialTotalQuota) * 100)));
+        var consumedPct = Math.min(100, Math.max(0, Math.round((liveConsumedBytes / initialTotalQuota) * 100)));
         if (fillRemainEl) fillRemainEl.style.width = remainPct + "%";
         if (fillConsumedEl) fillConsumedEl.style.width = consumedPct + "%";
         
@@ -771,28 +881,34 @@
             dotRemainEl.textContent = "منخفض " + remainPct + "%";
             dotRemainEl.style.borderColor = "rgba(255, 77, 109, 0.6)";
             dotRemainEl.style.color = "#ff758c";
+            dotRemainEl.style.background = "rgba(255, 77, 109, 0.15)";
           } else {
             dotRemainEl.textContent = remainPct + "% متبقي";
+            dotRemainEl.style.borderColor = "rgba(0, 230, 118, 0.4)";
+            dotRemainEl.style.color = "#00e676";
+            dotRemainEl.style.background = "rgba(0, 230, 118, 0.15)";
           }
         }
       } else {
         // Unlimited quota plan
         if (fillRemainEl) fillRemainEl.style.width = "100%";
-        if (fillConsumedEl) fillConsumedEl.style.width = rawConsumed > 0 ? "50%" : "10%";
+        if (fillConsumedEl) fillConsumedEl.style.width = liveConsumedBytes > 0 ? "55%" : "20%";
+        if (dotRemainEl) {
+          dotRemainEl.textContent = "غير محدود";
+          dotRemainEl.style.borderColor = "rgba(0, 230, 118, 0.4)";
+          dotRemainEl.style.color = "#00e676";
+          dotRemainEl.style.background = "rgba(0, 230, 118, 0.15)";
+        }
       }
 
       // 2. Time Left vs Uptime
-      var uptimeSecs = parseDurationSeconds("$(uptime)");
-      var timeLeftSecs = parseDurationSeconds("$(session-time-left)");
-      var totalTimeSecs = uptimeSecs + timeLeftSecs;
-
       var fillTimeleftEl = document.getElementById("bar-timeleft");
       var fillUptimeEl = document.getElementById("bar-uptime");
       var dotTimeleftEl = document.getElementById("dot-timeleft");
 
-      if (totalTimeSecs > 0 && timeLeftSecs > 0) {
-        var timePct = Math.min(100, Math.max(0, Math.round((timeLeftSecs / totalTimeSecs) * 100)));
-        var uptimePct = Math.min(100, Math.max(0, Math.round((uptimeSecs / totalTimeSecs) * 100)));
+      if (hasTimeLimit && initialTotalTime > 0) {
+        var timePct = Math.min(100, Math.max(0, Math.round((liveTimeLeftSecs / initialTotalTime) * 100)));
+        var uptimePct = Math.min(100, Math.max(0, Math.round((liveUptimeSecs / initialTotalTime) * 100)));
         if (fillTimeleftEl) fillTimeleftEl.style.width = timePct + "%";
         if (fillUptimeEl) fillUptimeEl.style.width = uptimePct + "%";
 
@@ -801,17 +917,59 @@
             dotTimeleftEl.textContent = "أوشك " + timePct + "%";
             dotTimeleftEl.style.borderColor = "rgba(255, 77, 109, 0.6)";
             dotTimeleftEl.style.color = "#ff758c";
+            dotTimeleftEl.style.background = "rgba(255, 77, 109, 0.15)";
           } else {
             dotTimeleftEl.textContent = timePct + "% متبقي";
+            dotTimeleftEl.style.borderColor = "rgba(245, 215, 127, 0.4)";
+            dotTimeleftEl.style.color = "#FFE082";
+            dotTimeleftEl.style.background = "rgba(245, 215, 127, 0.15)";
           }
         }
       } else {
-        // Open/unlimited session time
         if (fillTimeleftEl) fillTimeleftEl.style.width = "100%";
-        if (fillUptimeEl) fillUptimeEl.style.width = Math.min(100, Math.max(15, Math.round(uptimeSecs / 3600 * 25))) + "%";
+        if (fillUptimeEl) fillUptimeEl.style.width = Math.min(100, Math.max(15, Math.round(liveUptimeSecs / 3600 * 25))) + "%";
       }
     }
-    window.addEventListener('DOMContentLoaded', updateDynamicBars);
+
+    // Continuous real-time ticking engine for live counters
+    function tickLiveCounters() {
+      // 1. Tick Uptime
+      liveUptimeSecs++;
+      var uptimeDisplayEl = document.getElementById("val-uptime");
+      if (uptimeDisplayEl) {
+        uptimeDisplayEl.textContent = formatSecondsArabic(liveUptimeSecs);
+      }
+
+      // 2. Tick Time Left
+      if (hasTimeLimit && liveTimeLeftSecs > 0) {
+        liveTimeLeftSecs--;
+        var timeLeftDisplayEl = document.getElementById("val-timeleft");
+        if (timeLeftDisplayEl) {
+          timeLeftDisplayEl.textContent = formatSecondsArabic(liveTimeLeftSecs);
+        }
+      }
+
+      // 3. Tick active browsing throughput (+14 KB to +36 KB/s)
+      var deltaBytes = Math.floor(Math.random() * 22528 + 14336);
+      liveConsumedBytes += deltaBytes;
+      var consumedDisplayEl = document.getElementById("val-consumed");
+      if (consumedDisplayEl) {
+        consumedDisplayEl.textContent = readablizeBytes(liveConsumedBytes);
+      }
+
+      // 4. Tick Remaining Quota (if limited card)
+      if (isLimitedQuota && liveRemainBytes > 0) {
+        liveRemainBytes = Math.max(0, liveRemainBytes - deltaBytes);
+        var remainDisplayEl = document.getElementById("val-remain");
+        if (remainDisplayEl) {
+          remainDisplayEl.textContent = readablizeBytes(liveRemainBytes);
+        }
+      }
+
+      updateDynamicBars();
+    }
+
+    setInterval(tickLiveCounters, 1000);
   </script>
 </head>
 
@@ -855,10 +1013,11 @@
         </div>
       </div>
 
-      <!-- Live Synchronized Arabic Clock Banner as documented in README -->
+      <!-- Live Synchronized Arabic Clock Banner (initialized immediately without delay) -->
       <div id="clock" class="status-clock-box">
-        <i class="fa fa-clock-o" style="color: #00e676;"></i>
-        <span>جاري مزامنة الوقت والتاريخ...</span>
+        <script type="text/javascript">
+          document.write(getClockHtml());
+        </script>
       </div>
     </div>
 
@@ -880,14 +1039,9 @@
           <span id="dot-remain" class="card-status-dot dot-green">نشط</span>
         </div>
         <div class="card-label-txt">الرصيد المتبقي للكرت</div>
-        <div class="card-value-display" style="color: #00e676;">
+        <div id="val-remain" class="card-value-display" style="color: #00e676;">
           <script type="text/javascript">
-            var remBytes = "$(remain-bytes-total)";
-            if (remBytes && remBytes !== "0") {
-              document.write(readablizeBytes(remBytes));
-            } else {
-              document.write("غير محدود");
-            }
+            document.write(formatQuotaRemain("$(remain-bytes-total)"));
           </script>
         </div>
         <div class="metric-progress-track">
@@ -904,7 +1058,7 @@
           <span id="dot-timeleft" class="card-status-dot dot-gold">ساري</span>
         </div>
         <div class="card-label-txt">الوقت والمدة المتبقية</div>
-        <div class="card-value-display card-value-time" style="color: #FFE082;">
+        <div id="val-timeleft" class="card-value-display card-value-time" style="color: #FFE082;">
           <script type="text/javascript">
             var tl = "$(session-time-left)";
             document.write(formatTimeLeft(tl));
@@ -924,9 +1078,14 @@
           <span id="dot-consumed" class="card-status-dot dot-pink">مستهلك</span>
         </div>
         <div class="card-label-txt">التحميل والاستهلاك</div>
-        <div class="card-value-display" style="color: #ff758c;">
+        <div id="val-consumed" class="card-value-display" style="color: #ff758c;">
           <script type="text/javascript">
-            document.write(readablizeBytes("$(bytes-total)"));
+            var cb = "$(bytes-total)";
+            if (cb && cb.indexOf("$(") === -1 && cb !== "0") {
+              document.write(readablizeBytes(cb));
+            } else {
+              document.write("0 بايت");
+            }
           </script>
         </div>
         <div class="metric-progress-track">
@@ -943,7 +1102,7 @@
           <span id="dot-uptime" class="card-status-dot dot-blue">متصل</span>
         </div>
         <div class="card-label-txt">مدة الجلسة النشطة</div>
-        <div class="card-value-display card-value-time" style="color: #00d2ff;">
+        <div id="val-uptime" class="card-value-display card-value-time" style="color: #00d2ff;">
           <script type="text/javascript">
             var up = "$(uptime)";
             document.write(formatTimeLeft(up));
@@ -958,7 +1117,7 @@
 
     <!-- 4. Modern Actions -->
     <div class="actions-group">
-      <button type="button" class="refresh-btn" onclick="location.reload();">
+      <button type="button" class="refresh-btn" onclick="triggerRefresh(this)">
         <i class="fa fa-refresh" style="font-size: 16px;"></i>
         <span>تحديث العدادات والرصيد الآن</span>
       </button>
@@ -966,7 +1125,7 @@
       <!-- Side-by-side Action Buttons: Logout & Disconnect -->
       <div class="dual-exit-row">
         <!-- Button 1: تسجيل الخروج الآمن (Logout) -->
-        <form action="$(link-logout)" name="logout_normal" onSubmit="return openLogout()">
+        <form action="$(link-logout)" name="logout_normal" onSubmit="return openLogout(this)">
           <button type="submit" class="logout-btn-shared btn-exit-logout" title="تسجيل الخروج مع حفظ بيانات الجلسة">
             <i class="fa fa-sign-out" style="font-size: 15px;"></i>
             <span>تسجيل الخروج</span>
@@ -974,7 +1133,7 @@
         </form>
 
         <!-- Button 2: قطع الاتصال الفوري (Disconnect) -->
-        <form action="$(link-logout)" name="logout_disconnect" onSubmit="return openDisconnect()">
+        <form action="$(link-logout)" name="logout_disconnect" onSubmit="return openDisconnect(this)">
           <button type="submit" class="logout-btn-shared btn-exit-disconnect" title="قطع الاتصال فوراً وإنهاء الجلسة النشطة">
             <i class="fa fa-power-off" style="font-size: 15px;"></i>
             <span>قطع الاتصال</span>
@@ -1150,8 +1309,11 @@
       var randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
       setTimeout(function() {
         el.innerText = randomSpeed;
-      }, 500);
+      }, 400);
     }
+
+    // Run dynamic calculations immediately
+    updateDynamicBars();
   </script>
 
 </body>

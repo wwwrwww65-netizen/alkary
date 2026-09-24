@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1256" />
     <meta name="theme-color" content="#24020a" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="view-transition" content="same-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
     <link rel="apple-touch-icon" href="assets/img/favicon.png" />
     <title>شبكة الكاري نت اللاسلكية | تسجيل الدخول</title>
     
+    <link rel="prefetch" href="status.html">
+    <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/fontawesome-webfont.ttf" as="font" type="font/ttf" crossorigin>
+
     <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
     <link rel="stylesheet" href="assets/css/fontello.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -1404,7 +1409,7 @@
         </div>
 
         <!-- 7. Main Login Form -->
-        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif) style="display: flex; flex-direction: column; gap: 12px;">
+        <form name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin(event)" style="display: flex; flex-direction: column; gap: 12px;">
             
             <input type="hidden" name="dst" value="$(link-orig)" />
             <input type="hidden" name="popup" value="true" />
@@ -1466,7 +1471,7 @@
             </div>
 
             <!-- Main Submit Button -->
-            <button type="submit" class="main-login-btn" onclick="saveVoucherToStorage((document.getElementById('uname') ? document.getElementById('uname').value : '').trim()); if(typeof rem==='function'){ rem(); }">
+            <button type="submit" id="submit_btn" class="main-login-btn" onclick="saveVoucherToStorage((document.getElementById('uname') ? document.getElementById('uname').value : '').trim()); if(typeof rem==='function'){ rem(); } try { this.innerHTML = '<i class=\'fa fa-spinner fa-spin\' style=\'font-size: 18px;\'></i><span>جاري الاتصال والتحقق...</span>'; } catch(e){}">
                 <i class="fa fa-sign-in" style="font-size: 18px;"></i>
                 <span>تسجيل الدخول الفوري</span>
             </button>
@@ -1703,23 +1708,94 @@
             }
         }
 
-        // Standard MikroTik CHAP authentication handler
-        function doLogin() {
-            copyTextValue();
-            var u = (document.getElementById("uname") ? document.getElementById("uname").value : "").trim();
-            if (u) {
-                saveVoucherToStorage(u);
+        // Standard MikroTik CHAP / PAP instant authentication handler
+        function doLogin(e) {
+            if (e && e.preventDefault) {
+                e.preventDefault();
             }
+            copyTextValue();
+            var uField = document.getElementById("uname");
+            var u = (uField ? uField.value : "").trim();
+            if (!u) {
+                return false;
+            }
+            saveVoucherToStorage(u);
             if (typeof rem === "function") {
                 rem();
             }
-            if (document.sendin) {
-                document.sendin.username.value = document.login.username.value;
-                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+
+            var btn = document.getElementById("submit_btn");
+            if (btn) {
+                btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري الدخول الفوري...</span>';
+                btn.style.opacity = "0.9";
+            }
+
+            var loginUrl = (document.login && document.login.action) ? document.login.action : '/login';
+            var postData = new URLSearchParams();
+            var isChap = false;
+
+            if (document.sendin && typeof hexMD5 === "function") {
+                isChap = true;
+                var chapId = '$(chap-id)';
+                var chapChallenge = '$(chap-challenge)';
+                var encPass = hexMD5(chapId + document.login.password.value + chapChallenge);
+                document.sendin.username.value = u;
+                document.sendin.password.value = encPass;
                 var selSpeed = document.getElementById("selected_profile");
                 if (selSpeed && document.sendin.domain) {
                     document.sendin.domain.value = selSpeed.value;
                 }
+                loginUrl = document.sendin.action || loginUrl;
+                postData.append("username", u);
+                postData.append("password", encPass);
+                postData.append("dst", "$(link-orig)");
+                postData.append("popup", "true");
+                postData.append("domain", selSpeed ? selSpeed.value : "100M/100M");
+            } else {
+                postData.append("username", u);
+                postData.append("password", (document.login && document.login.password.value) ? document.login.password.value : u);
+                postData.append("dst", "$(link-orig)");
+                postData.append("popup", "true");
+                var selSpeed = document.getElementById("selected_profile");
+                postData.append("domain", selSpeed ? selSpeed.value : "100M/100M");
+            }
+
+            // High-speed fetch for instant zero-flash seamless login
+            if (window.fetch) {
+                fetch(loginUrl, {
+                    method: "POST",
+                    body: postData,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "X-Requested-With": "XMLHttpRequest"
+                    },
+                    credentials: "include"
+                }).then(function() {
+                    var statusTarget = '$(link-status)';
+                    if (!statusTarget || statusTarget.indexOf('$(') !== -1) statusTarget = 'status.html';
+                    return fetch(statusTarget, { credentials: "include" })
+                        .then(function(r) { return r.text(); })
+                        .then(function(html) {
+                            if (html && (html.indexOf('status-card') !== -1 || html.indexOf('alkary-status-wrapper') !== -1 || html.indexOf('status') !== -1)) {
+                                document.open();
+                                document.write(html);
+                                document.close();
+                                if (window.history && window.history.replaceState) {
+                                    window.history.replaceState({}, '', statusTarget);
+                                }
+                            } else {
+                                window.location.replace(statusTarget);
+                            }
+                        });
+                }).catch(function() {
+                    var statusTarget = '$(link-status)';
+                    if (!statusTarget || statusTarget.indexOf('$(') !== -1) statusTarget = 'status.html';
+                    window.location.replace(statusTarget);
+                });
+                return false;
+            }
+
+            if (isChap && document.sendin) {
                 document.sendin.submit();
                 return false;
             }

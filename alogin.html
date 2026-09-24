@@ -1,57 +1,86 @@
-﻿<html dir="rtl">
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh;">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-<meta http-equiv="Content-Language" content="ar-ye">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<META http-equiv="refresh" content="2;URL=status.html">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<title>شبكة الكاري نت اللاسلكية</title>
- <script language="JavaScript1.2">
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#24020a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="refresh" content="0; url=$(link-status)">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <title>شبكة الكاري نت اللاسلكية | جاري التوجيه...</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
 
-function reapply(){
-setTimeout("slideit()",2000);
-return true;
-}
-window.onerror=reapply;
-</script>
-<script language="JavaScript1.1">
-<!--
-var image1=new Image();
-image1.src="images/ads1.gif";        // ضع هنا عنوان الصورة الأولى
-var image2=new Image();    
-image2.src="images/ads1.gif";        // عنوان الصورة الثانية
-var image3=new Image();
-image3.src="images/ads1.gif";        // عنوان الصورة الثالثة
-//-->
-</script>
- <script language="JavaScript">
-<!--
-    function startClock() {
-        $(if popup == 'true')
-        open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200');
-	$(endif)
-	location.href = '$(link-redirect)';
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
     }
-//-->
-</script> 
+    html, body {
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
+      background-color: #2b000e !important;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+      text-align: center;
+    }
+    .redirect-card {
+      background: rgba(55, 4, 18, 0.88);
+      border: 1px solid rgba(245, 215, 127, 0.3);
+      border-top: 1.5px solid rgba(0, 230, 118, 0.6);
+      border-radius: 24px;
+      padding: 28px 22px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 230, 118, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 3.5px solid rgba(245, 215, 127, 0.18);
+      border-top-color: #00e676;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <script type="text/javascript">
+    function startClock() {
+      $(if popup == 'true')
+      try {
+        window.open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=340,height=520');
+      } catch(e) {}
+      $(endif)
+      window.location.replace('$(link-status)');
+    }
+    try {
+      var target = '$(link-status)';
+      if (target && target.indexOf('$(') === -1) {
+        window.location.replace(target);
+      } else {
+        window.location.replace('status.html');
+      }
+    } catch(e) {}
+  </script>
 </head>
 
-<body onLoad="slideit()" id="animate-area">
-<div id="logo">شبكة الكاري نت اللاسلكية<div class="info"><h4>للتواصل 
-	والاستفسار : 711292741</h4></div></div>
-<div id="content">
-<div align="center" class="box"><h3><font color="#009933">تم تسجيل الدخول بنجاح</font></h3>
- الرجاء استخدام الانترنت فيما لا يُغضب الله<p>في حال لم يتم نقلك تلقائياً 
-	<a href="status.html">اضغط هنا</a></p>
-</div>
-
-
-
-
-<br>
-
+<body onload="startClock()">
+  <div class="redirect-card">
+    <div class="spinner"></div>
+    <h3 style="color: #F5D77F; font-size: 18px; font-weight: 800;">تم تسجيل الدخول بنجاح !</h3>
+    <p style="color: #c0d8f0; font-size: 13.5px; line-height: 1.5;">جاري فتح لوحة متابعة الرصيد والإنترنت فوراً...</p>
+    <a href="status.html" style="color: #00e676; font-size: 12.5px; text-decoration: none; margin-top: 4px; font-weight: 700;">إذا لم يتم تحويلك تلقائياً اضغط هنا</a>
+  </div>
 </body>
-
 </html>

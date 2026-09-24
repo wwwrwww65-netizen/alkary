@@ -265,12 +265,14 @@
 
     /* Top Bar & Large Success Welcome Hero */
     .hero-success-card {
-      background: linear-gradient(135deg, rgba(62, 5, 22, 0.95) 0%, rgba(35, 3, 12, 0.92) 100%);
-      border: 1.5px solid rgba(0, 230, 118, 0.4);
-      border-top: 1.5px solid rgba(0, 230, 118, 0.75);
+      background: linear-gradient(160deg, rgba(48, 6, 21, 0.96) 0%, rgba(20, 2, 8, 0.98) 100%);
+      border: 1.5px solid rgba(0, 230, 118, 0.45);
+      border-top: 2.5px solid #00e676;
       border-radius: 24px;
       padding: 20px 18px;
-      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 230, 118, 0.2);
+      box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 230, 118, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -306,7 +308,7 @@
     }
 
     .status-badge-live {
-      background: rgba(0, 230, 118, 0.16);
+      background: rgba(0, 230, 118, 0.18);
       border: 1px solid #00e676;
       color: #00e676;
       font-size: 12px;
@@ -340,10 +342,11 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(0, 230, 118, 0.08);
-      border: 1px dashed rgba(0, 230, 118, 0.35);
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px dashed rgba(0, 230, 118, 0.45);
       border-radius: 18px;
       padding: 12px 14px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     .hero-success-icon {
@@ -377,8 +380,8 @@
     }
 
     .hero-sub-title {
-      font-size: 12px;
-      color: #d1f4e0;
+      font-size: 12.5px;
+      color: #e0f8eb;
       font-weight: 600;
     }
 
@@ -388,17 +391,18 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: rgba(0, 0, 0, 0.28);
-      border: 1px solid rgba(245, 215, 127, 0.2);
+      background: rgba(10, 1, 4, 0.65);
+      border: 1px solid rgba(245, 215, 127, 0.28);
       border-radius: 12px;
-      padding: 7px 12px;
+      padding: 8px 12px;
       font-size: 12px;
-      color: #faf8f5;
+      color: #f1f5f9;
       min-height: 36px;
       text-align: center;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
     }
 
     .status-clock-box b {
@@ -411,10 +415,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.32);
+      background: rgba(10, 1, 4, 0.68);
       border-radius: 14px;
-      padding: 9px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
     }
 
     .user-pill-tag {
@@ -427,19 +432,21 @@
     }
 
     .user-code-badge {
-      background: rgba(245, 215, 127, 0.18);
+      background: rgba(245, 215, 127, 0.22);
       color: #FFE082;
-      border: 1px solid rgba(245, 215, 127, 0.35);
+      border: 1px solid rgba(245, 215, 127, 0.45);
       padding: 2px 8px;
       border-radius: 8px;
       font-family: monospace;
       font-size: 14px;
+      font-weight: bold;
     }
 
     .user-network-details {
-      font-size: 11px;
-      color: #faf8f5;
+      font-size: 11.5px;
+      color: #cbd5e1;
       direction: ltr;
+      font-weight: 600;
     }
 
     /* Modern Redesigned Metrics Grid */
@@ -450,7 +457,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 2px;
+      margin-top: 4px;
       padding: 0 4px;
     }
 
@@ -460,43 +467,48 @@
       gap: 12px;
     }
 
-    /* Next-Gen Glassmorphic Metric Cards */
+    /* Next-Gen Glassmorphic Metric Cards with High Contrast & Physical Depth */
     .metric-card-modern {
-      background: linear-gradient(145deg, rgba(58, 6, 21, 0.92) 0%, rgba(28, 2, 9, 0.95) 100%);
+      background: linear-gradient(155deg, rgba(46, 6, 20, 0.96) 0%, rgba(18, 2, 8, 0.98) 100%);
       border-radius: 20px;
-      padding: 14px 13px;
+      padding: 15px 14px;
       display: flex;
       flex-direction: column;
       gap: 8px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      min-height: 125px;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+      min-height: 128px;
     }
 
     .metric-card-modern:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px -6px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.2);
     }
 
     /* Color Theme Variants for Cards */
     .card-theme-remain {
-      border: 1px solid rgba(0, 230, 118, 0.35);
-      border-top: 2px solid #00e676;
+      border: 1.5px solid rgba(0, 230, 118, 0.42);
+      border-top: 3px solid #00e676;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 230, 118, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.14);
     }
     .card-theme-timeleft {
-      border: 1px solid rgba(245, 215, 127, 0.38);
-      border-top: 2px solid #FFE082;
+      border: 1.5px solid rgba(245, 215, 127, 0.45);
+      border-top: 3px solid #FFE082;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(245, 215, 127, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.14);
     }
     .card-theme-consumed {
-      border: 1px solid rgba(255, 120, 150, 0.35);
-      border-top: 2px solid #ff4d6d;
+      border: 1.5px solid rgba(255, 77, 109, 0.42);
+      border-top: 3px solid #ff4d6d;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(255, 77, 109, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.14);
     }
     .card-theme-uptime {
-      border: 1px solid rgba(0, 210, 255, 0.35);
-      border-top: 2px solid #00d2ff;
+      border: 1.5px solid rgba(0, 210, 255, 0.42);
+      border-top: 3px solid #00d2ff;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.75), 0 0 18px rgba(0, 210, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.14);
     }
 
     .card-top-row {
@@ -554,9 +566,10 @@
     .dot-blue { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.4); }
 
     .card-label-txt {
-      font-size: 11.5px;
-      color: #faf8f5;
+      font-size: 12px;
+      color: #e2e8f0;
       font-weight: 700;
+      letter-spacing: -0.1px;
     }
 
     .card-value-display {
@@ -580,7 +593,8 @@
     .metric-progress-track {
       width: 100%;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       overflow: hidden;
       margin-top: auto;
@@ -688,9 +702,184 @@
 
     .footer-phones {
       text-align: center;
-      font-size: 11.5px;
-      color: #6486a8;
+      font-size: 12px;
+      color: #cbd5e1;
       padding: 10px 0;
+      font-weight: 600;
+    }
+
+    /* Value Added Services Cards */
+    .service-card {
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.25s ease;
+    }
+
+    /* Matches & Cinema Sports Card (Ultra-lightweight GPU-accelerated Neon Stadium Design) */
+    .cinema-card {
+      background: linear-gradient(135deg, rgba(3, 44, 31, 0.94) 0%, rgba(1, 25, 18, 0.98) 100%),
+                  repeating-linear-gradient(90deg, rgba(0, 230, 118, 0.04) 0px, rgba(0, 230, 118, 0.04) 28px, transparent 28px, transparent 56px);
+      border: 1.5px solid rgba(0, 230, 118, 0.45);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 230, 118, 0.1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .cinema-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 230, 118, 0.14) 0%, transparent 60%);
+      pointer-events: none;
+      animation: stadiumGlow 6s ease-in-out infinite alternate;
+      transform: translateZ(0);
+    }
+
+    @keyframes stadiumGlow {
+      0% { transform: translate(-10%, -10%); }
+      100% { transform: translate(10%, 10%); }
+    }
+
+    /* Floating Translucent Soccer Footballs inside Cinema Card */
+    .cinema-bubbles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .c-football {
+      position: absolute;
+      bottom: -22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.85);
+      filter: drop-shadow(0 0 6px rgba(0, 230, 118, 0.7)) drop-shadow(0 0 2px #ffffff);
+      opacity: 0;
+      animation: floatCinemaFootball 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      will-change: transform, opacity;
+      transform: translateZ(0);
+    }
+
+    .c-football:nth-child(1) { left: 7%; font-size: 14px; animation-duration: 3.8s; animation-delay: 0s; }
+    .c-football:nth-child(2) { left: 21%; font-size: 20px; animation-duration: 5.4s; animation-delay: 1.2s; }
+    .c-football:nth-child(3) { left: 36%; font-size: 13px; animation-duration: 4.2s; animation-delay: 0.5s; }
+    .c-football:nth-child(4) { left: 52%; font-size: 18px; animation-duration: 5.0s; animation-delay: 2.1s; }
+    .c-football:nth-child(5) { left: 68%; font-size: 12px; animation-duration: 3.6s; animation-delay: 1.5s; }
+    .c-football:nth-child(6) { left: 82%; font-size: 16px; animation-duration: 5.2s; animation-delay: 2.7s; }
+    .c-football:nth-child(7) { left: 93%; font-size: 11px; animation-duration: 4.1s; animation-delay: 0.8s; }
+
+    @keyframes floatCinemaFootball {
+      0% {
+        transform: translateY(0) scale(0.6) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.85;
+      }
+      50% {
+        transform: translateY(-30px) scale(1) rotate(180deg) translateX(6px);
+        opacity: 0.95;
+      }
+      75% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-68px) scale(1.15) rotate(360deg) translateX(-6px);
+        opacity: 0;
+      }
+    }
+
+    .service-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .sports-badge-tag {
+      background: linear-gradient(135deg, #00e676, #00b0ff);
+      color: #021a10;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 1px 6px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #00e676;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00e676;
+      animation: pulseDot 1.8s infinite;
+      display: inline-block;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 7px rgba(0, 230, 118, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+    }
+
+    .service-desc {
+      font-size: 11px;
+      color: #a7f3d0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .service-action-btn {
+      background: linear-gradient(135deg, #00e676 0%, #00c853 100%);
+      color: #002b14 !important;
+      font-size: 12.5px;
+      font-weight: 900;
+      padding: 7px 16px;
+      border-radius: 10px;
+      border: 1px solid #b9f6ca;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 0 14px rgba(0, 230, 118, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+      position: relative;
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    .service-action-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 22px rgba(0, 230, 118, 0.75);
+      background: linear-gradient(135deg, #69f0ae 0%, #00e676 100%);
+    }
+
+    .service-action-btn:active {
+      transform: scale(0.96);
     }
   </style>
 
@@ -1021,6 +1210,35 @@
       </div>
     </div>
 
+    <!-- Value-Added Services (Matches / Cinema) -->
+    <div class="service-card cinema-card">
+      <div class="cinema-bubbles">
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+        <div class="c-football"><i class="fa fa-futbol-o"></i></div>
+      </div>
+      <div class="service-info">
+        <div class="service-title-row">
+          <i class="fa fa-futbol-o" style="color: #00e676; font-size: 16px;"></i>
+          <span>بث المباريات والسينما</span>
+          <span class="sports-badge-tag">LIVE HD</span>
+          <div class="live-dot"></div>
+        </div>
+        <div class="service-desc">
+          <i class="fa fa-tv" style="font-size: 10px; color: #00e676;"></i>
+          <span>بث رياضي مباشر • سينما ومسلسلات 4K</span>
+        </div>
+      </div>
+      <button type="button" class="service-action-btn" onclick="openModal('cinema-modal')">
+        <span>مشاهدة</span>
+        <i class="fa fa-play-circle" style="font-size: 14px;"></i>
+      </button>
+    </div>
+
     <!-- 2. Metrics Header Section -->
     <div class="metrics-header-title">
       <span><i class="fa fa-tachometer" style="color: #F5D77F; margin-left: 6px;"></i>بيانات واستهلاك باقة الكرت الحالية:</span>
@@ -1143,7 +1361,7 @@
     </div>
 
     <div class="footer-phones">
-      <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
+      <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651
     </div>
 
   </div>
@@ -1261,7 +1479,7 @@
         </div>
         <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 12px; border-radius: 12px;">
           <div style="font-weight: bold; color: #FFE082;"><i class="fa fa-phone" style="margin-left: 5px;"></i>للإدارة والاستفسار وطلب نقاط بيع:</div>
-          <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651 - 711292741</div>
+          <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651</div>
         </div>
       </div>
     </div>
@@ -1286,6 +1504,27 @@
           <i class="fa fa-refresh" style="margin-left: 5px;"></i>
           <span>إعادة الفحص الآن</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Live Cinema & Matches -->
+  <div id="cinema-modal" class="modal-overlay" onclick="closeModal('cinema-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('cinema-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-film" style="color: #00e676;"></i> سيرفر السينما والبث المباشر 4K</div>
+      <div class="modal-body-content">
+        <p>استمتع بمشاهدة مباريات اليوم بجودة عالية وأحدث الأفلام والمسلسلات مجاناً وبسرعة محلية فائقة دون استهلاك باقة الإنترنت الأساسية على شبكة الكاري نت.</p>
+        <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+          <button class="refresh-btn" style="height: 44px; font-size: 14px; background: linear-gradient(135deg, #00c853, #00796b);" onclick="alert('جاري فتح قنوات البث المباشر BeIN Sports...');">
+            <i class="fa fa-play-circle" style="margin-left: 5px;"></i>
+            <span>فتح قنوات المباريات المباشرة</span>
+          </button>
+          <button class="refresh-btn" style="height: 44px; font-size: 14px; background: linear-gradient(135deg, #0091ea, #1565c0);" onclick="alert('جاري فتح مكتبة الأفلام والمسلسلات 4K...');">
+            <i class="fa fa-video-camera" style="margin-left: 5px;"></i>
+            <span>فتح مكتبة الأفلام والمسلسلات</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

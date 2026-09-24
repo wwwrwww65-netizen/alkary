@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="theme-color" content="#24020a" />
+  <meta name="view-transition" content="same-origin" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="refresh" content="0; url=$(link-status)">
   <meta http-equiv="pragma" content="no-cache">
@@ -11,7 +12,11 @@
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
-
+  <script type="text/javascript">
+    var target = '$(link-status)';
+    if (!target || target.indexOf('$(') !== -1) target = 'status.html';
+    window.location.replace(target);
+  </script>
   <style>
     * {
       box-sizing: border-box;
@@ -54,28 +59,8 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
-
-  <script type="text/javascript">
-    function startClock() {
-      $(if popup == 'true')
-      try {
-        window.open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=340,height=520');
-      } catch(e) {}
-      $(endif)
-      window.location.replace('$(link-status)');
-    }
-    try {
-      var target = '$(link-status)';
-      if (target && target.indexOf('$(') === -1) {
-        window.location.replace(target);
-      } else {
-        window.location.replace('status.html');
-      }
-    } catch(e) {}
-  </script>
 </head>
-
-<body onload="startClock()">
+<body>
   <div class="redirect-card">
     <div class="spinner"></div>
     <h3 style="color: #F5D77F; font-size: 18px; font-weight: 800;">تم تسجيل الدخول بنجاح !</h3>

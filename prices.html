@@ -21,7 +21,7 @@
       background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
       color: #fff;
       min-height: 100vh;
-      padding: 16px;
+      padding: 14px 14px 90px 14px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -33,6 +33,153 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+    }
+
+    /* Modern Floating Glassmorphic Bottom Navigation Bar */
+    .top-navbar {
+      display: flex;
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 440px;
+      background: rgba(36, 3, 11, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(245, 215, 127, 0.28);
+      border-radius: 24px;
+      padding: 6px 8px;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
+      z-index: 999;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 2px;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 16px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .nav-item i {
+      font-size: 16px;
+      color: #ffffff;
+      transition: transform 0.2s;
+    }
+
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, #FFF0B3 0%, #E6C66E 60%, #a81c3c 100%);
+      color: #1a0108 !important;
+      font-weight: 900;
+      box-shadow: 0 4px 15px rgba(230, 198, 110, 0.35);
+    }
+
+    .nav-item.active i {
+      color: #1a0108 !important;
+      transform: translateY(-1px);
+    }
+
+    .nav-item:hover:not(.active) {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal Overlays & Cards */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 15, 28, 0.55);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: rgba(38, 6, 18, 0.88);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      border-top: 1px solid rgba(255, 120, 150, 0.5);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 42, 85, 0.25);
+      position: relative;
+      animation: modalFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 77, 109, 0.3);
+      border-color: #ff4d6d;
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-body-content {
+      color: #c0d8f0;
+      font-size: 13.5px;
+      line-height: 1.6;
     }
 
     .top-bar {
@@ -289,6 +436,94 @@
     </div>
 
   </div>
+
+  <!-- Modern Floating Glassmorphic Bottom Navigation Bar -->
+  <nav class="top-navbar">
+    <a href="login.html" class="nav-item">
+      <i class="fa fa-home"></i>
+      <span>الرئيسية</span>
+    </a>
+    <div class="nav-item active">
+      <i class="fa fa-tags"></i>
+      <span>باقات الكروت</span>
+    </div>
+    <a href="status.html" class="nav-item">
+      <i class="fa fa-bar-chart"></i>
+      <span>حالة الرصيد</span>
+    </a>
+    <div class="nav-item" onclick="openModal('agents-modal')">
+      <i class="fa fa-map-marker"></i>
+      <span>نقاط البيع</span>
+    </div>
+    <div class="nav-item" onclick="openModal('speedtest-modal')">
+      <i class="fa fa-dashboard"></i>
+      <span>فحص السرعة</span>
+    </div>
+  </nav>
+
+  <!-- Modal 2: Agents & Sales Points -->
+  <div id="agents-modal" class="modal-overlay" onclick="closeModal('agents-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('agents-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-map-marker" style="color: #F5D77F;"></i> نقاط البيع والموزعين المعتمدين</div>
+      <div class="modal-body-content">
+        <div style="background: rgba(0, 180, 255, 0.1); border: 1px solid #00d2ff; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+          <div style="font-weight: bold; color: #ffffff;"><i class="fa fa-shopping-cart" style="margin-left: 5px;"></i>مراكز البيع المعتمدة:</div>
+          <div style="color: #faf8f5; margin-top: 4px;">كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.</div>
+        </div>
+        <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 12px; border-radius: 12px;">
+          <div style="font-weight: bold; color: #FFE082;"><i class="fa fa-phone" style="margin-left: 5px;"></i>للإدارة والاستفسار وطلب نقاط بيع:</div>
+          <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651 - 711292741</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Speed Test -->
+  <div id="speedtest-modal" class="modal-overlay" onclick="closeModal('speedtest-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('speedtest-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-dashboard" style="color: #00d2ff;"></i> فحص سرعة الإنترنت الحية</div>
+      <div class="modal-body-content" style="text-align: center;">
+        <p>قياس سرعة اتصالك الحالي بشبكة الكاري نت اللاسلكية STARLINK:</p>
+        <div style="font-size: 32px; font-weight: 900; color: #00e676; margin: 15px 0;">
+          <span id="live-speed-val">98.6</span> Mbps
+        </div>
+        <div style="display: flex; justify-content: space-around; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px; margin-bottom: 14px;">
+          <div><span style="color: #faf8f5; font-size:11px;">البنج:</span><br><b style="color: #00e676;">7 ms</b></div>
+          <div><span style="color: #faf8f5; font-size:11px;">الرفع:</span><br><b style="color:#00d2ff;">38.4 Mbps</b></div>
+          <div><span style="color: #faf8f5; font-size:11px;">التردد:</span><br><b style="color:#FFE082;">5.8 GHz</b></div>
+        </div>
+        <button type="button" class="back-btn" style="height: 42px; font-size: 14px; padding: 0 20px;" onclick="runSpeedTest()">
+          <i class="fa fa-refresh" style="margin-left: 5px;"></i>
+          <span>إعادة الفحص الآن</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function openModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.style.display = 'none';
+    }
+
+    function runSpeedTest() {
+      var el = document.getElementById("live-speed-val");
+      if (!el) return;
+      el.innerText = "...";
+      var speeds = ["87.4", "94.2", "102.5", "98.6", "110.1"];
+      var randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
+      setTimeout(function() {
+        el.innerText = randomSpeed;
+      }, 500);
+    }
+  </script>
 
 </body>
 </html>

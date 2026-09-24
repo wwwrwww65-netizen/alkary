@@ -88,56 +88,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
             z-index: 999;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        /* Floating Translucent Bubbles Container */
-        .bar-bubbles {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .bubble {
-            position: absolute;
-            bottom: -20px;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.15) 60%, rgba(245, 215, 127, 0.05) 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.4), inset 0 0 4px rgba(255, 255, 255, 0.6);
-            opacity: 0;
-            animation: floatBubble 5s ease-in-out infinite;
-            will-change: transform, opacity;
-            transform: translateZ(0);
-        }
-
-        .bubble:nth-child(1) { left: 12%; width: 8px; height: 8px; animation-duration: 4.2s; animation-delay: 0s; }
-        .bubble:nth-child(2) { left: 28%; width: 13px; height: 13px; animation-duration: 5.6s; animation-delay: 1.2s; }
-        .bubble:nth-child(3) { left: 52%; width: 7px; height: 7px; animation-duration: 3.8s; animation-delay: 0.6s; }
-        .bubble:nth-child(4) { left: 74%; width: 11px; height: 11px; animation-duration: 5.1s; animation-delay: 2.1s; }
-        .bubble:nth-child(5) { left: 88%; width: 9px; height: 9px; animation-duration: 4.6s; animation-delay: 1.7s; }
-        .bubble:nth-child(6) { left: 42%; width: 14px; height: 14px; animation-duration: 6.2s; animation-delay: 3s; }
-
-        @keyframes floatBubble {
-            0% {
-                transform: translateY(0) scale(0.6) translateX(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.75;
-            }
-            50% {
-                transform: translateY(-26px) scale(1) translateX(6px);
-                opacity: 0.85;
-            }
-            80% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(-55px) scale(1.15) translateX(-6px);
-                opacity: 0;
-            }
         }
 
         .nav-item {
@@ -156,8 +106,6 @@
             cursor: pointer;
             text-align: center;
             gap: 2px;
-            position: relative;
-            z-index: 2;
         }
 
         .nav-item i {
@@ -505,8 +453,8 @@
         .voucher-input {
             width: 100%;
             height: 54px;
-            background: #30020d;
-            border: 1.5px solid #521424;
+            background: rgba(45, 3, 13, 0.95);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
             border-radius: 14px;
             color: #ffffff;
             font-size: 18px;
@@ -516,19 +464,24 @@
             padding: 0 16px;
             outline: none;
             transition: all 0.3s ease;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), inset 0 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .voucher-input:hover {
+            border-color: rgba(255, 255, 255, 0.55);
+            background: rgba(55, 4, 16, 0.98);
         }
 
         .voucher-input:focus {
-            border-color: #00d2ff;
-            box-shadow: 0 0 16px rgba(0, 210, 255, 0.4), inset 0 2px 6px rgba(0, 0, 0, 0.8);
-            background: #1a040b;
+            border-color: #F5D77F;
+            box-shadow: 0 0 18px rgba(245, 215, 127, 0.45), inset 0 2px 6px rgba(0, 0, 0, 0.8);
+            background: #25020a;
         }
 
         .voucher-input::placeholder {
-            color: #4b6785;
-            font-size: 16px;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 15.5px;
+            font-weight: 600;
             letter-spacing: 0;
         }
 
@@ -586,12 +539,17 @@
             display: inline-block;
             width: 22px;
             height: 22px;
+            cursor: pointer;
+            user-select: none;
+            flex-shrink: 0;
         }
 
         .custom-checkbox input {
             opacity: 0;
             width: 0;
             height: 0;
+            position: absolute;
+            pointer-events: none;
         }
 
         .checkmark {
@@ -604,6 +562,7 @@
             border: 1.5px solid #008be5;
             border-radius: 6px;
             transition: all 0.2s;
+            pointer-events: none;
         }
 
         .custom-checkbox input:checked ~ .checkmark {
@@ -1121,7 +1080,7 @@
 
         
 
-        /* Modals & Popups (Clean Neon Glass) */
+        /* Modals & Popups (Ultra-Modern Frosted Glassmorphism) */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1129,49 +1088,61 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(50, 4, 16, 0.95);
-            backdrop-filter: blur(8px);
-            z-index: 100;
+            background: rgba(10, 15, 28, 0.55);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 16px;
+            transition: opacity 0.3s ease;
         }
 
         .modal-card {
-            background: #26060f;
-            border: 1.5px solid #ff4d6d;
-            border-radius: 20px;
+            background: rgba(38, 6, 18, 0.88);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            border-top: 1px solid rgba(255, 120, 150, 0.5);
+            border-radius: 24px;
             width: 100%;
-            max-width: 420px;
-            padding: 20px;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.35);
+            max-width: 440px;
+            padding: 24px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 42, 85, 0.25);
             position: relative;
-            animation: modalFadeIn 0.3s ease;
-            max-height: 90vh;
+            animation: modalFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 88vh;
             overflow-y: auto;
         }
 
         @keyframes modalFadeIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from { transform: scale(0.92) translateY(12px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .modal-close-btn {
             position: absolute;
-            top: 14px;
-            left: 14px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             color: #ffffff;
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 77, 109, 0.3);
+            border-color: #ff4d6d;
+            transform: rotate(90deg);
         }
 
         .modal-title {
@@ -1190,7 +1161,7 @@
             line-height: 1.6;
         }
 
-        /* Price Cards inside Modal */
+        /* Price Cards inside Modal (Frosted Glass) */
         .modal-price-grid {
             display: flex;
             flex-direction: column;
@@ -1199,13 +1170,21 @@
         }
 
         .modal-price-item {
-            background: rgba(50, 4, 18, 0.8);
-            border: 1px solid rgba(0, 180, 255, 0.3);
-            border-radius: 12px;
-            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-price-item:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(0, 210, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .mpi-right {
@@ -1221,7 +1200,7 @@
         }
 
         .mpi-details {
-            font-size: 11px;
+            font-size: 11.5px;
             color: #F5D77F;
         }
 
@@ -1229,10 +1208,10 @@
             font-size: 16px;
             font-weight: 900;
             color: #FFE082;
-            background: rgba(255, 213, 79, 0.12);
-            padding: 4px 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 213, 79, 0.3);
+            background: rgba(255, 213, 79, 0.15);
+            padding: 5px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 213, 79, 0.35);
         }
 
         /* Speed Test Simulator */
@@ -1325,56 +1304,13 @@
 
 <body>
 
-    <!-- Hidden Form for MikroTik Authentication -->
-    $(if chap-id)
-    <form name="sendin" action="$(link-login-only)" method="post">
-        <input type="hidden" name="username" />
-        <input type="hidden" name="password" />
-        <input type="hidden" name="dst" value="$(link-orig)" />
-        <input type="hidden" name="popup" value="true" />
-        <input type="hidden" name="speed" id="sendin_speed" value="100M/100M" />
-    </form>
-    
-    <script type="text/javascript">
-    function doLogin() {
-        var u = document.login.username.value.trim();
-        var p = document.login.password.value ? document.login.password.value.trim() : u;
-        
-        if (!u) {
-            alert('يرجى إدخال كود الكرت أولاً');
-            document.getElementById('uname').focus();
-            return false;
-        }
-        
-        // Save Card to Local Storage if Remember Me is checked
-        if (document.getElementById('remember').checked) {
-            saveVoucherToStorage(u);
-        }
-
-        document.sendin.username.value = u;
-        document.sendin.password.value = hexMD5('$(chap-id)' + p + '$(chap-challenge)');
-        document.sendin.speed.value = document.getElementById('selected_profile').value;
-        document.sendin.submit();
-        return false;
-    }
-    </script>
-    $(endif)
-
     <div class="main-wrapper">
 
         <!-- 1. Top Navigation Bar (Tabs) -->
         <nav class="top-navbar">
-            <div class="bar-bubbles">
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-                <div class="bubble"></div>
-            </div>
             <a href="login.html" class="nav-item active">
-                <i class="fa fa-sign-in"></i>
-                <span>تسجيل الدخول</span>
+                <i class="fa fa-home"></i>
+                <span>الرئيسية</span>
             </a>
             <div class="nav-item" onclick="openModal('packages-modal')">
                 <i class="fa fa-tags"></i>
@@ -1485,13 +1421,13 @@
                     </button>
                 </div>
                 <div class="input-box-container">
-                    <input id="uname" type="text" name="username" class="voucher-input" placeholder="أدخل كود الكرت هنا" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required oninput="copyTextValue();" />
+                    <input id="uname" type="text" name="username" class="voucher-input" placeholder="أدخل كود الكرت هنا" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required oninput="copyTextValue();" improve-input rm-white-spaces to-arabic-numbers />
                     <input id="paswd" type="hidden" name="password" />
                 </div>
             </div>
 
             <!-- Save Card Bar -->
-            <div class="save-card-box" onclick="toggleRemember()">
+            <label class="save-card-box" for="remember">
                 <div class="save-card-info">
                     <div class="floppy-icon"><i class="fa fa-save"></i></div>
                     <div>
@@ -1504,11 +1440,11 @@
                         </div>
                     </div>
                 </div>
-                <label class="custom-checkbox" onclick="event.stopPropagation()">
+                <div class="custom-checkbox">
                     <input type="checkbox" id="remember" checked />
-                    <span class="checkmark" onclick="toggleRemember()"></span>
-                </label>
-            </div>
+                    <span class="checkmark"></span>
+                </div>
+            </label>
 
             <!-- Speed Profiles Selector (Matches README.md) -->
             <div class="speed-section">
@@ -1530,17 +1466,28 @@
             </div>
 
             <!-- Main Submit Button -->
-            <button type="submit" class="main-login-btn" onclick="return rem();">
+            <button type="submit" class="main-login-btn" onclick="saveVoucherToStorage((document.getElementById('uname') ? document.getElementById('uname').value : '').trim()); if(typeof rem==='function'){ rem(); }">
                 <i class="fa fa-sign-in" style="font-size: 18px;"></i>
                 <span>تسجيل الدخول الفوري</span>
             </button>
 
         </form>
 
+        <!-- Hidden Sendin Form for MikroTik CHAP Authentication -->
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+            <input type="hidden" name="domain" id="sendin_speed" value="100M/100M" />
+        </form>
+        $(endif)
+
         <!-- 8. Support & Network Diagnostics -->
         <div class="support-footer">
             <div class="support-phones">
-                <i class="fa fa-headphones" style="margin-left: 4px;"></i>الدعم الفني والشكاوى: واتساب <span>(778311135 / 778898651)</span> | اتصال: <span>711292741</span>
+                <i class="fa fa-headphones" style="margin-left: 4px;"></i>الدعم الفني والشكاوى: واتساب <span>(778311135 / 778898651)</span>
             </div>
         </div>
 
@@ -1689,7 +1636,40 @@
     </div>
 
     <!-- Modal 8: Install App -->
-    
+    <div id="install-modal" class="modal-overlay" onclick="closeModal('install-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('install-modal')"><i class="fa fa-times"></i></button>
+            <div class="modal-title"><i class="fa fa-mobile" style="color: #00d2ff;"></i> تثبيت تطبيق شبكة الكاري نت</div>
+            <div class="modal-body-content">
+                <p>لتثبيت بوابة شبكة الكاري نت كتطبيق مباشر وسريع على شاشة هاتفك الرئيسية دون الحاجة لتحميل من المتجر:</p>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; margin: 12px 0; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa fa-android" style="font-size: 20px; color: #00e676;"></i>
+                        <span style="font-weight: 700; color: #fff;">لمستخدمي أندرويد (متصفح Chrome):</span>
+                    </div>
+                    <div style="font-size: 12.5px; color: #c0d8f0; line-height: 1.6; padding-right: 28px;">
+                        اضغط على زر الخيارات ( الثلاث نقاط <b>⋮</b> ) أعلى يسار المتصفح، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b> أو <b>"تثبيت التطبيق"</b>.
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fa fa-apple" style="font-size: 20px; color: #F5D77F;"></i>
+                        <span style="font-weight: 700; color: #fff;">لمستخدمي آيفون (متصفح Safari):</span>
+                    </div>
+                    <div style="font-size: 12.5px; color: #c0d8f0; line-height: 1.6; padding-right: 28px;">
+                        اضغط على زر المشاركة ( <b>⎋</b> في أسفل الشاشة )، ثم اسحب للأسفل واختر <b>"إضافة إلى الشاشة الرئيسية"</b>.
+                    </div>
+                </div>
+
+                <button type="button" class="main-login-btn" style="height: 42px; font-size: 14px;" onclick="closeModal('install-modal')">
+                    <i class="fa fa-check" style="margin-left: 5px;"></i>
+                    <span>حسناً، فهمت ذلك</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Error Alert Modal if MikroTik returned $(error) -->
     $(if error)
@@ -1716,12 +1696,33 @@
     <script type="text/javascript">
         // 1. Synchronize Username to Password for Single-Voucher system
         function copyTextValue() {
-            var val = document.getElementById("uname").value;
-            document.getElementById("paswd").value = val;
+            var unameField = document.getElementById("uname");
+            var paswdField = document.getElementById("paswd");
+            if (unameField && paswdField) {
+                paswdField.value = unameField.value;
+            }
         }
 
-        function rem() {
+        // Standard MikroTik CHAP authentication handler
+        function doLogin() {
             copyTextValue();
+            var u = (document.getElementById("uname") ? document.getElementById("uname").value : "").trim();
+            if (u) {
+                saveVoucherToStorage(u);
+            }
+            if (typeof rem === "function") {
+                rem();
+            }
+            if (document.sendin) {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                var selSpeed = document.getElementById("selected_profile");
+                if (selSpeed && document.sendin.domain) {
+                    document.sendin.domain.value = selSpeed.value;
+                }
+                document.sendin.submit();
+                return false;
+            }
             return true;
         }
 
@@ -1794,14 +1795,14 @@
             try {
                 var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
                 if (list.length === 0) {
-                    container.innerHTML = "<div style='color: #ffffff; text-align:center; padding:10px;'>لا توجد كروت سابقة محفوظة على هذا الجهاز.</div>";
+                    container.innerHTML = "<div style='color: #ffffff; text-align:center; padding:12px; background:rgba(255,255,255,0.05); border-radius:8px;'>لا توجد كروت سابقة محفوظة على هذا الجهاز.</div>";
                     return;
                 }
                 var html = "";
                 list.forEach(function(code) {
-                    html += "<div style='background:rgba(0,180,255,0.1); border:1px solid rgba(0,180,255,0.3); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;'>"
-                          + "<span style='font-weight:bold; color:#fff; font-size:15px;'>" + code + "</span>"
-                          + "<button type='button' style='background:#00d2ff; color:#020b18; border:none; padding:4px 10px; border-radius:6px; font-weight:bold; cursor:pointer;' onclick='useVoucher(\"" + code + "\")'>استخدام الكرت</button>"
+                    html += "<div style='background:rgba(0,180,255,0.12); border:1px solid rgba(0,180,255,0.35); padding:10px 14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:all 0.2s ease;' onclick='useVoucher(\"" + code + "\")'>"
+                          + "<span style='font-weight:bold; color:#00e5ff; font-size:16px; letter-spacing:1px;'><i class='fa fa-ticket' style='margin-left:8px;'></i>" + code + "</span>"
+                          + "<button type='button' style='background:#00d2ff; color:#020b18; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:13px;' onclick='event.stopPropagation(); useVoucher(\"" + code + "\")'><i class='fa fa-arrow-down' style='margin-left:4px;'></i>استخدام الكرت</button>"
                           + "</div>";
                 });
                 container.innerHTML = html;
@@ -1809,8 +1810,12 @@
         }
 
         function useVoucher(code) {
-            document.getElementById("uname").value = code;
-            copyTextValue();
+            var unameField = document.getElementById("uname");
+            if (unameField) {
+                unameField.value = code;
+                copyTextValue();
+                unameField.focus();
+            }
             closeModal("history-modal");
         }
 
@@ -1859,23 +1864,33 @@
             alert("تم إدراج كود الطوارئ (salafni_3min) بنجاح! اضغط الآن على تسجيل الدخول.");
         }
 
-        // 9. Error Translation
+        // 9. Error Translation (Synchronized with README.md Section 17 & errors.txt)
         $(document).ready(function() {
             updateHistoryCount();
             
             var errElem = document.getElementById("error-arabic-msg");
             if (errElem) {
-                var raw = errElem.innerText;
-                if (raw.indexOf("simultaneous session limit") !== -1 || raw.indexOf("already logged in") !== -1) {
-                    errElem.innerText = "عذراً، هذا الكرت مسجل دخول حالياً في جهاز آخر!";
+                var raw = errElem.innerText.toLowerCase();
+                if (raw.indexOf("simultaneous session limit") !== -1 || raw.indexOf("no more sessions") !== -1 || raw.indexOf("already logged in") !== -1) {
+                    errElem.innerText = "لا يمكن تسجيل الدخول أكثر من مرة، الكرت قيد الاستخدام حالياً.";
                 } else if (raw.indexOf("invalid username or password") !== -1) {
-                    errElem.innerText = "كود الكرت غير صحيح، يرجى التأكد وإعادة المحاولة.";
+                    errElem.innerText = "خطأ في إسم المستخدم أو كلمة المرور، يرجى التأكد وإعادة المحاولة.";
+                } else if (raw.indexOf("invalid password") !== -1) {
+                    errElem.innerText = "تأكد من كتابة كلمة المرور بشكل صحيح.";
+                } else if (raw.indexOf("access denied") !== -1) {
+                    errElem.innerText = "بطاقة لا يمكن استخدامها في هذا الوقت.";
                 } else if (raw.indexOf("uptime limit reached") !== -1) {
-                    errElem.innerText = "عذراً، لقد انتهى الوقت المتاح لهذه البطاقة.";
-                } else if (raw.indexOf("traffic limit") !== -1 || raw.indexOf("transfer limit") !== -1) {
-                    errElem.innerText = "عذراً، لقد انتهى رصيد التحميل المتاح لهذه البطاقة.";
+                    errElem.innerText = "عذراً، لقد انتهى الوقت المتاح لك في هذا الكرت.";
+                } else if (raw.indexOf("transfer limit") !== -1 || raw.indexOf("traffic limit") !== -1) {
+                    errElem.innerText = "لا يمكنك تسجيل الدخول، انتهى رصيد (ميغابايت) هذه البطاقة.";
                 } else if (raw.indexOf("no valid profile") !== -1) {
                     errElem.innerText = "لقد انتهت الصلاحية الزمنية لهذه البطاقة.";
+                } else if (raw.indexOf("calling-station-id") !== -1 || raw.indexOf("not allowed from this mac") !== -1) {
+                    errElem.innerText = "هذا الحساب مقترن بجهاز آخر ولا يمكن استخدامه من هذا الجهاز.";
+                } else if (raw.indexOf("not found") !== -1) {
+                    errElem.innerText = "اسم المستخدم غير موجود، تأكد من كتابته بشكل صحيح.";
+                } else if (raw.indexOf("radius timeout") !== -1) {
+                    errElem.innerText = "عزيزي المشترك، نعتذر عن انقطاع الخدمة المؤقت بسبب الصيانة.";
                 }
             }
         });

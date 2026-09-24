@@ -65,9 +65,9 @@ function renderMikrotikTemplate(htmlContent, vars = {}) {
     return vars['logged-in'] === 'yes' ? ifBody : (elseBody || '');
   });
 
-  // 4. $(if session-time-left) ... $(endif)
-  output = output.replace(/\$\(if\s+session-time-left\)([\s\S]*?)\$(endif)/g, (match, body) => {
-    return vars['session-time-left'] ? body : '';
+  // 4. $(if session-time-left) ... $(else) ... $(endif)
+  output = output.replace(/\$\(if\s+session-time-left\)([\s\S]*?)(?:\$\(else\)([\s\S]*?))?\$\(endif\)/g, (match, ifBody, elseBody) => {
+    return vars['session-time-left'] ? ifBody : (elseBody || '');
   });
 
   // 5. $(if advert-pending == 'yes') ... $(endif)

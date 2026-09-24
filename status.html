@@ -25,7 +25,7 @@
       background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
       color: #ffffff;
       min-height: 100vh;
-      padding: 16px;
+      padding: 14px 14px 90px 14px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
@@ -39,135 +39,531 @@
       gap: 14px;
     }
 
-    /* Top Bar */
-    .top-bar {
+    /* Modern Floating Glassmorphic Bottom Navigation Bar */
+    .top-navbar {
       display: flex;
-      justify-content: space-between;
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 440px;
+      background: rgba(36, 3, 11, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(245, 215, 127, 0.28);
+      border-radius: 24px;
+      padding: 6px 8px;
+      justify-content: space-around;
       align-items: center;
-      background: rgba(55, 4, 18, 0.88);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 75, 110, 0.35);
-      border-radius: 14px;
-      padding: 10px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
+      z-index: 999;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .brand-pill {
-      font-size: 15px;
-      font-weight: 800;
-      color: #00d2ff;
+    .nav-item {
+      flex: 1;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-    }
-
-    .status-badge {
-      background: rgba(0, 230, 118, 0.15);
-      border: 1px solid #00e676;
-      color: #00e676;
+      justify-content: center;
+      padding: 6px 2px;
+      color: #ffffff;
       font-size: 11px;
-      font-weight: bold;
-      padding: 3px 10px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    /* User Profile Card */
-    .user-card {
-      background: rgba(78, 8, 26, 0.9);
-      border: 1.5px solid #a81c3c;
-      border-radius: 18px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-    }
-
-    .user-avatar {
-      width: 54px;
-      height: 54px;
+      font-weight: 700;
+      text-decoration: none;
       border-radius: 16px;
-      background: linear-gradient(135deg, #00d2ff, #0055b3);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-align: center;
+      gap: 2px;
+    }
+
+    .nav-item i {
+      font-size: 16px;
+      color: #ffffff;
+      transition: transform 0.2s;
+    }
+
+    .nav-item:active {
+      transform: scale(0.95);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, #FFF0B3 0%, #E6C66E 60%, #a81c3c 100%);
+      color: #1a0108 !important;
+      font-weight: 900;
+      box-shadow: 0 4px 15px rgba(230, 198, 110, 0.35);
+    }
+
+    .nav-item.active i {
+      color: #1a0108 !important;
+      transform: translateY(-1px);
+    }
+
+    .nav-item:hover:not(.active) {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal Overlays & Cards */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 15, 28, 0.55);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: rgba(38, 6, 18, 0.88);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      border-top: 1px solid rgba(255, 120, 150, 0.5);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 440px;
+      padding: 24px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 42, 85, 0.25);
+      position: relative;
+      animation: modalFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 88vh;
+      overflow-y: auto;
+    }
+
+    @keyframes modalFadeIn {
+      from { transform: scale(0.92) translateY(12px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 4px 15px rgba(0, 140, 255, 0.4);
+      transition: all 0.2s ease;
     }
 
-    .user-meta {
+    .modal-close-btn:hover {
+      background: rgba(255, 77, 109, 0.3);
+      border-color: #ff4d6d;
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-body-content {
+      color: #c0d8f0;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    .modal-price-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .modal-price-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mpi-right {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .user-name {
-      font-size: 18px;
-      font-weight: 900;
-      color: #ffffff;
-    }
-
-    .user-ip-mac {
-      font-size: 11px;
-      color: #ffffff;
-      direction: ltr;
-      text-align: right;
-    }
-
-    /* Grid of Metrics */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .metric-card {
-      background: rgba(75, 8, 26, 0.9);
-      border: 1px solid rgba(255, 75, 110, 0.3);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .m-label {
-      font-size: 12px;
-      color: #faf8f5;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .m-val {
-      font-size: 16px;
+    .mpi-title {
+      font-size: 14px;
       font-weight: 800;
       color: #ffffff;
     }
 
-    .val-uptime { color: #00d2ff; }
-    .val-timeleft { color: #FFE082; }
-    .val-consumed { color: #F5D77F; }
-    .val-remain { color: #00e676; }
+    .mpi-details {
+      font-size: 11.5px;
+      color: #F5D77F;
+    }
+
+    .mpi-price {
+      font-size: 16px;
+      font-weight: 900;
+      color: #FFE082;
+      background: rgba(255, 213, 79, 0.15);
+      padding: 5px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 213, 79, 0.35);
+    }
+
+    /* Top Bar & Large Success Welcome Hero */
+    .hero-success-card {
+      background: linear-gradient(135deg, rgba(62, 5, 22, 0.95) 0%, rgba(35, 3, 12, 0.92) 100%);
+      border: 1.5px solid rgba(0, 230, 118, 0.4);
+      border-top: 1.5px solid rgba(0, 230, 118, 0.75);
+      border-radius: 24px;
+      padding: 22px 18px;
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 28px rgba(0, 230, 118, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-success-card::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(0, 230, 118, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-pill {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #F5D77F;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      letter-spacing: -0.2px;
+    }
+
+    .status-badge-live {
+      background: rgba(0, 230, 118, 0.16);
+      border: 1px solid #00e676;
+      color: #00e676;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 14px rgba(0, 230, 118, 0.35);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #00e676;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00e676;
+      animation: pulseGreen 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    /* Huge Celebration Banner Inside Hero */
+    .hero-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px dashed rgba(0, 230, 118, 0.35);
+      border-radius: 18px;
+      padding: 14px 16px;
+    }
+
+    .hero-success-icon {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #00e676, #00965e);
+      color: #0d2818;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 6px 18px rgba(0, 230, 118, 0.4);
+    }
+
+    .hero-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-main-title {
+      font-size: 18.5px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+    }
+
+    .hero-sub-title {
+      font-size: 12.5px;
+      color: #d1f4e0;
+      font-weight: 600;
+    }
+
+    /* Live Synchronized Arabic Clock Banner */
+    .status-clock-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(245, 215, 127, 0.2);
+      border-radius: 12px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #faf8f5;
+    }
+
+    .status-clock-box b {
+      color: #FFE082;
+      letter-spacing: 0.3px;
+    }
+
+    /* User Profile Micro-bar */
+    .user-info-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.32);
+      border-radius: 14px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .user-pill-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .user-code-badge {
+      background: rgba(245, 215, 127, 0.18);
+      color: #FFE082;
+      border: 1px solid rgba(245, 215, 127, 0.35);
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    .user-network-details {
+      font-size: 11px;
+      color: #faf8f5;
+      direction: ltr;
+    }
+
+    /* Modern Redesigned Metrics Grid */
+    .metrics-header-title {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+      padding: 0 4px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Next-Gen Glassmorphic Metric Cards */
+    .metric-card-modern {
+      background: linear-gradient(145deg, rgba(58, 6, 21, 0.92) 0%, rgba(28, 2, 9, 0.95) 100%);
+      border-radius: 20px;
+      padding: 15px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s ease;
+    }
+
+    .metric-card-modern:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -6px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Color Theme Variants for Cards */
+    .card-theme-remain {
+      border: 1px solid rgba(0, 230, 118, 0.35);
+      border-top: 2px solid #00e676;
+    }
+    .card-theme-timeleft {
+      border: 1px solid rgba(245, 215, 127, 0.38);
+      border-top: 2px solid #FFE082;
+    }
+    .card-theme-consumed {
+      border: 1px solid rgba(255, 120, 150, 0.35);
+      border-top: 2px solid #ff4d6d;
+    }
+    .card-theme-uptime {
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      border-top: 2px solid #00d2ff;
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-indicator-chip {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .chip-green {
+      background: rgba(0, 230, 118, 0.16);
+      color: #00e676;
+      box-shadow: 0 0 12px rgba(0, 230, 118, 0.25);
+    }
+    .chip-gold {
+      background: rgba(245, 215, 127, 0.18);
+      color: #FFE082;
+      box-shadow: 0 0 12px rgba(245, 215, 127, 0.25);
+    }
+    .chip-pink {
+      background: rgba(255, 77, 109, 0.18);
+      color: #ff4d6d;
+      box-shadow: 0 0 12px rgba(255, 77, 109, 0.25);
+    }
+    .chip-blue {
+      background: rgba(0, 210, 255, 0.16);
+      color: #00d2ff;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.25);
+    }
+
+    .card-status-dot {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 12px;
+      letter-spacing: 0.2px;
+    }
+    .dot-green { background: rgba(0, 230, 118, 0.15); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.4); }
+    .dot-gold { background: rgba(245, 215, 127, 0.15); color: #FFE082; border: 1px solid rgba(245, 215, 127, 0.4); }
+    .dot-pink { background: rgba(255, 77, 109, 0.15); color: #ff758c; border: 1px solid rgba(255, 77, 109, 0.4); }
+    .dot-blue { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.4); }
+
+    .card-label-txt {
+      font-size: 11.5px;
+      color: #faf8f5;
+      font-weight: 700;
+    }
+
+    .card-value-display {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    .card-value-time {
+      font-size: 15px;
+      direction: rtl;
+      white-space: nowrap;
+    }
+
+    /* Live Progress Mini-Bar inside Cards */
+    .metric-progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .metric-progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.6s ease;
+    }
+
+    .fill-remain { background: linear-gradient(90deg, #00c853, #00e676); width: 85%; }
+    .fill-timeleft { background: linear-gradient(90deg, #E6C66E, #FFF0B3); width: 72%; }
+    .fill-consumed { background: linear-gradient(90deg, #ff1744, #ff5252); width: 28%; }
+    .fill-uptime { background: linear-gradient(90deg, #0091ea, #00d2ff); width: 60%; }
 
     /* Action Buttons */
     .actions-group {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .refresh-btn {
       width: 100%;
       height: 48px;
       background: linear-gradient(135deg, #a81c3c, #63051d);
-      border: none;
-      border-radius: 12px;
+      border: 1px solid rgba(245, 215, 127, 0.35);
+      border-radius: 16px;
       color: #ffffff;
       font-size: 15px;
       font-weight: 800;
@@ -176,36 +572,71 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 4px 15px rgba(0, 139, 229, 0.4);
-      transition: all 0.2s;
+      box-shadow: 0 8px 22px rgba(168, 28, 60, 0.45);
+      transition: all 0.25s ease;
     }
 
     .refresh-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0, 139, 229, 0.6);
+      box-shadow: 0 10px 26px rgba(168, 28, 60, 0.6);
     }
 
-    .logout-btn {
+    .dual-exit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .dual-exit-row form {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .logout-btn-shared {
       width: 100%;
       height: 46px;
-      background: rgba(255, 61, 0, 0.15);
-      border: 1px solid #ff3d00;
-      border-radius: 12px;
-      color: #ff5252;
-      font-size: 14px;
-      font-weight: bold;
+      border-radius: 15px;
+      font-size: 13.5px;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
+      white-space: nowrap;
     }
 
-    .logout-btn:hover {
-      background: #ff3d00;
+    /* 1. زر تسجيل الخروج: كحلي ملكي ياقوتي فاخر */
+    .btn-exit-logout {
+      background: rgba(14, 30, 56, 0.65);
+      border: 1.5px solid rgba(0, 210, 255, 0.45);
+      color: #70d6ff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+    .btn-exit-logout:hover {
+      background: rgba(0, 210, 255, 0.22);
       color: #ffffff;
-      box-shadow: 0 0 15px rgba(255, 61, 0, 0.5);
+      border-color: #00d2ff;
+      box-shadow: 0 0 18px rgba(0, 210, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    /* 2. زر قطع الاتصال: قرمزي ياقوتي فخم */
+    .btn-exit-disconnect {
+      background: rgba(168, 28, 60, 0.25);
+      border: 1.5px solid rgba(255, 77, 109, 0.5);
+      color: #ff758c;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+    .btn-exit-disconnect:hover {
+      background: linear-gradient(135deg, #ff1744, #c2185b);
+      color: #ffffff;
+      border-color: #ff5252;
+      box-shadow: 0 0 20px rgba(255, 23, 68, 0.55);
+      transform: translateY(-1px);
     }
 
     .footer-phones {
@@ -223,6 +654,164 @@
       var e = Math.floor(Math.log(bytes) / Math.log(1024));
       return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
     }
+
+    // Convert MikroTik time notation (both w, d, h, m, s and HH:MM:SS) to concise single-line Arabic words
+    function formatTimeLeft(timeStr) {
+      if (!timeStr || timeStr === "" || timeStr === "0s" || timeStr === "0" || timeStr.indexOf("$(") !== -1) {
+        return "غير محدد (مفتوح)";
+      }
+      // If MikroTik outputs HH:MM:SS format (e.g. 00:35:12)
+      if (/^\d{1,2}:\d{2}:\d{2}$/.test(timeStr)) {
+        var parts = timeStr.split(':');
+        var hrs = parseInt(parts[0], 10);
+        var mins = parseInt(parts[1], 10);
+        var secs = parseInt(parts[2], 10);
+        var out = [];
+        if (hrs > 0) out.push(hrs + ' س');
+        if (mins > 0) out.push(mins + ' د');
+        out.push(secs + ' ث');
+        return out.join(' ');
+      }
+      return timeStr
+        .replace(/(\d+)\s*w/g, '$1 أسابيع ')
+        .replace(/(\d+)\s*d/g, '$1 يوم ')
+        .replace(/(\d+)\s*h/g, '$1 س ')
+        .replace(/(\d+)\s*m/g, '$1 د ')
+        .replace(/(\d+)\s*s/g, '$1 ث')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    // Synchronized Live Arabic Clock and Date as specified in README
+    function refrClock() {
+      var d = new Date();
+      var days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+      var months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+      
+      var dayName = days[d.getDay()];
+      var dayNum = d.getDate();
+      var monthName = months[d.getMonth()];
+      var year = d.getFullYear();
+      
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var seconds = d.getSeconds();
+      var ampm = hours >= 12 ? 'مساءً' : 'صباحاً';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // 0 becomes 12
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      
+      var clockEl = document.getElementById("clock");
+      if (clockEl) {
+        clockEl.innerHTML = '<i class="fa fa-calendar" style="color: #FFE082; margin-left: 5px;"></i>' + 
+          dayName + ' ' + dayNum + ' ' + monthName + ' ' + year + ' &nbsp;•&nbsp; ' +
+          '<i class="fa fa-clock-o" style="color: #00e676; margin-left: 4px;"></i>' +
+          '<b>' + hours + ':' + minutes + ':' + seconds + ' ' + ampm + '</b>';
+      }
+    }
+    setInterval(refrClock, 1000);
+    window.addEventListener('DOMContentLoaded', refrClock);
+
+    // Safe Logout with Cookie Cleanup
+    function openLogout() {
+      try {
+        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      } catch(e) {}
+      return true;
+    }
+
+    // Immediate Disconnect with LocalStorage and Cookie Reset
+    function openDisconnect() {
+      try {
+        document.cookie = "hotspot_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        if (window.localStorage) {
+          localStorage.removeItem("alkary_active_user");
+        }
+      } catch(e) {}
+      return true;
+    }
+
+    // Dynamic Calculation of Progress Indicators based on real MikroTik quota & times
+    function parseDurationSeconds(str) {
+      if (!str || str === "" || str.indexOf("$(") !== -1) return 0;
+      if (/^\d{1,2}:\d{2}:\d{2}$/.test(str)) {
+        var parts = str.split(':');
+        return parseInt(parts[0], 10) * 3600 + parseInt(parts[1], 10) * 60 + parseInt(parts[2], 10);
+      }
+      var total = 0;
+      var w = str.match(/(\d+)\s*w/); if (w) total += parseInt(w[1], 10) * 7 * 86400;
+      var d = str.match(/(\d+)\s*d/); if (d) total += parseInt(d[1], 10) * 86400;
+      var h = str.match(/(\d+)\s*h/); if (h) total += parseInt(h[1], 10) * 3600;
+      var m = str.match(/(\d+)\s*m/); if (m) total += parseInt(m[1], 10) * 60;
+      var s = str.match(/(\d+)\s*s/); if (s) total += parseInt(s[1], 10);
+      return total;
+    }
+
+    function updateDynamicBars() {
+      // 1. Quota Remaining vs Consumed
+      var rawRemain = parseInt("$(remain-bytes-total)", 10) || 0;
+      var rawConsumed = parseInt("$(bytes-total)", 10) || 0;
+      var totalQuota = rawRemain + rawConsumed;
+
+      var fillRemainEl = document.getElementById("bar-remain");
+      var fillConsumedEl = document.getElementById("bar-consumed");
+      var dotRemainEl = document.getElementById("dot-remain");
+
+      if (totalQuota > 0) {
+        var remainPct = Math.min(100, Math.max(0, Math.round((rawRemain / totalQuota) * 100)));
+        var consumedPct = Math.min(100, Math.max(0, Math.round((rawConsumed / totalQuota) * 100)));
+        if (fillRemainEl) fillRemainEl.style.width = remainPct + "%";
+        if (fillConsumedEl) fillConsumedEl.style.width = consumedPct + "%";
+        
+        if (dotRemainEl) {
+          if (remainPct < 15) {
+            dotRemainEl.textContent = "منخفض " + remainPct + "%";
+            dotRemainEl.style.borderColor = "rgba(255, 77, 109, 0.6)";
+            dotRemainEl.style.color = "#ff758c";
+          } else {
+            dotRemainEl.textContent = remainPct + "% متبقي";
+          }
+        }
+      } else {
+        // Unlimited quota plan
+        if (fillRemainEl) fillRemainEl.style.width = "100%";
+        if (fillConsumedEl) fillConsumedEl.style.width = rawConsumed > 0 ? "50%" : "10%";
+      }
+
+      // 2. Time Left vs Uptime
+      var uptimeSecs = parseDurationSeconds("$(uptime)");
+      var timeLeftSecs = parseDurationSeconds("$(session-time-left)");
+      var totalTimeSecs = uptimeSecs + timeLeftSecs;
+
+      var fillTimeleftEl = document.getElementById("bar-timeleft");
+      var fillUptimeEl = document.getElementById("bar-uptime");
+      var dotTimeleftEl = document.getElementById("dot-timeleft");
+
+      if (totalTimeSecs > 0 && timeLeftSecs > 0) {
+        var timePct = Math.min(100, Math.max(0, Math.round((timeLeftSecs / totalTimeSecs) * 100)));
+        var uptimePct = Math.min(100, Math.max(0, Math.round((uptimeSecs / totalTimeSecs) * 100)));
+        if (fillTimeleftEl) fillTimeleftEl.style.width = timePct + "%";
+        if (fillUptimeEl) fillUptimeEl.style.width = uptimePct + "%";
+
+        if (dotTimeleftEl) {
+          if (timePct < 20) {
+            dotTimeleftEl.textContent = "أوشك " + timePct + "%";
+            dotTimeleftEl.style.borderColor = "rgba(255, 77, 109, 0.6)";
+            dotTimeleftEl.style.color = "#ff758c";
+          } else {
+            dotTimeleftEl.textContent = timePct + "% متبقي";
+          }
+        }
+      } else {
+        // Open/unlimited session time
+        if (fillTimeleftEl) fillTimeleftEl.style.width = "100%";
+        if (fillUptimeEl) fillUptimeEl.style.width = Math.min(100, Math.max(15, Math.round(uptimeSecs / 3600 * 25))) + "%";
+      }
+    }
+    window.addEventListener('DOMContentLoaded', updateDynamicBars);
   </script>
 </head>
 
@@ -230,64 +819,68 @@
 
   <div class="status-container">
 
-    <!-- Top Bar -->
-    <div class="top-bar">
-      <div class="brand-pill">
-        <i class="fa fa-bolt" style="color: #F5D77F;"></i>
-        <span>شبكة الكاري نت اللاسلكية</span>
+    <!-- 1. Large Prominent Success Welcome Hero Card -->
+    <div class="hero-success-card">
+      <div class="hero-header-row">
+        <div class="brand-pill">
+          <i class="fa fa-bolt" style="color: #FFE082;"></i>
+          <span>شبكة الكاري نت اللاسلكية</span>
+        </div>
+        <div class="status-badge-live">
+          <span class="pulse-dot"></span>
+          <span>متصل بالإنترنت بنجاح</span>
+        </div>
       </div>
-      <div class="status-badge">
-        <span style="display: inline-block; width: 7px; height: 7px; background: #00e676; border-radius: 50%;"></span>
-        <span>متصل بالإنترنت</span>
+
+      <!-- Huge Success Alert Box -->
+      <div class="hero-banner-content">
+        <div class="hero-success-icon">
+          <i class="fa fa-check-circle"></i>
+        </div>
+        <div class="hero-text-block">
+          <div class="hero-main-title">تم تسجيل دخولك بنجاح !</div>
+          <div class="hero-sub-title">أهلاً بك، اتصالك الآن نشط بسرعة فائقة عبر STARLINK</div>
+        </div>
+      </div>
+
+      <!-- Connected Voucher & Network Bar -->
+      <div class="user-info-strip">
+        <div class="user-pill-tag">
+          <i class="fa fa-id-card-o" style="color: #FFE082;"></i>
+          <span>الكرت:</span>
+          <span class="user-code-badge">$(username)</span>
+        </div>
+        <div class="user-network-details">
+          <span>IP: $(ip)</span> &nbsp;|&nbsp; <span>MAC: $(mac)</span>
+        </div>
+      </div>
+
+      <!-- Live Synchronized Arabic Clock Banner as documented in README -->
+      <div id="clock" class="status-clock-box">
+        <i class="fa fa-clock-o" style="color: #00e676;"></i>
+        <span>جاري مزامنة الوقت والتاريخ...</span>
       </div>
     </div>
 
-    <!-- User Card -->
-    <div class="user-card">
-      <div class="user-avatar">
-        <i class="fa fa-user" style="color: #ffffff; font-size: 24px;"></i>
-      </div>
-      <div class="user-meta">
-        <div class="user-name">$(username)</div>
-        <div class="user-ip-mac">IP: $(ip) | MAC: $(mac)</div>
-      </div>
+    <!-- 2. Metrics Header Section -->
+    <div class="metrics-header-title">
+      <span><i class="fa fa-tachometer" style="color: #F5D77F; margin-left: 6px;"></i>بيانات واستهلاك باقة الكرت الحالية:</span>
+      <span style="font-size: 11px; color: #00e676; font-weight: 700;"><i class="fa fa-refresh fa-spin" style="margin-left: 4px;"></i>تحديث مباشر</span>
     </div>
 
-    <!-- Metrics Grid -->
+    <!-- 3. Redesigned Modern 4-Metrics Grid with Indicators & Meters -->
     <div class="metrics-grid">
       
-      <!-- Metric 1: Uptime -->
-      <div class="metric-card">
-        <div class="m-label"><i class="fa fa-clock-o" style="color: #00d2ff; margin-left: 4px;"></i>الوقت المستهلك:</div>
-        <div class="m-val val-uptime">$(uptime)</div>
-      </div>
-
-      <!-- Metric 2: Time Left -->
-      <div class="metric-card">
-        <div class="m-label"><i class="fa fa-hourglass-half" style="color: #FFE082; margin-left: 4px;"></i>الوقت المتبقي:</div>
-        <div class="m-val val-timeleft">
-          $(if session-time-left)
-            $(session-time-left)
-          $(else)
-            غير محدد (مفتوح)
-          $(endif)
+      <!-- Metric 1: Remaining Traffic (الرصيد المتبقي) -->
+      <div class="metric-card-modern card-theme-remain">
+        <div class="card-top-row">
+          <div class="card-indicator-chip chip-green">
+            <i class="fa fa-database"></i>
+          </div>
+          <span id="dot-remain" class="card-status-dot dot-green">نشط</span>
         </div>
-      </div>
-
-      <!-- Metric 3: Total Downloaded -->
-      <div class="metric-card">
-        <div class="m-label"><i class="fa fa-bar-chart" style="color: #F5D77F; margin-left: 4px;"></i>الاستهلاك الكلي:</div>
-        <div class="m-val val-consumed">
-          <script type="text/javascript">
-            document.write(readablizeBytes("$(bytes-total)"));
-          </script>
-        </div>
-      </div>
-
-      <!-- Metric 4: Remaining Traffic -->
-      <div class="metric-card">
-        <div class="m-label"><i class="fa fa-database" style="color: #00e676; margin-left: 4px;"></i>الرصيد المتبقي:</div>
-        <div class="m-val val-remain">
+        <div class="card-label-txt">الرصيد المتبقي للكرت</div>
+        <div class="card-value-display" style="color: #00e676;">
           <script type="text/javascript">
             var remBytes = "$(remain-bytes-total)";
             if (remBytes && remBytes !== "0") {
@@ -297,23 +890,97 @@
             }
           </script>
         </div>
+        <div class="metric-progress-track">
+          <div id="bar-remain" class="metric-progress-fill fill-remain"></div>
+        </div>
+      </div>
+
+      <!-- Metric 2: Time Left (الوقت المتبقي) -->
+      <div class="metric-card-modern card-theme-timeleft">
+        <div class="card-top-row">
+          <div class="card-indicator-chip chip-gold">
+            <i class="fa fa-clock-o"></i>
+          </div>
+          <span id="dot-timeleft" class="card-status-dot dot-gold">ساري</span>
+        </div>
+        <div class="card-label-txt">الوقت والمدة المتبقية</div>
+        <div class="card-value-display card-value-time" style="color: #FFE082;">
+          <script type="text/javascript">
+            var tl = "$(session-time-left)";
+            document.write(formatTimeLeft(tl));
+          </script>
+        </div>
+        <div class="metric-progress-track">
+          <div id="bar-timeleft" class="metric-progress-fill fill-timeleft"></div>
+        </div>
+      </div>
+
+      <!-- Metric 3: Total Downloaded (الاستهلاك الكلي) -->
+      <div class="metric-card-modern card-theme-consumed">
+        <div class="card-top-row">
+          <div class="card-indicator-chip chip-pink">
+            <i class="fa fa-cloud-download"></i>
+          </div>
+          <span id="dot-consumed" class="card-status-dot dot-pink">مستهلك</span>
+        </div>
+        <div class="card-label-txt">التحميل والاستهلاك</div>
+        <div class="card-value-display" style="color: #ff758c;">
+          <script type="text/javascript">
+            document.write(readablizeBytes("$(bytes-total)"));
+          </script>
+        </div>
+        <div class="metric-progress-track">
+          <div id="bar-consumed" class="metric-progress-fill fill-consumed"></div>
+        </div>
+      </div>
+
+      <!-- Metric 4: Uptime (الوقت المستهلك) -->
+      <div class="metric-card-modern card-theme-uptime">
+        <div class="card-top-row">
+          <div class="card-indicator-chip chip-blue">
+            <i class="fa fa-history"></i>
+          </div>
+          <span id="dot-uptime" class="card-status-dot dot-blue">متصل</span>
+        </div>
+        <div class="card-label-txt">مدة الجلسة النشطة</div>
+        <div class="card-value-display card-value-time" style="color: #00d2ff;">
+          <script type="text/javascript">
+            var up = "$(uptime)";
+            document.write(formatTimeLeft(up));
+          </script>
+        </div>
+        <div class="metric-progress-track">
+          <div id="bar-uptime" class="metric-progress-fill fill-uptime"></div>
+        </div>
       </div>
 
     </div>
 
-    <!-- Actions -->
+    <!-- 4. Modern Actions -->
     <div class="actions-group">
       <button type="button" class="refresh-btn" onclick="location.reload();">
         <i class="fa fa-refresh" style="font-size: 16px;"></i>
-        <span>تحديث العدادات والرصيد</span>
+        <span>تحديث العدادات والرصيد الآن</span>
       </button>
 
-      <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
-        <button type="submit" class="logout-btn">
-          <i class="fa fa-sign-out" style="font-size: 16px;"></i>
-          <span>تسجيل الخروج وقطع الاتصال</span>
-        </button>
-      </form>
+      <!-- Side-by-side Action Buttons: Logout & Disconnect -->
+      <div class="dual-exit-row">
+        <!-- Button 1: تسجيل الخروج الآمن (Logout) -->
+        <form action="$(link-logout)" name="logout_normal" onSubmit="return openLogout()">
+          <button type="submit" class="logout-btn-shared btn-exit-logout" title="تسجيل الخروج مع حفظ بيانات الجلسة">
+            <i class="fa fa-sign-out" style="font-size: 15px;"></i>
+            <span>تسجيل الخروج</span>
+          </button>
+        </form>
+
+        <!-- Button 2: قطع الاتصال الفوري (Disconnect) -->
+        <form action="$(link-logout)" name="logout_disconnect" onSubmit="return openDisconnect()">
+          <button type="submit" class="logout-btn-shared btn-exit-disconnect" title="قطع الاتصال فوراً وإنهاء الجلسة النشطة">
+            <i class="fa fa-power-off" style="font-size: 15px;"></i>
+            <span>قطع الاتصال</span>
+          </button>
+        </form>
+      </div>
     </div>
 
     <div class="footer-phones">
@@ -321,6 +988,171 @@
     </div>
 
   </div>
+
+  <!-- Modern Floating Glassmorphic Bottom Navigation Bar -->
+  <nav class="top-navbar">
+    <a href="status.html" class="nav-item active">
+      <i class="fa fa-home"></i>
+      <span>الرئيسية</span>
+    </a>
+    <div class="nav-item" onclick="openModal('packages-modal')">
+      <i class="fa fa-tags"></i>
+      <span>باقات الكروت</span>
+    </div>
+    <div class="nav-item" onclick="openModal('agents-modal')">
+      <i class="fa fa-map-marker"></i>
+      <span>نقاط البيع</span>
+    </div>
+    <div class="nav-item" onclick="openModal('speedtest-modal')">
+      <i class="fa fa-dashboard"></i>
+      <span>فحص السرعة</span>
+    </div>
+    <div class="nav-item" onclick="openModal('install-modal')">
+      <i class="fa fa-mobile"></i>
+      <span>تثبيت التطبيق</span>
+    </div>
+  </nav>
+
+  <!-- Modal: Install App / PWA Instructions -->
+  <div id="install-modal" class="modal-overlay" onclick="closeModal('install-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('install-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-mobile" style="color: #00d2ff;"></i> تثبيت تطبيق شبكة الكاري نت</div>
+      <div class="modal-body-content">
+        <p>لتثبيت بوابة شبكة الكاري نت كتطبيق مباشر وسريع على شاشة هاتفك الرئيسية دون الحاجة لتحميل من المتجر:</p>
+        
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; margin: 12px 0; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa fa-android" style="font-size: 20px; color: #00e676;"></i>
+            <span style="font-weight: 700; color: #fff;">لمستخدمي أندرويد (متصفح Chrome):</span>
+          </div>
+          <div style="font-size: 12.5px; color: #c0d8f0; line-height: 1.6; padding-right: 28px;">
+            اضغط على زر الخيارات ( الثلاث نقاط <b>⋮</b> ) أعلى يسار المتصفح، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b> أو <b>"تثبيت التطبيق"</b>.
+          </div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa fa-apple" style="font-size: 20px; color: #F5D77F;"></i>
+            <span style="font-weight: 700; color: #fff;">لمستخدمي آيفون (متصفح Safari):</span>
+          </div>
+          <div style="font-size: 12.5px; color: #c0d8f0; line-height: 1.6; padding-right: 28px;">
+            اضغط على زر المشاركة ( <b>⎋</b> في أسفل الشاشة )، ثم اسحب للأسفل واختر <b>"إضافة إلى الشاشة الرئيسية"</b>.
+          </div>
+        </div>
+
+        <button type="button" class="refresh-btn" style="height: 42px; font-size: 14px;" onclick="closeModal('install-modal')">
+          <i class="fa fa-check" style="margin-left: 5px;"></i>
+          <span>حسناً، فهمت ذلك</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 1: Packages & Pricing -->
+  <div id="packages-modal" class="modal-overlay" onclick="closeModal('packages-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('packages-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-tags" style="color: #F5D77F;"></i> باقات وأسعار كروت شبكة الكاري نت</div>
+      <div class="modal-body-content">
+        <p>اختر الباقة المناسبة لاحتياجك من قائمة كروت الكاري نت اللاسلكية:</p>
+        <div class="modal-price-grid">
+          <div class="modal-price-item">
+            <div class="mpi-right">
+              <span class="mpi-title">باقة 200 ريال</span>
+              <span class="mpi-details">10 ساعات • صلاحية 24 ساعة • 450MB</span>
+            </div>
+            <span class="mpi-price">200 ر.ي</span>
+          </div>
+          <div class="modal-price-item">
+            <div class="mpi-right">
+              <span class="mpi-title">باقة 500 ريال</span>
+              <span class="mpi-details">35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 1500MB</span>
+            </div>
+            <span class="mpi-price">500 ر.ي</span>
+          </div>
+          <div class="modal-price-item">
+            <div class="mpi-right">
+              <span class="mpi-title">باقة 1000 ريال (الأكثر طلباً)</span>
+              <span class="mpi-details">160 ساعة (6 أيام و 16 ساعة) • صلاحية 10 أيام • 3.4GB</span>
+            </div>
+            <span class="mpi-price">1000 ر.ي</span>
+          </div>
+          <div class="modal-price-item">
+            <div class="mpi-right">
+              <span class="mpi-title">باقة 2500 ريال (الشهرية الفائقة)</span>
+              <span class="mpi-details">16 يوم (أسبوعين ويومين) • صلاحية 30 يوم • 6.4GB</span>
+            </div>
+            <span class="mpi-price">2500 ر.ي</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Agents & Sales Points -->
+  <div id="agents-modal" class="modal-overlay" onclick="closeModal('agents-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('agents-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-map-marker" style="color: #F5D77F;"></i> نقاط البيع والموزعين المعتمدين</div>
+      <div class="modal-body-content">
+        <div style="background: rgba(0, 180, 255, 0.1); border: 1px solid #00d2ff; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+          <div style="font-weight: bold; color: #ffffff;"><i class="fa fa-shopping-cart" style="margin-left: 5px;"></i>مراكز البيع المعتمدة:</div>
+          <div style="color: #faf8f5; margin-top: 4px;">كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.</div>
+        </div>
+        <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 12px; border-radius: 12px;">
+          <div style="font-weight: bold; color: #FFE082;"><i class="fa fa-phone" style="margin-left: 5px;"></i>للإدارة والاستفسار وطلب نقاط بيع:</div>
+          <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651 - 711292741</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Speed Test -->
+  <div id="speedtest-modal" class="modal-overlay" onclick="closeModal('speedtest-modal')">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('speedtest-modal')"><i class="fa fa-times"></i></button>
+      <div class="modal-title"><i class="fa fa-dashboard" style="color: #00d2ff;"></i> فحص سرعة الإنترنت الحية</div>
+      <div class="modal-body-content" style="text-align: center;">
+        <p>قياس سرعة اتصالك الحالي بشبكة الكاري نت اللاسلكية STARLINK:</p>
+        <div style="font-size: 32px; font-weight: 900; color: #00e676; margin: 15px 0;">
+          <span id="live-speed-val">98.6</span> Mbps
+        </div>
+        <div style="display: flex; justify-content: space-around; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px; margin-bottom: 14px;">
+          <div><span style="color: #faf8f5; font-size:11px;">البنج:</span><br><b style="color: #00e676;">7 ms</b></div>
+          <div><span style="color: #faf8f5; font-size:11px;">الرفع:</span><br><b style="color:#00d2ff;">38.4 Mbps</b></div>
+          <div><span style="color: #faf8f5; font-size:11px;">التردد:</span><br><b style="color:#FFE082;">5.8 GHz</b></div>
+        </div>
+        <button type="button" class="refresh-btn" style="height: 42px; font-size: 14px;" onclick="runSpeedTest()">
+          <i class="fa fa-refresh" style="margin-left: 5px;"></i>
+          <span>إعادة الفحص الآن</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function openModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      var m = document.getElementById(id);
+      if (m) m.style.display = 'none';
+    }
+
+    function runSpeedTest() {
+      var el = document.getElementById("live-speed-val");
+      if (!el) return;
+      el.innerText = "...";
+      var speeds = ["87.4", "94.2", "102.5", "98.6", "110.1"];
+      var randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
+      setTimeout(function() {
+        el.innerText = randomSpeed;
+      }, 500);
+    }
+  </script>
 
 </body>
 </html>

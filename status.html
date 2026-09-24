@@ -1,240 +1,322 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<title>شبكه الكاري نت اللاسلكيه</title>
-$(if refresh-timeout)
-<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
-$(endif)
-<meta charset="windows-1256" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta http-equiv="refresh" content="300">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0' name='viewport' />
-<link href="fonts/notofont.css" rel="stylesheet">
-<link rel="stylesheet" href="css/fontello.css">
-<script language="JavaScript">
-<!--
-$(if advert-pending == 'yes')
-    var popup = '';
-    function focusAdvert() {
-	if (window.focus) popup.focus();
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#24020a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  $(if refresh-timeout-secs)
+  <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+  $(endif)
+  <title>شبكة الكاري نت اللاسلكية | لوحة متابعة الاستهلاك والرصيد</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+  <link rel="stylesheet" href="assets/css/fontello.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', sans-serif;
     }
-    function openAdvert() {
-	popup = open('$(link-advert)', 'hotspot_advert', '');
-	setTimeout("focusAdvert()", 1000);
+
+    body {
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
-$(endif)
-    function openLogout() {
-	if (window.name != 'hotspot_status') return true;
-        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
-	window.close();
-	return false;
+
+    .status-container {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-//-->
-</script>
-<script language="JavaScript">
 
-function readablizeBytes(bytes) {
-var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
-var e = Math.floor(Math.log(bytes)/Math.log(1024));
-return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
-}
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(55, 4, 18, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 75, 110, 0.35);
+      border-radius: 14px;
+      padding: 10px 14px;
+    }
 
-</script>
-<script language="JavaScript">
+    .brand-pill {
+      font-size: 15px;
+      font-weight: 800;
+      color: #00d2ff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-function readablizeBytes(bytes) {
-var s = ['&#1576;&#1575;&#1610;&#1578;', '&#1603;&#1610;&#1604;&#1608;&#1576;&#1575;&#1610;&#1578;', '&#1605;&#1610;&#1580;&#1575;&#1576;&#1575;&#1610;&#1578;', '&#1580;&#1610;&#1580;&#1575;&#1576;&#1575;&#1610;&#1578;', '&#1578;&#1610;&#1585;&#1575;&#1576;&#1575;&#1610;&#1578;', 'PB'];
-var e = Math.floor(Math.log(bytes)/Math.log(1024));
-return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
-}
+    .status-badge {
+      background: rgba(0, 230, 118, 0.15);
+      border: 1px solid #00e676;
+      color: #00e676;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-</script>
-<style>
-html, body {
-min-height: 100%;
-}
-body {
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-radial-gradient(#0A7294, #032936) no-repeat; /* Safari 5.1 to 6.0 */
-    background: -o-radial-gradient(#0A7294, #032936) no-repeat; /* For Opera 11.6 to 12.0 */
-    background: -moz-radial-gradient(#0A7294, #032936) no-repeat; /* For Firefox 3.6 to 15 */
-    background: radial-gradient(#0A7294, #032936) no-repeat; /* Standard syntax (must be last) */
-}
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Noto Kufi Arabic', sans-serif;
-transition: width 0.3s ease;
-}
-.box {
-width: 50%;
-background-color: white;
-padding: 20px;
-margin: 85px auto 70px auto;
-text-align: center;
-position: relative;
-border-bottom: 4px solid #0085DE;
--webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
-}
-.box .header {
-color: black;
-}
-.icon {
-background-color: #0085DE;
-width: 70px;
-height: 70px;
-font-size: 2.2rem;
-border-radius: 50px;
-vertical-align: top;
-padding: 1px;
-position: absolute;
-top: -35px;
-left: 45%;
-}
-.icon i {
-color: white;
-}
-.hr {
-width: 90%;
-height: 1px;
-background-color: rgba(0,0,0,0.22);
-margin: 10px auto;
-}
-.section {
-direction: rtl;
-margin: 10px 0 10px 0;
-padding: 15px;
-color: white;
-font-size: 1rem;
-font-size: bold;
-}
-.username {
-background-color: #C70000;
-}
-.card {
-background-color: #006AC7;
-}
-.remain {
-background-color: #C75000;
-}
-.final {
-background-color: #A60088;
-}
-.submit button {
-width: 50%;
-border: none;
-outline: none;
-font-size: 0.9rem;
-font-weight: bold;
-background-color: #15B300;
-color: white;
-padding: 10px;
-cursor: pointer;
-border-bottom: 2px solid rgba(0,0,0,0.33);
-}
-.submit button:hover {
-background-color: #108C00;
-}
-@keyframes anime {
-from {color: #D60000;}
-to {color: #0085DE;}
-}
-@-webkit-keyframes anime {
-from {color: #D60000;}
-to {color: #0085DE;}
-}
-.animate {
-animation: anime .25s infinite alternate;
--webkit-animation: anime .25s infinite alternate;
-}
-@media screen and (max-width:964px){
-.icon {
-left: 44%;
-}
-}
-@media screen and (max-width:781px){
-.box {
-width: 60%;
-}
-.icon {
-left: 42%;
-}
-}
-@media screen and (max-width:562px){
-.box {
-width: 90%;
-}
-}
-@media screen and (max-width:400px){
-.icon {
-left: 39%;
-}
-}
-@media screen and (max-width:284px){
-.icon {
-left: 37%;
-}
-}
-</style>
+    /* User Profile Card */
+    .user-card {
+      background: rgba(78, 8, 26, 0.9);
+      border: 1.5px solid #a81c3c;
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+    }
+
+    .user-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #00d2ff, #0055b3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 4px 15px rgba(0, 140, 255, 0.4);
+    }
+
+    .user-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .user-name {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .user-ip-mac {
+      font-size: 11px;
+      color: #f7a8b8;
+      direction: ltr;
+      text-align: right;
+    }
+
+    /* Grid of Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric-card {
+      background: rgba(75, 8, 26, 0.9);
+      border: 1px solid rgba(255, 75, 110, 0.3);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .m-label {
+      font-size: 12px;
+      color: #faf8f5;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .m-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .val-uptime { color: #00d2ff; }
+    .val-timeleft { color: #FFE082; }
+    .val-consumed { color: #F5D77F; }
+    .val-remain { color: #00e676; }
+
+    /* Action Buttons */
+    .actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .refresh-btn {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #a81c3c, #63051d);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 139, 229, 0.4);
+      transition: all 0.2s;
+    }
+
+    .refresh-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 139, 229, 0.6);
+    }
+
+    .logout-btn {
+      width: 100%;
+      height: 46px;
+      background: rgba(255, 61, 0, 0.15);
+      border: 1px solid #ff3d00;
+      border-radius: 12px;
+      color: #ff5252;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #ff3d00;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 61, 0, 0.5);
+    }
+
+    .footer-phones {
+      text-align: center;
+      font-size: 11.5px;
+      color: #6486a8;
+      padding: 10px 0;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function readablizeBytes(bytes) {
+      if (!bytes || bytes === "0" || bytes === 0) return "0 MB";
+      var s = ['بايت', 'كيلوبايت', 'ميجابايت', 'جيجابايت', 'تيرابايت'];
+      var e = Math.floor(Math.log(bytes) / Math.log(1024));
+      return (bytes / Math.pow(1024, Math.floor(e))).toFixed(2) + " " + s[e];
+    }
+  </script>
 </head>
-<body $(if advert-pending == 'yes')
-	onLoad="openAdvert()"
-$(endif)>
- <div class="wrapper">
- <div class="box">
- <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
- $(if login-by == 'trial')
- $(elif login-by != 'mac')
- $(endif)
- $(if session-time-left)
- $(else)
- $(endif)
- $(if blocked == 'yes')
- $(elif refresh-timeout)
- $(endif)
- $(if login-by-mac != 'yes')
-  <div class="icon"><i class="icon-user"></i></div>
-   <br>
-  <div class="header"><h4>
-<span lang="ar-sy">
-<font color="#000000" size="5">
-	<div id="clock"><b>Loading...</b></div>  
 
-	<script type="text/javascript">  function refrClock()  {  var d=new Date();  var s=d.getSeconds();  var m=d.getMinutes();  var h=d.getHours();  var day=d.getDay();  var date=d.getDate();  var month=d.getMonth();  var year=d.getFullYear();  var days=new Array("&#1575;&#1604;&#1575;&#1581;&#1583;","&#1575;&#1604;&#1575;&#1579;&#1606;&#1610;&#1606;","&#1575;&#1604;&#1579;&#1604;&#1575;&#1579;&#1575;&#1569;","&#1575;&#1604;&#1575;&#1585;&#1576;&#1593;&#1575;&#1569;","&#1575;&#1604;&#1582;&#1605;&#1610;&#1587;","&#1575;&#1604;&#1580;&#1605;&#1593;&#1577;","&#1575;&#1604;&#1587;&#1576;&#1578;");  var months=new Array("&#1610;&#1606;&#1575;&#1610;&#1585;","&#1601;&#1576;&#1585;&#1575;&#1610;&#1585;","&#1605;&#1575;&#1585;&#1587;","&#1575;&#1576;&#1585;&#1610;&#1604;","&#1605;&#1575;&#1610;","&#1610;&#1608;&#1606;&#1610;&#1608;","&#1610;&#1608;&#1604;&#1610;&#1608;","&#1575;&#1594;&#1587;&#1591;&#1587;","&#1587;&#1576;&#1578;&#1605;&#1576;&#1585;","&#1575;&#1603;&#1578;&#1608;&#1576;&#1585;","&#1606;&#1608;&#1601;&#1605;&#1576;&#1585;","&#1583;&#1610;&#1587;&#1605;&#1576;&#1585;");  var am_pm;  if (s<10) {s="0" + s}  if (m<10) {m="0" + m}  if (h>12) {h-=12;am_pm = "&#1605;&#1587;&#1575;&#1569;&#1611;."}  else {am_pm="&#1589;&#1576;&#1575;&#1581;&#1575;&#1611;."}  if (h<10) {h="0" + h}  document.getElementById("clock").innerHTML=days[day] + " " + date + " &#1605;&#1606; " + months[month] + " " + year + "   |   &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; &#1575;&#1604;&#1575;&#1606; " + h + ":" + m + ":" + s + " " + am_pm;  setTimeout("refrClock()",1000);  }  refrClock();</script>
-	</font></span></h4></div>
-  <div class="hr"></div>
-  <div class="section card">
-  <h4>الوقت المستخدم:</h4>
-<td align="center" bgcolor="#FFFF00">
-		<b><font size="4" color="#000000">$(uptime)</font>
+<body>
+
+  <div class="status-container">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="brand-pill">
+        <span>⚡ شبكة الكاري نت اللاسلكية</span>
+      </div>
+      <div class="status-badge">
+        <span style="display: inline-block; width: 7px; height: 7px; background: #00e676; border-radius: 50%;"></span>
+        <span>متصل بالإنترنت</span>
+      </div>
+    </div>
+
+    <!-- User Card -->
+    <div class="user-card">
+      <div class="user-avatar">
+        <span>👤</span>
+      </div>
+      <div class="user-meta">
+        <div class="user-name">$(username)</div>
+        <div class="user-ip-mac">IP: $(ip) | MAC: $(mac)</div>
+      </div>
+    </div>
+
+    <!-- Metrics Grid -->
+    <div class="metrics-grid">
+      
+      <!-- Metric 1: Uptime -->
+      <div class="metric-card">
+        <div class="m-label">⏱️ الوقت المستهلك:</div>
+        <div class="m-val val-uptime">$(uptime)</div>
+      </div>
+
+      <!-- Metric 2: Time Left -->
+      <div class="metric-card">
+        <div class="m-label">⏳ الوقت المتبقي:</div>
+        <div class="m-val val-timeleft">
+          $(if session-time-left)
+            $(session-time-left)
+          $(else)
+            غير محدد (مفتوح)
+          $(endif)
+        </div>
+      </div>
+
+      <!-- Metric 3: Total Downloaded -->
+      <div class="metric-card">
+        <div class="m-label">📊 الاستهلاك الكلي:</div>
+        <div class="m-val val-consumed">
+          <script type="text/javascript">
+            document.write(readablizeBytes("$(bytes-total)"));
+          </script>
+        </div>
+      </div>
+
+      <!-- Metric 4: Remaining Traffic -->
+      <div class="metric-card">
+        <div class="m-label">💾 الرصيد المتبقي:</div>
+        <div class="m-val val-remain">
+          <script type="text/javascript">
+            var remBytes = "$(remain-bytes-total)";
+            if (remBytes && remBytes !== "0") {
+              document.write(readablizeBytes(remBytes));
+            } else {
+              document.write("غير محدود");
+            }
+          </script>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-group">
+      <button type="button" class="refresh-btn" onclick="location.reload();">
+        <span>🔄 تحديث العدادات والرصيد</span>
+      </button>
+
+      <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+        <button type="submit" class="logout-btn">
+          <span>🚪 تسجيل الخروج وقطع الاتصال</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="footer-phones">
+      خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
+    </div>
+
   </div>
-  <div class="section remain">
-  <h4>الوقت المتبقي:</h4>
-  <h4 id="timeLeft">$(session-time-left)</h4>
-  </div>
-  <div class="section remain">
-  <h4>الحجم المستهلك في هذا الاتصال:</h4>
-  <h4><script language="JavaScript">document.write(readablizeBytes($(bytes-total)));</script></h4>
-  </div>
-   <div class="submit"><input type="hidden" name="erase-cookie" value="on">
-  <div class="section final">
-  <h4>الرصيد المتبقي:</h4>
-  <h4 id="timeLeft0"><script language="JavaScript">document.write(readablizeBytes($(remain-bytes-total)));</script></h4>
-  </div>
-  &nbsp;<p><button type="submit">تسجيل الخروج</button></div>
-   $(endif)
-   </form>
- </div>
- </div>
- <script type="text/javascript">
-document.getElementById("timeLeft").innerHTML = "$(session-time-left)".replace("w", " أسبوع , ").replace("d", " يوم , ").replace("h", " ساعة , ").replace("m", " دقيقة , ").replace("s", " ثانية");
-</script>
 
 </body>
-
 </html>

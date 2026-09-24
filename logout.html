@@ -1,72 +1,182 @@
-﻿<html dir="rtl">
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-<meta http-equiv="Content-Language" content="ar-ye">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<title>شبكة الكاري نت اللاسلكية</title>
- <script language="JavaScript1.2">
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#24020a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>شبكة الكاري نت اللاسلكية | تم تسجيل الخروج</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+  <link rel="stylesheet" href="assets/css/fontello.css" />
 
-function reapply(){
-setTimeout("slideit()",2000);
-return true;
-}
-window.onerror=reapply;
-</script>
-<script language="JavaScript1.1">
-<!--
-var image1=new Image();
-image1.src="images/ads1.gif";        // ضع هنا عنوان الصورة الأولى
-var image2=new Image();    
-image2.src="images/ads1.gif";        // عنوان الصورة الثانية
-var image3=new Image();
-image3.src="images/ads1.gif";        // عنوان الصورة الثالثة
-//-->
-</script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', sans-serif;
+    }
 
+    body {
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .logout-container {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(78, 8, 26, 0.9);
+      border: 1.5px solid #a81c3c;
+      border-radius: 20px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
+      text-align: center;
+    }
+
+    .brand-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #00d2ff, #0055b3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 140, 255, 0.4);
+    }
+
+    .logout-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .logout-sub {
+      font-size: 13px;
+      color: #faf8f5;
+    }
+
+    .session-card {
+      background: rgba(75, 8, 26, 0.9);
+      border: 1px solid rgba(255, 75, 110, 0.3);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #ffe5ec;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      color: #f7a8b8;
+      font-weight: 600;
+    }
+
+    .info-val {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .relogin-btn {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #a81c3c, #63051d);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 139, 229, 0.4);
+      transition: all 0.2s;
+    }
+
+    .relogin-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 139, 229, 0.6);
+    }
+
+    .support-text {
+      font-size: 11.5px;
+      color: #6486a8;
+    }
+  </style>
 </head>
 
-<body onLoad="slideit()" id="animate-area">
-<script language="JavaScript">
-<!--
-    function openLogin() {
-	if (window.name != 'hotspot_logout') return true;
-	open('$(link-login)', '_blank', '');
-	window.close();
-	return false;
-    }
-//-->
-</script>
-<div id="logo">شبكة وصال نت اللاسلكية<div class="info"><h4>للتواصل 
-	والاستفسار : 711292741</h4></div></div>
-<div id="content">
-<div align="center" class="box"> <form action="$(link-login)" name="login" onSubmit="return openLogin()" class="form-signin">
-<font color="#CC3300">
-<b><span class="style5"><span style="font-size: 20pt">تم تسجيل الخروج بنجاح</span></span></b></font>
-<table class="tabula" border="1">  
-<tr><td align="right">اسم المستخدم</td><td class="style7">$(username)</td></tr>
-<tr><td align="right">رقم الـ IP</td><td class="style6">$(ip)</td></tr>
-<tr><td align="right">عنوان الـ MAC</td><td class="style6">$(mac)</td></tr>
-<tr><td align="right">وقت الجلسة</td><td class="style6">$(uptime)</td></tr>
-$(if session-time-left)
-<tr><td align="right">الوقت المتبقي لك</td><td class="style6">$(session-time-left)</td></tr>
-$(endif)
-<tr><td align="right">حجم البايتات المُرسلة / المُستقبلة</td><td class="style6">$(bytes-in-nice) / 
-	$(bytes-out-nice)</td></tr>
-</table>
+<body>
 
-<br><input class="btn btn-lg btn-primary btn-block" type="submit" value="تسجيل الدخول مرة اخرى">	
-</form>
+  <div class="logout-container">
 
+    <div class="brand-icon">⚡</div>
+    
+    <div>
+      <h2 class="logout-title">تم قطع الاتصال بنجاح</h2>
+      <p class="logout-sub">شكراً لاختياركم شبكة الكاري نت اللاسلكية</p>
+    </div>
 
-</div>
+    <div class="session-card">
+      <div class="info-row">
+        <span class="info-label">اسم المشترك:</span>
+        <span class="info-val">$(username)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">عنوان IP:</span>
+        <span class="info-val" style="direction: ltr;">$(ip)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">عنوان MAC:</span>
+        <span class="info-val" style="direction: ltr;">$(mac)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">مدة الاتصال:</span>
+        <span class="info-val" style="color: #00d2ff;">$(uptime)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">البيانات المستلمة:</span>
+        <span class="info-val" style="color: #00e676;">$(bytes-in-nice)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">البيانات المرسلة:</span>
+        <span class="info-val" style="color: #FFE082;">$(bytes-out-nice)</span>
+      </div>
+    </div>
 
+    <a href="$(link-login)" class="relogin-btn">
+      <span>⚡ تسجيل الدخول مجدداً</span>
+    </a>
 
+    <div class="support-text">
+      خدمة العملاء والدعم الفني: 778311135 - 778898651 - 711292741
+    </div>
 
+  </div>
 
-<br>
 </body>
-
 </html>

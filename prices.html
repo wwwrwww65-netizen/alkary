@@ -1,260 +1,294 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="theme-color" content="#673ab7" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>الباقات والأسعار</title>
-  <link rel="stylesheet" href="assets/css/assets.css" />
+  <meta name="theme-color" content="#24020a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>طلقة نت - STARLINK | باقات وأسعار الكروت</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/fontello.css" />
+  
   <style>
-    body {
-      background: #1c1c2e;
-      color: #fff;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
       font-family: 'Almarai', sans-serif;
-      margin: 0;
-      padding: 20px;
     }
 
-    .card-con {
-      max-width: 500px;
-      margin: auto;
+    body {
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
+      color: #fff;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    .back {
-      text-align: center;
-      margin-bottom: 10px;
+    .container {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .back button {
-      background-color: #00AAE3;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .back button:hover {
-      background-color: #0077a7;
-    }
-
-    .card {
-      background: #2a2a3d;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .card-header h3 {
-      margin: 0;
-      font-size: 24px;
-      color: #FFDD00;
-      text-align: center;
-    }
-
-    .line {
-      height: 2px;
-      background: linear-gradient(to right, #00AAE3, #8E2DE2);
-      margin: 15px 0;
-    }
-
-    .card-body .sec {
+    .top-bar {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #3a3a4f;
+      align-items: center;
+      background: rgba(55, 4, 18, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 75, 110, 0.35);
+      border-radius: 14px;
+      padding: 10px 14px;
     }
 
-    .card-body .sec:last-child {
+    .brand-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #00d2ff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-btn {
+      background: linear-gradient(135deg, #a81c3c, #63051d);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 0 10px rgba(0, 139, 229, 0.4);
+    }
+
+    .header-box {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .header-box h2 {
+      font-size: 22px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    }
+
+    .header-box p {
+      font-size: 12px;
+      color: #faf8f5;
+      margin-top: 4px;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(8, 25, 48, 0.75);
+      border: 1px solid rgba(255, 75, 110, 0.35);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #00d2ff;
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 180, 255, 0.2);
+      padding-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .price-pill {
+      font-size: 15px;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 8px;
+    }
+
+    .price-green {
+      background: rgba(0, 230, 118, 0.15);
+      border: 1px solid #00e676;
+      color: #00e676;
+    }
+
+    .price-red {
+      background: rgba(255, 61, 0, 0.15);
+      border: 1px solid #ff3d00;
+      color: #ff5252;
+    }
+
+    .price-gold {
+      background: rgba(255, 215, 0, 0.15);
+      border: 1px solid #ffd700;
+      color: #FFE082;
+    }
+
+    .price-orange {
+      background: rgba(245, 215, 127, 0.15);
+      border: 1px solid #F5D77F;
+      color: #ff9933;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #ffe5ec;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .spec-row:last-child {
       border-bottom: none;
     }
 
-    .title {
+    .spec-label {
+      color: #f7a8b8;
+      font-weight: 600;
+    }
+
+    .spec-val {
+      color: #ffffff;
       font-weight: bold;
-      color: #bbb;
     }
 
-    .sub-title {
-      color: #fff;
-    }
-
-    /* Modal Styling */
-    .alert-back {
-      display: none;
-      position: fixed;
-      top: 0; right: 0; bottom: 0; left: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 999;
-    }
-
-    .modal {
-      background: white;
-      color: #000;
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 300px;
-      margin: 100px auto;
+    .footer-note {
       text-align: center;
-    }
-
-    .modal-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-      color: #673ab7;
-    }
-
-    .modal .title {
-      font-size: 20px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .modal-body div {
-      margin: 10px 0;
+      color: #6486a8;
+      font-size: 11px;
+      padding: 10px 0;
     }
   </style>
 </head>
 <body>
 
-<style>
-  .card-con {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 10px;
-    font-family: "Tajawal", sans-serif;
-    direction: rtl;
-  }
-
-  .card {
-    width: 200px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  }
-
-  .card-header {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px 0;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .line {
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 0 15px;
-  }
-
-  .card-body {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
-
-  .sec {
-    display: flex;
-    justify-content: space-between;
-    margin: 4px 0;
-  }
-
-  .title {
-    font-weight: bold;
-  }
-
-  button {
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 4px;
-    font-family: "Tajawal", sans-serif;
-  }
-
-  button:hover {
-    background-color: #125ecb;
-  }
-
-  .back {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-  /* 🎨 ألوان متدرجة احترافية */
-  .c1 { background: linear-gradient(135deg, #0bab64, #3bb78f); }
-  .c2 { background: linear-gradient(135deg, #0575e6, #021b79); }
-  .c3 { background: linear-gradient(135deg, #e52d27, #b31217); }
-  .c4 { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
-  .c5 { background: linear-gradient(135deg, #ff8c00, #ffb347); }
-</style>
-
-<div class="card-con">
-  <div class="back"><a href="login.html"><button>🔙 الصفحة الرئيسية</button></a></div>
-  <div class="back"><a href="status.html"><button>📊 صفحة الاستهلاك</button></a></div>
-
-  <!-- باقة 200 -->
-  <div class="card c1">
-    <div class="card-header"><h3>200 ريال</h3></div>
-    <div class="line"></div>
-    <div class="card-body">
-      <div class="sec"><span class="title">الوقت:</span><span class="sub-title">10 ساعات</span></div>
-      <div class="sec"><span class="title">الصلاحية:</span><span class="sub-title">يوم واحد</span></div>
-      <div class="sec"><span class="title">التحميل:</span><span class="sub-title">450 ميجا</span></div>
+  <div class="container">
+    
+    <div class="top-bar">
+      <div class="brand-title">
+        <span>⚡ طلقة نت - STARLINK</span>
+      </div>
+      <a href="$(link-login)" class="back-btn">
+        <span>🚪 العودة للدخول</span>
+      </a>
     </div>
-  </div>
 
-
-  <!-- باقة 500 -->
-  <div class="card c3">
-    <div class="card-header"><h3>500 ريال</h3></div>
-    <div class="line"></div>
-    <div class="card-body">
-      <div class="sec"><span class="title">الوقت:</span><span class="sub-title">يوم و11 ساعة</span></div>
-      <div class="sec"><span class="title">الصلاحية:</span><span class="sub-title">10 أيام</span></div>
-      <div class="sec"><span class="title">التحميل:</span><span class="sub-title">1500 ميجا</span></div>
+    <div class="header-box">
+      <h2>🎓 قائمة الباقات والأسعار</h2>
+      <p>سرعات فضائية فائقة وباقات متنوعة تلبي جميع الاحتياجات</p>
     </div>
-  </div>
 
-  <!-- باقة 1000 -->
-  <div class="card c4">
-    <div class="card-header"><h3>1000 ريال</h3></div>
-    <div class="line"></div>
-    <div class="card-body">
-      <div class="sec"><span class="title">الوقت:</span><span class="sub-title">6 أيام و16 ساعة</span></div>
-      <div class="sec"><span class="title">الصلاحية:</span><span class="sub-title">10 أيام</span></div>
-      <div class="sec"><span class="title">التحميل:</span><span class="sub-title">3.4 جيجا</span></div>
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">🚀 باقة 200 ريال</span>
+        <span class="price-pill price-green">200 ر.ي</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">الوقت المتاح:</span>
+        <span class="spec-val">10 ساعات</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">مدة الصلاحية:</span>
+        <span class="spec-val">يوم واحد (24 ساعة)</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">حجم التحميل:</span>
+        <span class="spec-val">450 ميجابايت</span>
+      </div>
     </div>
-  </div>
 
-  <!-- باقة 2500 -->
-  <div class="card c5">
-    <div class="card-header"><h3>2500 ريال</h3></div>
-    <div class="line"></div>
-    <div class="card-body">
-      <div class="sec"><span class="title">الوقت:</span><span class="sub-title">2 أسابيع و2 يوم</span></div>
-      <div class="sec"><span class="title">الصلاحية:</span><span class="sub-title">شهر</span></div>
-      <div class="sec"><span class="title">التحميل:</span><span class="sub-title">6.4 جيجا</span></div>
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">🔥 باقة 500 ريال</span>
+        <span class="price-pill price-red">500 ر.ي</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">الوقت المتاح:</span>
+        <span class="spec-val">35 ساعة (يوم و 11 ساعة)</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">مدة الصلاحية:</span>
+        <span class="spec-val">10 أيام</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">حجم التحميل:</span>
+        <span class="spec-val">1500 ميجابايت (1.5 GB)</span>
+      </div>
     </div>
+
+    <!-- Card 3 -->
+    <div class="card" style="border-color: #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);">
+      <div class="card-head" style="border-color: rgba(255, 215, 0, 0.3);">
+        <span class="card-title" style="color: #FFE082;">⭐ باقة 1000 ريال (الأكثر طلباً)</span>
+        <span class="price-pill price-gold">1000 ر.ي</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">الوقت المتاح:</span>
+        <span class="spec-val">160 ساعة (6 أيام و 16 ساعة)</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">مدة الصلاحية:</span>
+        <span class="spec-val">10 أيام</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">حجم التحميل:</span>
+        <span class="spec-val">3.4 جيجابايت</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title">👑 باقة 2500 ريال (الشهرية)</span>
+        <span class="price-pill price-orange">2500 ر.ي</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">الوقت المتاح:</span>
+        <span class="spec-val">16 يوم (أسبوعين ويومين)</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">مدة الصلاحية:</span>
+        <span class="spec-val">شهر كامل (30 يوم)</span>
+      </div>
+      <div class="spec-row">
+        <span class="spec-label">حجم التحميل:</span>
+        <span class="spec-val">6.4 جيجابايت</span>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      لطلب الكروت أو الاستفسار: 718097168 - 778311135
+    </div>
+
   </div>
-</div>
-
-
 
 </body>
 </html>

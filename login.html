@@ -1,554 +1,1653 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-	<meta charset="windows-1256" />
-	<meta name="theme-color" content="#673ab7" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" href="assets/img/favicon.png">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-
-    <title>تسجيل الدخول</title>
-	
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
-
-	<link rel="stylesheet" href="assets/css/assets.css" />
-	<link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
-	<link rel="stylesheet" href="assets/css/fontello.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256" />
+    <meta name="theme-color" content="#24020a" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+    <title>شبكة الكاري نت اللاسلكية | تسجيل الدخول</title>
+    
+    <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+    <link rel="stylesheet" href="assets/css/fontello.css" />
+    
+    <script src="assets/js/jquery-1.11.2.min.js"></script>
     <script src="assets/js/hotCookie.min.js"></script>
     <script src="assets/js/hotInImprover.min.js"></script>
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/chik.css">
-	<script type="text/javascript" src="assets/js/label.js"></script>
-	<script src="assets/js/jquery-1.11.2.min.js"></script>
-	<script src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
+    <script src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
+    <script type="text/javascript" src="/md5.js"></script>
 
+    <style>
+        :root {
+            --bg-primary: #1a0108;
+            --bg-card: rgba(55, 4, 18, 0.82);
+            --bg-card-border: rgba(229, 192, 123, 0.22);
+            --gold-champagne: #F5D77F;
+            --gold-glow: rgba(229, 192, 123, 0.45);
+            --ruby-btn: #c41e3a;
+            --orange-star: #F5D77F;
+            --orange-turbo: #F5D77F;
+            --gold-border: #d4af37;
+            --gold-bg: rgba(60, 45, 10, 0.4);
+            --green-active: #00e676;
+            --green-gaming: #082d23;
+            --text-main: #faf8f5;
+            --text-sub: #d8b4be;
+            --font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
 
-	 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important; background-color: #2b000e !important;
+            min-height: 100vh;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 10px 10px 85px 10px;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 460px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin: 0 auto;
+        }
+
+        /* Modern Floating Glassmorphic Bottom Navigation Bar */
+        .top-navbar {
+            display: flex;
+            position: fixed;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            max-width: 440px;
+            background: rgba(36, 3, 11, 0.78);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(245, 215, 127, 0.28);
+            border-radius: 24px;
+            padding: 6px 8px;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 15px rgba(245, 215, 127, 0.12);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 2px;
+            color: #d8b4be;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            text-align: center;
+            gap: 2px;
+        }
+
+        .nav-item i {
+            font-size: 16px;
+            transition: transform 0.2s;
+        }
+
+        .nav-item:active {
+            transform: scale(0.95);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #FFF0B3 0%, #E6C66E 60%, #a81c3c 100%);
+            color: #1a0108 !important;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(230, 198, 110, 0.35);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-1px);
+        }
+
+        .nav-item:hover:not(.active) {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Server Status Pill Bar */
+        .server-status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(75, 8, 26, 0.9);
+            border: 1px solid rgba(255, 75, 110, 0.35);
+            border-radius: 12px;
+            padding: 8px 14px;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffe5ec;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 9px;
+            height: 9px;
+            background-color: var(--green-active);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--green-active);
+            animation: pulseDot 1.8s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #F5D77F;
+            font-weight: bold;
+            font-size: 11px;
+            background: rgba(0, 140, 255, 0.12);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 140, 255, 0.2);
+        }
+
+        /* Hero Brand Card */
+        .hero-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 14px 10px 6px 10px;
+        }
+
+        .brand-icon-box {
+            width: 82px;
+            height: 82px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #F5D77F 0%, #c41e3a 50%, #800020 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 150, 255, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+            position: relative;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .brand-icon-box .lightning-svg {
+            width: 44px;
+            height: 44px;
+            fill: #000814;
+            filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.4));
+        }
+
+        .brand-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .brand-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .starlink-badge {
+            background: linear-gradient(135deg, #ff7b00, #ff4500);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 0 12px rgba(255, 100, 0, 0.5);
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            font-size: 13px;
+            color: #f7a8b8;
+            line-height: 1.5;
+            max-width: 380px;
+            font-weight: 500;
+        }
+
+        /* News Ticker Bar */
+        .marquee-container {
+            background: rgba(45, 10, 20, 0.85);
+            border: 1px solid rgba(255, 75, 110, 0.35);
+            border-radius: 12px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .marquee-badge {
+            background: #00d2ff;
+            color: #020b18;
+            font-size: 10.5px;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marqueeAnim 18s linear infinite;
+            color: #fce7eb;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        @keyframes marqueeAnim {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Spiritual / Wisdom Box */
+        .wisdom-box {
+            background: linear-gradient(135deg, rgba(45, 30, 8, 0.6), rgba(20, 14, 4, 0.85));
+            border: 1px solid #d4af37;
+            border-radius: 16px;
+            padding: 14px 16px 16px 16px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.18), inset 0 0 15px rgba(212, 175, 55, 0.05);
+        }
+
+        .wisdom-header-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #d4af37;
+            color: #1a1202;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 14px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        }
+
+        .wisdom-text {
+            color: #ffebb3;
+            font-size: 13.5px;
+            font-weight: bold;
+            line-height: 1.6;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Card Input Section */
+        .card-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #ffe5ec;
+            font-weight: 600;
+            padding: 0 4px;
+        }
+
+        .history-btn {
+            background: rgba(0, 140, 255, 0.15);
+            border: 1.5px solid rgba(229, 192, 123, 0.4);
+            color: #faf8f5;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .history-btn:hover {
+            background: rgba(0, 140, 255, 0.3);
+            color: #ffffff;
+        }
+
+        .input-box-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .voucher-input {
+            width: 100%;
+            height: 54px;
+            background: #30020d;
+            border: 1.5px solid #521424;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 1px;
+            padding: 0 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .voucher-input:focus {
+            border-color: #00d2ff;
+            box-shadow: 0 0 16px rgba(0, 210, 255, 0.4), inset 0 2px 6px rgba(0, 0, 0, 0.8);
+            background: #1a040b;
+        }
+
+        .voucher-input::placeholder {
+            color: #4b6785;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        /* Save Card Bar */
+        .save-card-box {
+            background: rgba(75, 8, 26, 0.85);
+            border: 1px solid rgba(255, 75, 110, 0.3);
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .save-card-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floppy-icon {
+            font-size: 20px;
+            color: #85a5c5;
+        }
+
+        .save-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            font-weight: bold;
+            color: #e1efff;
+        }
+
+        .badge-auto {
+            background: rgba(0, 180, 255, 0.2);
+            color: #00d2ff;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+        }
+
+        .save-desc {
+            font-size: 10.5px;
+            color: #6c8aa8;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        /* Checkbox Customization */
+        .custom-checkbox {
+            position: relative;
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+        }
+
+        .custom-checkbox input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #450414;
+            border: 1.5px solid #008be5;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #008be5;
+            box-shadow: 0 0 10px rgba(0, 139, 229, 0.6);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Speed Selector Grid */
+        .speed-section {
+            background: rgba(70, 6, 24, 0.9);
+            border: 1px solid rgba(255, 75, 110, 0.35);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .speed-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #e0f2fe;
+        }
+
+        .speed-active-name {
+            color: var(--orange-turbo);
+            font-weight: 800;
+        }
+
+        .speed-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .speed-btn {
+            background: #380310;
+            border: 1.5px solid rgba(229, 192, 123, 0.25);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            position: relative;
+        }
+
+        .speed-btn .s-title {
+            font-size: 12.5px;
+            font-weight: bold;
+            color: #d0e4f7;
+        }
+
+        .speed-btn .s-profile {
+            font-size: 10px;
+            color: #6486a8;
+            direction: ltr;
+        }
+
+        .speed-btn:hover {
+            border-color: #00d2ff;
+            background: #450c1c;
+        }
+
+        /* Active Turbo (Orange) */
+        .speed-btn.active-turbo {
+            background: linear-gradient(135deg, #F5D77F, #C49A33);
+            border-color: #FFF0B3;
+            box-shadow: 0 0 18px rgba(245, 215, 127, 0.55);
+        }
+
+        .speed-btn.active-turbo .s-title { color: #29020d !important; font-weight: 900 !important; text-shadow: none !important; }
+
+        .speed-btn.active-turbo .s-profile { color: #4a0316 !important; font-weight: 800 !important; }
+
+        /* Active Blue Normal */
+        .speed-btn.active-blue { background: linear-gradient(135deg, #FFF0B3 0%, #E6C66E 50%, #B89738 100%) !important; border-color: #FFF0B3 !important; box-shadow: 0 0 16px rgba(245, 215, 127, 0.55) !important; }
+
+        .speed-btn.active-blue .s-title { color: #29020d !important; font-weight: 900 !important; text-shadow: none !important; }
+
+        .speed-btn.active-blue .s-profile { color: #4a0316 !important; font-weight: 800 !important; }
+
+        /* Gaming Button */
+        .gaming-btn {
+            background: linear-gradient(135deg, #072e24, #041f18);
+            border: 1px solid #00b074;
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 12px rgba(0, 230, 118, 0.15);
+        }
+
+        .gaming-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.35);
+            background: #0a3d30;
+        }
+
+        .gaming-btn.active {
+            background: linear-gradient(135deg, #00c853, #007e33);
+            border-color: #69f0ae;
+            box-shadow: 0 0 20px rgba(0, 200, 83, 0.6);
+        }
+
+        .gaming-btn.active .g-title, .gaming-btn.active .g-sub {
+            color: #ffffff;
+        }
+
+        .gaming-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            text-align: right;
+        }
+
+        .g-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #69f0ae;
+        }
+
+        .g-sub {
+            font-size: 10.5px;
+            color: #4db6ac;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .ping-pill {
+            background: rgba(0, 230, 118, 0.15);
+            border: 1px solid #00e676;
+            color: #00e676;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .gaming-btn.active .ping-pill {
+            background: #ffffff;
+            color: #007e33;
+            border-color: #ffffff;
+        }
+
+        /* Main Login Button */
+        .main-login-btn {
+            width: 100%;
+            height: 54px;
+            background: linear-gradient(135deg, #FFF0B3 0%, #E6C66E 50%, #B89738 100%) !important;
+            background-size: 200% auto;
+            border: none;
+            border-radius: 14px;
+            color: #29020d !important;
+            font-size: 17px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(245, 215, 127, 0.45);
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+            outline: none;
+        }
+
+        .main-login-btn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 100, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.5);
+        }
+
+        .main-login-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* AI Check Balance Button */
+        .ai-check-btn {
+            width: 100%;
+            height: 46px;
+            background: linear-gradient(135deg, rgba(88, 5, 25, 0.85), rgba(45, 2, 12, 0.95));
+            border: 1.5px solid rgba(229, 192, 123, 0.4);
+            border-radius: 12px;
+            color: #F5D77F;
+            font-size: 13.5px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .ai-check-btn:hover {
+            background: rgba(0, 140, 255, 0.2);
+            color: #ffffff;
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Value Added Services Cards */
+        .service-card {
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.25s ease;
+        }
+
+        /* Matches & Cinema Card */
+        .cinema-card {
+            background: linear-gradient(135deg, rgba(6, 40, 32, 0.85), rgba(3, 22, 18, 0.95));
+            border: 1px solid #00b074;
+            box-shadow: 0 4px 15px rgba(0, 176, 116, 0.15);
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .service-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #e8f5e9;
+        }
+
+        .service-desc {
+            font-size: 11px;
+            color: #81c784;
+        }
+
+        .service-action-btn {
+            background: #00e676;
+            color: #003318;
+            font-size: 12px;
+            font-weight: 900;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
+            transition: all 0.2s;
+        }
+
+        .service-action-btn:hover {
+            background: #69f0ae;
+            transform: scale(1.04);
+        }
+
+        /* Salafni Emergency Loan Card */
+        .salafni-card {
+            background: linear-gradient(135deg, rgba(48, 35, 10, 0.85), rgba(24, 18, 5, 0.95));
+            border: 1px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .salafni-title-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #fff8e1;
+        }
+
+        .salafni-action-btn {
+            background: linear-gradient(135deg, #E6C66E, #B89738);
+            color: #29020d !important;
+            font-size: 12px;
+            font-weight: 900;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(245, 215, 127, 0.4);
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .salafni-action-btn:hover {
+            background: #ffaa00;
+            transform: scale(1.04);
+        }
+
+        /* Support & Network Info Section */
+        .support-footer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px 0;
+        }
+
+        .support-phones {
+            font-size: 12px;
+            color: #F5D77F;
+            font-weight: 700;
+        }
+
+        .support-phones span {
+            color: #faf8f5;
+        }
+
+        .network-ip-mac {
+            font-size: 11px;
+            color: #d8b4be;
+            font-family: monospace;
+            direction: ltr;
+        }
+
+        /* Copyright & Developer Section */
+        .copyright-card {
+            background: rgba(68, 6, 22, 0.95);
+            border: 1px solid rgba(229, 192, 123, 0.2);
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cr-text-1 {
+            font-size: 11.5px;
+            color: #faf8f5;
+            font-weight: 600;
+        }
+
+        .cr-text-2 {
+            font-size: 11px;
+            color: #FFE082;
+            font-weight: bold;
+        }
+
+        .footer-action-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .foot-pill-btn {
+            flex: 1;
+            max-width: 160px;
+            background: #00a859;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 168, 89, 0.3);
+        }
+
+        .foot-pill-btn.web-btn {
+            background: #800020;
+            color: #F5D77F;
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            box-shadow: none;
+        }
+
+        .foot-pill-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Bottom Fixed Floating App Bar */
+        
+
+        
+
+        /* Modals & Popups (Clean Neon Glass) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(50, 4, 16, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #26060f;
+            border: 1.5px solid #ff4d6d;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.35);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalFadeIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-body-content {
+            color: #c0d8f0;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        /* Price Cards inside Modal */
+        .modal-price-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .modal-price-item {
+            background: rgba(50, 4, 18, 0.8);
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            border-radius: 12px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mpi-right {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .mpi-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .mpi-details {
+            font-size: 11px;
+            color: #F5D77F;
+        }
+
+        .mpi-price {
+            font-size: 16px;
+            font-weight: 900;
+            color: #FFE082;
+            background: rgba(255, 213, 79, 0.12);
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 213, 79, 0.3);
+        }
+
+        /* Speed Test Simulator */
+        .speedtest-gauge {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 6px solid #10335e;
+            border-top: 6px solid #00d2ff;
+            border-right: 6px solid #00e676;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .gauge-num {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .gauge-unit {
+            font-size: 12px;
+            color: #00d2ff;
+            font-weight: bold;
+        }
+
+        /* Error Alert Popup */
+        .error-modal {
+            border-color: #ff3d00;
+            box-shadow: 0 0 30px rgba(255, 61, 0, 0.4);
+        }
+
+        .error-modal .modal-title {
+            color: #ff5252;
+        }
+    </style>
 </head>
-
-$(if chap-id)
-	<form name="sendin" action="$(link-login-only)" method="post">
-		<input type="hidden" name="username" />
-		<input type="hidden" name="password" />
-		<input type="hidden" name="dst" value="$(link-orig)" />
-		<input type="hidden" name="popup" value="true" />
-		<input type="hidden" name="speed" value="false" />
-	</form>
-	
-	<script type="text/javascript" src="/md5.js"></script>
-	<script type="text/javascript">
-	//<!--
-	    function doLogin() {
-		document.sendin.username.value = document.login.username.value;
-		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
-		if (document.login.domain) {
-			document.sendin.speed.value = document.login.domain.value;
-		}
-		document.sendin.submit();
-		return false;
-	    }
-	//-->
-	</script>
-$(endif)
-
-<!-- بداية كود الوضع الليلي-->
-
-<style type='text/css'> /* Night Mode */ .nightly{color:#999;font-size:13px} .Switchbtn{position:fixed;text-align:center;display:inline-block;align-items:center;z-index:100;left:20px;top:20px} .togglenight{display:none;} .togglenight + .togglenight-btn{outline:0;display:inline-block;width:45px;height:10px;position:relative;cursor:pointer;margin-right:5px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;} .togglenight + .togglenight-btn:after,.togglenight + .togglenight-btn:before{position:relative;display:block;content:"";width:50%;height:100%} .togglenight-switch + .togglenight-btn{background:#d5d2fc;border-radius:99em;transition:all .4s ease} .togglenight-switch + .togglenight-btn:after{content:'';border-radius:100px;background:#887fff;transition:right 0.3s cubic-bezier(0.175,0.885,0.32,1.275),padding 0.3s ease,margin 0.3s ease;position:absolute;width:20px;height:20px;top:-5px;right:0;box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23)} .togglenight-switch:checked + .togglenight-btn{background:rgba(255,255,255,.15)} .togglenight:checked + .togglenight-btn:after{content:'';right:55%;background:#ff9f43} .nightmode{background:#202124;color:rgba(255,255,255,.7)} .nightmode a{color:rgba(255,255,255,.7)!important} .nightmode a:hover{color:rgba(255,255,255,.4)!important}
-.nightmode .class-baru{}
-.nightmode .class-baru{}
-.nightmode .form{background-color:#202124;}
-.nightmode .submit button {background:#101;}
-.nightmode .back button {background:#101;}
-.nightmode .trial {background:#101;}
-.nightmode .social-icon {background:#101;}
-.nightmode .social-icon.facebook:hover {background:#101;}
-.nightmode .social-icon.dollar:hover {background:#101;}
-.nightmode .social-icon.gplus:hover {background:#101;}
-.nightmode .social-icon.location:hover {background:#101;}
-.nightmode .copyright {background:#101;}
-.nightmode .marque {background:#101;}
-.nightmode .banner {background:#202124;}
-.nightmode .form .input-group .input-field input {color:#fff;}
-.nightmode .modal {background:#202124;}
-.nightmode .bnr {background:#202124;}
-.nightmode #speed {background:#202124;}
-
-</style>
-
-
-<!-- نهاية كود الوضع الليلي-->
-<style>
-.submit button {
-  background-color: #8E44AD;
-  font-size: 18px;
-  padding: 12px 25px;
-  border-radius: 10px;
-}
-
-#clock {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 8px 16px;
-  font-weight: bold;
-  color: #fff;
-}
-
-body {
-  background: linear-gradient(135deg, #1C1C1C, #2C3E50);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
-
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-.form {
-    background-color: #f4f6f7;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-.submit button {
-    background-color: #2980B9;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 10px 20px;
-}
-.submit button:hover {
-    background-color: #1A5276;
-}
-.banner {
-    background: linear-gradient(90deg, #2C3E50, #2980B9);
-    color: #fff;
-}
-.marque {
-    background-color: #34495E;
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px;
-}
-
-/*SliderShow css*/
-#hcg-slider-1 .hcg-slide-container {
-    width: auto;
-    height: auto;
-}
-
-.hcg-slider {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.hcg-slide-container {
-    max-width: 100%;
-    display: inline-block;
-    position: relative;
-}
-
-.hcg-slides {
-    display: none;
-    text-align: center;
-    overflow: hidden;
-}
-
-.hcg-slides img {
-    max-width: 90%;
-    max-height: 100%;
-    display: inline-block;
-    border-radius: 5px;
-    border: solid 1px #a0a0a0;
-    vertical-align: middle;
-}
-
-.hcg-slide-dot-control {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.hcg-slide-dot {
-    cursor: pointer;
-    height: 13px;
-    width: 13px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 10%;
-    display: inline-block;
-}
-
-.hcg-slide-dot.dot-active {
-    background-color: #717171;
-}
-
-
-.animated {
-    animation-name: fadeInRight;
-    animation-duration: 1s;
-}
-
-@keyframes fadeInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.fadeInRight {
-    animation-name: fadeInRight;
-}
-/*SliderShow css*/
-</style>
 
 <body>
 
-<!-- /كود لوغو خارج البنر-->
+    <!-- Hidden Form for MikroTik Authentication -->
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+        <input type="hidden" name="speed" id="sendin_speed" value="100M/100M" />
+    </form>
+    
+    <script type="text/javascript">
+    function doLogin() {
+        var u = document.login.username.value.trim();
+        var p = document.login.password.value ? document.login.password.value.trim() : u;
+        
+        if (!u) {
+            alert('يرجى إدخال كود الكرت أولاً');
+            document.getElementById('uname').focus();
+            return false;
+        }
+        
+        // Save Card to Local Storage if Remember Me is checked
+        if (document.getElementById('remember').checked) {
+            saveVoucherToStorage(u);
+        }
 
-                  <!--<div class="logo-basheer"><img src="assets/img/logo.svg"></div>-->
-				  
-<!-- /نهاية كود اللوغو--> 
+        document.sendin.username.value = u;
+        document.sendin.password.value = hexMD5('$(chap-id)' + p + '$(chap-challenge)');
+        document.sendin.speed.value = document.getElementById('selected_profile').value;
+        document.sendin.submit();
+        return false;
+    }
+    </script>
+    $(endif)
 
-<!-- /بداية كود الايقونات-->
-        <div class="bnr">
-        <div class="banner2">
-                <div class="floated">
-                        <a href="prices.html"><div class="social-icon dollar">
-                            <i class="icon-dollar"></i>
-                        </div></a>
-                       <!-- <a href="https://www.facebook.com/00000.alkabor"><div class="social-icon facebook">
-                            <i class="icon-facebook"></i>
-                        </div></a>-->
-                        <div class="social-icon gplus" onclick="document.getElementById('alert-phone').style.display = ('block')">
-                            <i class="icon-whatsapp"></i>
+    <div class="main-wrapper">
+
+        <!-- 1. Top Navigation Bar (Tabs) -->
+        <nav class="top-navbar">
+            <a href="login.html" class="nav-item active">
+                <i class="icon-login">⚡</i>
+                <span>تسجيل الدخول</span>
+            </a>
+            <div class="nav-item" onclick="openModal('packages-modal')">
+                <i class="icon-dollar">🎓</i>
+                <span>باقات الكروت</span>
+            </div>
+            <div class="nav-item" onclick="openModal('agents-modal')">
+                <i class="icon-location">📍</i>
+                <span>نقاط البيع</span>
+            </div>
+            <div class="nav-item" onclick="openModal('speedtest-modal')">
+                <i class="icon-signal">⏱️</i>
+                <span>فحص السرعة</span>
+            </div>
+            <div class="nav-item" onclick="openModal('install-modal')">
+                <i class="icon-phone">📱</i>
+                <span>تثبيت التطبيق</span>
+            </div>
+        </nav>
+
+        <!-- 2. Server Status Bar -->
+        <div class="server-status-bar">
+            <div class="status-right">
+                <div class="live-dot"></div>
+                <span>سيرفر ميكروتك شبكة الكاري نت نشط</span>
+            </div>
+            <div class="status-left">
+                <span>📶 5GHz & 2.4GHz</span>
+            </div>
+        </div>
+
+        <!-- 3. Brand & Hero Title -->
+        <div class="hero-brand">
+            <div class="brand-icon-box">
+                <svg class="lightning-svg" viewBox="0 0 24 24">
+                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                </svg>
+            </div>
+            <div class="brand-title-row">
+                <h1 class="brand-title">⚡ شبكة الكاري نت اللاسلكية</h1>
+                <span class="starlink-badge">STARLINK</span>
+            </div>
+            <p class="brand-subtitle">
+                منظومة توزيع إنترنت فائق السرعة عبر شبكات الأقمار الصناعية ستاربينك وكروت ميكروتك الذكية
+            </p>
+        </div>
+
+        <!-- 4. News Ticker (الشريط الإخباري التفاعلي) -->
+        <div class="marquee-container">
+            <div class="marquee-badge">📢 جديد الأخبار</div>
+            <div class="marquee-track">
+                <div class="marquee-content">
+                    <span>أهلاً وسهلاً بكم في <b>شبكة الكاري نت اللاسلكية</b> ⚡ تصفح سريع واستقرار ممتاز ⚡ باقات مرنة تناسب جميع الاحتياجات ⚡ احتفظ بمعلومات الدخول حتى انتهاء المدة ⚡ نشكركم على اختياركم لنا.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Spiritual / Wisdom Banner -->
+        <div class="wisdom-box">
+            <div class="wisdom-header-pill">
+                <span>📖 تذكير وموعظة 📖</span>
+            </div>
+            <p class="wisdom-text">
+                « استخدم الإنترنت فيما ينفعك .. واحذر أن تجعل الله أهون الناظرين إليك »
+            </p>
+        </div>
+
+        <!-- 6. Main Login Form -->
+        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif) style="display: flex; flex-direction: column; gap: 12px;">
+            
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+            <input type="hidden" name="domain" id="selected_profile" value="100M/100M" />
+
+            <!-- Input Card Box -->
+            <div class="card-input-wrapper">
+                <div class="input-label-row">
+                    <span>أدخل كود الكرت المطبوع على القسيمة</span>
+                    <button type="button" class="history-btn" onclick="openModal('history-modal')">
+                        <span>⏱️ الكروت السابقة</span>
+                        <span id="history-count">(0)</span>
+                    </button>
+                </div>
+                <div class="input-box-container">
+                    <input id="uname" type="text" name="username" class="voucher-input" placeholder="أدخل كود الكرت هنا" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required oninput="copyTextValue();" />
+                    <input id="paswd" type="hidden" name="password" />
+                </div>
+            </div>
+
+            <!-- Save Card Bar -->
+            <div class="save-card-box" onclick="toggleRemember()">
+                <div class="save-card-info">
+                    <div class="floppy-icon">💾</div>
+                    <div>
+                        <div class="save-title-row">
+                            <span>حفظ وتذكر الكرت على هذا الجهاز</span>
+                            <span class="badge-auto">تلقائي</span>
                         </div>
-                        <div class="social-icon location" onclick="document.getElementById('alert-location').style.display = ('block')">
-                            <i class="icon-location"></i>
+                        <div class="save-desc">
+                            يحفظ الكود في ذاكرة الهاتف حتى لا تضيع باقتك إذا قمت برمي الكرت الورقي
                         </div>
                     </div>
-        </div>
-		<div class='Switchbtn'> <span class='nightly'>الوضع الليلي</span> <input class='togglenight togglenight-switch' id='nightmode' type='checkbox'/> <label class='togglenight-btn' for='nightmode'/></div>
-<script type='text/javascript'>
-//<![CDATA[
-// Night Mode
-$("#nightmode").click(function(){$("body").toggleClass("nightmode")}),$("body").toggleClass(localStorage.toggled),$("#nightmode").click(function(){"nightmode"!=localStorage.toggled?($("body").toggleClass("nightmode",!0),localStorage.toggled="nightmode"):($("body").toggleClass("nightmode",!1),localStorage.toggled="")});
-//]]>
-</script>
-		<!-- /نهاية كود الايقونات-->
-		</div>
-<br>
-<br>
-<br>
-<br>
-    <!-- سكربت خاص بالساعة-->
-<div id="clock">Loading...</div>  <script type="text/javascript">  function refrClock()  {  var d=new Date();  var s=d.getSeconds();  var m=d.getMinutes();  var h=d.getHours();  var day=d.getDay();  var date=d.getDate();  var month=d.getMonth();  var year=d.getFullYear();  var days=new Array("الاحد","الاثنين","الثلاثاء","الاربعاء","الخميس","الجمعة","السبت");  var months=new Array("يناير","فبراير","مارس","ابريل","ماي","يونيو","يوليو","اغسطس","سبتمبر","اكتوبر","نوفمبر","ديسمبر");  var am_pm;  if (s<10) {s="0" + s}  if (m<10) {m="0" + m}  if (h>12) {h-=12;am_pm = "مساءً."}  else {am_pm="صباحاً."}  if (h<10) {h="0" + h}  document.getElementById("clock").innerHTML=days[day] + " " + date + " من " + months[month] + " " + year + "   |   الساعة الان " + h + ":" + m + ":" + s + " " + am_pm;  setTimeout("refrClock()",1000);  }  refrClock();</script>
+                </div>
+                <label class="custom-checkbox" onclick="event.stopPropagation()">
+                    <input type="checkbox" id="remember" checked />
+                    <span class="checkmark" onclick="toggleRemember()"></span>
+                </label>
+            </div>
 
- <!-- نهاية الكود-->
-	
-    <div class="form">
-      <div class="banner">
-	  <!-- /كود لوغو داخل البنر-->
-       <!--<div class="logo-basheer">
-        <img src="assets/img/labtop.svg" />
-    </div>-->
-	   <!-- /نهاية الكود-->
-<!-- بداية كود اسم الشبكة داخل البنر -->
-<style>
-@keyframes gradientText {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
+            <!-- Speed Profiles Selector -->
+            <div class="speed-section">
+                <div class="speed-header">
+                    <span>تحديد سرعة الكرت :</span>
+                    <span class="speed-active-name" id="display-profile-name">🚀 سرعة فائقة (100M/100M)</span>
+                </div>
 
-.animated-title {
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  margin: 20px 0;
-  background: linear-gradient(270deg, #8e2de2, #ff6ec4, #ff9a8b, #f6416c);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientText 8s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(255, 105, 180, 0.2), 0 0 12px rgba(255, 105, 180, 0.3);
-}
-</style>
+                <div class="speed-grid">
+                    <div class="speed-btn" id="btn-eco" onclick="setSpeedProfile('512K/512K', 'السرعة الاقتصادية', this)">
+                        <span class="s-title">السرعة الاقتصادية</span>
+                        <span class="s-profile">512K/512K</span>
+                    </div>
+                    <div class="speed-btn" id="btn-med" onclick="setSpeedProfile('2M/2M', 'السرعة المتوسطة', this)">
+                        <span class="s-title">السرعة المتوسطة</span>
+                        <span class="s-profile">2M/2M</span>
+                    </div>
+                    <div class="speed-btn active-turbo" id="btn-turbo" onclick="setSpeedProfile('100M/100M', '🚀 سرعة فائقة', this, true)">
+                        <span class="s-title">⚡ سرعة فائقة</span>
+                        <span class="s-profile">100M/100M</span>
+                    </div>
+                    <div class="speed-btn" id="btn-high" onclick="setSpeedProfile('10M/10M', 'السرعة العالية', this)">
+                        <span class="s-title">السرعة العالية</span>
+                        <span class="s-profile">10M/10M</span>
+                    </div>
+                </div>
 
-<div>
-  <h1 class="animated-title">
-    <i class="icon-signal" style="margin-left: 8px;"></i> شبكة الكاري نت اللاسلكية
-  </h1>
-</div>
-<br>
-<!-- نهاية الكود -->
+                <!-- Gaming Profile Button -->
+                <div class="gaming-btn" id="btn-gaming" onclick="setSpeedProfile('gaming-profile', '🎮 وضع الألعاب (استقرار فائق)', this, false, true)">
+                    <div class="gaming-title-group">
+                        <span class="g-title">🎮 وضع الألعاب (استقرار فائق)</span>
+                        <span class="g-sub">gaming-profile</span>
+                    </div>
+                    <div class="ping-pill">
+                        <span>⚡ بنج 7ms</span>
+                    </div>
+                </div>
+            </div>
 
-<!-- إضافة تأثير إضاءة بالـ CSS -->
-<style>
-@keyframes glow {
-  from {
-    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFA500;
-  }
-  to {
-    text-shadow: 0 0 20px #FFF700, 0 0 30px #FFA500, 0 0 40px #FFD700;
-  }
-}
-</style>
+            <!-- Main Submit Button -->
+            <button type="submit" class="main-login-btn" onclick="return rem();">
+                <span>⚡ تسجيل الدخول الفوري</span>
+            </button>
 
+            <!-- AI Card Check Button -->
+            <button type="button" class="ai-check-btn" onclick="openModal('ai-check-modal')">
+                <span>🔍 فحص رصيد وتفاصيل الكرت الذكي (AI 2026)</span>
+            </button>
 
+        </form>
 
-<!-- /بداية كود شريط اخباري معدل -->
-<div class="marque" style="
-  background-color: #2E003E;
-  color: #FF9A8B;
-  font-size: 17px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 12px rgba(255, 154, 139, 0.4);
-  font-weight: bold;
-">
-  <marquee direction="right" onMouseOver="this.stop();" onMouseOut="this.start();" scrollamount="4">
-    أهلاً وسهلاً بكم في شبكة <span style='color:#FF6EC4;'>الكاري نت</span>
-    <img width="40" src="img/new.gif" align="absmiddle" />
-    تصفح سريع واستقرار ممتاز
-    <img width="40" src="img/new.gif" align="absmiddle" />
-    باقات مرنة تناسب جميع الاحتياجات
-    <img width="40" src="img/new.gif" align="absmiddle" />
-    احتفظ بمعلومات الدخول حتى انتهاء المدة
-    <img width="40" src="img/new.gif" align="absmiddle" />
-    نشكركم على اختياركم لنا
-    <img width="40" src="img/new.gif" align="absmiddle" />
-    تصفح آمن وممتع نتمناه لكم
-    <img width="40" src="img/new.gif" align="absmiddle" />
-  </marquee>
-</div>
-<!-- /نهاية كود الشريط الاخباري -->
-
-
-	
-		
-	<!-- /بداية كود تسجيل الدخول-->
-<form name="login" action="$(link-login-only)" method="post" 
-      $(if chap-id) onSubmit="return doLogin()" $(endif)>
-    
-    <input type="hidden" name="dst" value="$(link-orig)" />
-    <input type="hidden" name="popup" value="true" />
-
-<!-- بداية قسم اختيار السرعة بتصميم ناعم -->
-<section style="
-    background: linear-gradient(135deg, rgba(75,0,130,0.6), rgba(186,85,211,0.6));
-    padding: 35px;
-    border-radius: 18px;
-    max-width: 420px;
-    margin: 40px auto;
-    text-align: center;
-    box-shadow: 0 6px 25px rgba(155, 89, 182, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-"
-onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 10px 30px rgba(186,85,211,0.5)';"
-onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 25px rgba(155, 89, 182, 0.4)';">
-
-    <h2 style="
-        color: #f8f0ff;
-        font-family: 'Cairo', sans-serif;
-        font-size: 26px;
-        font-weight: bold;
-        margin-bottom: 12px;
-        text-shadow: 0 0 12px rgba(255,255,255,0.4);
-    ">
-        اختيار السرعة
-    </h2>
-
-    <p style="
-        color: #f3eaff;
-        font-size: 15px;
-        font-family: 'Cairo', sans-serif;
-        margin-bottom: 25px;
-        opacity: 0.9;
-    ">
-        يرجى تحديد السرعة المناسبة من القائمة أدناه
-    </p>
-
-    <select name="domain" style="
-        height: 50px;
-        font-size: 1em;
-        padding: 10px 20px;
-        border-radius: 12px;
-        border: none;
-        background: linear-gradient(90deg, #ede7f6, #f3e5f5);
-        color: #333;
-        font-weight: 600;
-        width: 85%;
-        max-width: 260px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 10px rgba(255,255,255,0.3);
-        outline: none;
-        text-align: center;
-    "
-    onfocus="this.style.boxShadow='0 0 14px rgba(155,89,182,0.6)';"
-    onblur="this.style.boxShadow='inset 0 0 8px rgba(0,0,0,0.1), 0 0 10px rgba(255,255,255,0.3)';">
-        <option value="512K/512K">سرعة ضعيفة</option>
-        <option value="100M/100M" selected>سرعة قوية</option>
-    </select>
-</section>
-<!-- نهاية قسم اختيار السرعة -->
-
-    <!-- حقل الإدخال -->
-    <div class="input-group" style="max-width: 400px; margin: auto;">
-        <div class="input-field" style="margin-bottom: 15px;">
-            <input id="uname" type="text" name="username" required placeholder="أدخل الكود هنا"
-                style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" />
-        </div>
-
-        <input id="paswd" type="hidden" name="password" />
-
-        <!-- تذكرني -->
-        <div id="toggles" style="margin: 10px 0;">
-            <input type="checkbox" name="checkbox1" id="remember" class="ios-toggle" value="ON" checked />
-            <label for="remember" class="checkbox-label" data-off="لا تتذكرني" data-on="تذكرني"></label>
-        </div>
-
-        <!-- زر الدخول -->
-        <div class="submit" style="text-align: center;">
-            <button onclick="return rem();" type="submit" style="
-                background-color: #28A745;
-                color: white;
-                padding: 12px 25px;
-                font-size: 16px;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            " onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28A745'">
-                تسجيل الدخول <i class="icon-login"></i>
+        <!-- 7. Value-Added Services (Matches / Cinema & Salafni) -->
+        <div class="service-card cinema-card">
+            <div class="service-info">
+                <div class="service-title-row">
+                    <span>🎬 بث المباريات والسينما</span>
+                    <div class="live-dot" style="width: 7px; height: 7px;"></div>
+                </div>
+                <div class="service-desc">بث رياضي مباشر • سينما ومسلسلات 4K</div>
+            </div>
+            <button type="button" class="service-action-btn" onclick="openModal('cinema-modal')">
+                <span>دخول ↗</span>
             </button>
         </div>
+
+        <div class="service-card salafni-card">
+            <div class="service-info">
+                <div class="salafni-title-row">
+                    <span>⚡ خدمة سلفني (إنترنت طوارئ مجاني)</span>
+                </div>
+            </div>
+            <button type="button" class="salafni-action-btn" onclick="openModal('salafni-modal')">
+                <span>سلفني 3 دقائق ⚡</span>
+            </button>
+        </div>
+
+        <!-- 8. Support & Network Diagnostics -->
+        <div class="support-footer">
+            <div class="support-phones">
+                الدعم الفني والشكاوى: واتساب <span>(778311135 / 778898651)</span> | اتصال: <span>711292741</span>
+            </div>
+            <div class="network-ip-mac">
+                IP: $(ip) | MAC: $(mac)
+            </div>
+        </div>
+
+        <!-- 9. Copyright & Developer Bar -->
+        <div class="copyright-card">
+            <div class="cr-text-1">جميع الحقوق محفوظة لـ شبكة الكاري نت اللاسلكية © 2026</div>
+            <div class="cr-text-2">خدمة المشتركين والدعم الفني على مدار الساعة</div>
+            <div class="footer-action-row">
+                <a href="https://wa.me/967778311135" target="_blank" class="foot-pill-btn">
+                    <span>💬 واتساب: 778311135</span>
+                </a>
+                <a href="tel:778898651" class="foot-pill-btn web-btn">
+                    <span>📞 اتصال: 778898651</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 
-   </form>
-<!-- /نهاية كود تسجيل الدخول-->
+    
 
-   
-$(if error)
-    <div id="alert-error" class="alert-back" onclick="this.style.display = ('none')">	
-        <div class="modal">
-            <div class="modal-icon error"><i class="icon-error"></i></div>
-            <div class="title error">
-                <script type="text/javascript">
-                    var error = "$(error)";
-                    if (error == "simultaneous session limit reached") {
-                        document.write("لا يمكن تسجيل الدخول أكثر من مرة");
-                    }
-                    else if (error == "invalid username or password") {
-                        document.write("خطأ في إسم المستخدم او كلمة المرور");
-                    }
+    <!-- ==================== MODALS ==================== -->
 
-else if (error == "access denied at this time") {
-document.write("بطاقة  لا يمكن استخدامها في هذا الوقت");
-}
-else if (error == "uptime limit reached") {
-document.write("عذرا لقد انتهى الوقت المتاح لك..");
-}
-else if (error == "invalid password") {
-document.write("تأكد من كتابة كلمة المرور بشكل صحيح");
-}
-else if (error == "no more sessions are allowed for user $(username)") {
-document.write("لا يمكن تسجيل الدخول اكثر من مرة");
-}
-else if (error == "no valid profile found") {
-document.write("لقد انتهت صلاحية هذه البطاقة");
-}
-else if (error == "transfer limit reached") {
-document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
-}
-else if (error == "user $(username) has reached traffic limit") {
-document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
-}
-else if (error == "invalid Calling-Station-Id") {
-document.write("هذا الحساب مقترن بجهاز آخر ");
-}
-else if (error == "user $(username) is not allowed to log in from this MAC address") {
-document.write("هذا الحساب مقترن بجهاز آخر");
-}
-else if(error.search("not found") != -1) {
-document.write("اسم المستخدم غير موجود تأكد من كتابته بشكل صحيح");
-}
-else if (error == "radius timeout") {
-document.write("عزيزي المشترك نعتذر عن انقطاع الخدمة بسبب الصيانة");
-}
-                    else {
-                        document.write("$(error)");
-                    }
-                </script>
-            </div>
-            <div class="modal-clear"></div>
-            <div id="line"></div>
-            <div class="modal-body">
-                <p>يرجى المحاولة مرة أخرى أو مراجعة المسؤول</p>
+    <!-- Modal 1: Packages & Pricing -->
+    <div id="packages-modal" class="modal-overlay" onclick="closeModal('packages-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('packages-modal')">✕</button>
+            <div class="modal-title">🎓 باقات وأسعار كروت شبكة الكاري نت</div>
+            <div class="modal-body-content">
+                <p>اختر الباقة المناسبة لاحتياجك من قائمة كروت الكاري نت اللاسلكية:</p>
+                <div class="modal-price-grid">
+                    <div class="modal-price-item">
+                        <div class="mpi-right">
+                            <span class="mpi-title">باقة 200 ريال</span>
+                            <span class="mpi-details">10 ساعات • صلاحية 24 ساعة • 450MB</span>
+                        </div>
+                        <span class="mpi-price">200 ر.ي</span>
+                    </div>
+                    <div class="modal-price-item">
+                        <div class="mpi-right">
+                            <span class="mpi-title">باقة 500 ريال</span>
+                            <span class="mpi-details">35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 1500MB</span>
+                        </div>
+                        <span class="mpi-price">500 ر.ي</span>
+                    </div>
+                    <div class="modal-price-item">
+                        <div class="mpi-right">
+                            <span class="mpi-title">باقة 1000 ريال (الأكثر طلباً)</span>
+                            <span class="mpi-details">160 ساعة (6 أيام و 16 ساعة) • صلاحية 10 أيام • 3.4GB</span>
+                        </div>
+                        <span class="mpi-price">1000 ر.ي</span>
+                    </div>
+                    <div class="modal-price-item">
+                        <div class="mpi-right">
+                            <span class="mpi-title">باقة 2500 ريال (الشهرية الفائقة)</span>
+                            <span class="mpi-details">16 يوم (أسبوعين ويومين) • صلاحية 30 يوم • 6.4GB</span>
+                        </div>
+                        <span class="mpi-price">2500 ر.ي</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-$(endif)
+
+    <!-- Modal 2: Agents & Sales Points -->
+    <div id="agents-modal" class="modal-overlay" onclick="closeModal('agents-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('agents-modal')">✕</button>
+            <div class="modal-title">📍 نقاط البيع والموزعين المعتمدين</div>
+            <div class="modal-body-content">
+                <div style="background: rgba(0, 180, 255, 0.1); border: 1px solid #00d2ff; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
+                    <div style="font-weight: bold; color: #ffffff;">🏪 مراكز البيع المعتمدة:</div>
+                    <div style="color: #faf8f5; margin-top: 4px;">كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.</div>
+                </div>
+                <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 12px; border-radius: 12px;">
+                    <div style="font-weight: bold; color: #FFE082;">📞 للإدارة والاستفسار وطلب نقاط بيع:</div>
+                    <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651 - 711292741</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Speed Test -->
+    <div id="speedtest-modal" class="modal-overlay" onclick="closeModal('speedtest-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('speedtest-modal')">✕</button>
+            <div class="modal-title">⏱️ فحص سرعة الإنترنت الحية</div>
+            <div class="modal-body-content" style="text-align: center;">
+                <p>قياس سرعة اتصالك الحالي بشبكة الكاري نت اللاسلكية STARLINK:</p>
+                <div class="speedtest-gauge">
+                    <span class="gauge-num" id="live-speed-val">98.6</span>
+                    <span class="gauge-unit">Mbps</span>
+                </div>
+                <div style="display: flex; justify-content: space-around; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 10px; margin-bottom: 14px;">
+                    <div><span style="color: #faf8f5; font-size:11px;">البنج (Ping):</span><br><b style="color: #00e676;">7 ms</b></div>
+                    <div><span style="color: #faf8f5; font-size:11px;">الرفع (Upload):</span><br><b style="color:#00d2ff;">38.4 Mbps</b></div>
+                    <div><span style="color: #faf8f5; font-size:11px;">التردد:</span><br><b style="color:#FFE082;">5.8 GHz</b></div>
+                </div>
+                <button type="button" class="main-login-btn" style="height: 42px; font-size: 14px;" onclick="runSpeedTest()">
+                    🔄 إعادة الفحص الآن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Card History -->
+    <div id="history-modal" class="modal-overlay" onclick="closeModal('history-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('history-modal')">✕</button>
+            <div class="modal-title">⏱️ سجل الكروت السابقة المحفوظة</div>
+            <div class="modal-body-content">
+                <p>الكروت التي قمت بتسجيل الدخول بها سابقاً على شبكة الكاري نت:</p>
+                <div id="history-list" style="margin: 12px 0; display: flex; flex-direction: column; gap: 8px;">
+                    <!-- Populated dynamically -->
+                </div>
+                <button type="button" class="ai-check-btn" style="height: 38px;" onclick="clearVoucherHistory()">
+                    🗑️ مسح سجل الكروت المحفوظة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: AI Card Checker -->
+    <div id="ai-check-modal" class="modal-overlay" onclick="closeModal('ai-check-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('ai-check-modal')">✕</button>
+            <div class="modal-title">🔍 فحص رصيد وتفاصيل الكرت (AI 2026)</div>
+            <div class="modal-body-content">
+                <p>أدخل كود الكرت لمعرفة الرصيد، الصلاحية، والوقت المتبقي دون استهلاك رصيدك:</p>
+                <input type="text" id="ai-card-input" class="voucher-input" placeholder="أدخل رقم الكرت هنا" style="margin: 10px 0; height: 46px;" />
+                <button type="button" class="main-login-btn" style="height: 42px; font-size: 14px; margin-bottom: 10px;" onclick="checkCardAI()">
+                    فحص الكرت بالذكاء الاصطناعي ⚡
+                </button>
+                <div id="ai-result-box" style="display: none; background: rgba(0, 230, 118, 0.1); border: 1px solid #00e676; padding: 12px; border-radius: 12px;">
+                    <div style="font-weight: bold; color: #00e676;">✅ بيانات الكرت:</div>
+                    <div style="color: #fff; font-size: 12.5px; margin-top: 4px;" id="ai-result-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Live Cinema & Matches -->
+    <div id="cinema-modal" class="modal-overlay" onclick="closeModal('cinema-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('cinema-modal')">✕</button>
+            <div class="modal-title">🎬 سيرفر السينما والبث المباشر 4K</div>
+            <div class="modal-body-content">
+                <p>استمتع بمشاهدة مباريات اليوم بجودة عالية وأحدث الأفلام والمسلسلات مجاناً وبسرعة محلية فائقة دون استهلاك باقة الإنترنت الأساسية على شبكة الكاري نت.</p>
+                <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+                    <button class="main-login-btn" style="height: 44px; font-size: 14px;" onclick="alert('جاري فتح قنوات البث المباشر BeIN Sports...');">
+                        ⚽ فتح قنوات المباريات المباشرة
+                    </button>
+                    <button class="ai-check-btn" style="height: 44px;" onclick="alert('جاري فتح مكتبة الأفلام والمسلسلات 4K...');">
+                        🍿 فتح مكتبة الأفلام والمسلسلات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 7: Salafni Emergency -->
+    <div id="salafni-modal" class="modal-overlay" onclick="closeModal('salafni-modal')">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal('salafni-modal')">✕</button>
+            <div class="modal-title">⚡ خدمة سلفني (إنترنت طوارئ مجاني)</div>
+            <div class="modal-body-content">
+                <p>هل انتهت باقتك وتحتاج لفتح الإنترنت بشكل عاجل للتواصل؟</p>
+                <div style="background: rgba(245, 215, 127, 0.12); border: 1px solid #E6C66E; padding: 12px; border-radius: 12px; margin: 12px 0;">
+                    <div style="color: #FFE082; font-weight: bold;">🎁 رصيد طوارئ مجاني: 3 دقائق</div>
+                    <div style="color: #ffe0b2; font-size: 12px; margin-top: 4px;">تمنحك الشبكة 3 دقائق مجانية لتصفح الواتساب والتواصل السريع وشراء كرت جديد.</div>
+                </div>
+                <button class="main-login-btn" style="height: 44px; font-size: 14px; background: linear-gradient(135deg, #E6C66E, #B89738);" onclick="activateSalafni()">
+                    تفعيل سلفني 3 دقائق الآن ⚡
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8: Install App -->
     
-	
 
+    <!-- Error Alert Modal if MikroTik returned $(error) -->
+    $(if error)
+    <div id="error-popup-modal" class="modal-overlay error-modal" style="display: flex;">
+        <div class="modal-card" style="border-color: #ff3d00;">
+            <button class="modal-close-btn" onclick="document.getElementById('error-popup-modal').style.display='none'">✕</button>
+            <div class="modal-title" style="color: #ff5252;">⚠️ تنبيه تسجيل الدخول</div>
+            <div class="modal-body-content">
+                <div id="error-arabic-msg" style="font-size: 15px; font-weight: bold; color: #ffffff; margin-bottom: 8px;">
+                    $(error)
+                </div>
+                <div style="font-size: 12px; color: #ffab91;">
+                    يرجى التأكد من كتابة كود الكرت بالشكل الصحيح أو مراجعة خدمة العملاء.
+                </div>
+                <button class="main-login-btn" style="height: 42px; margin-top: 14px; background: #ff3d00;" onclick="document.getElementById('error-popup-modal').style.display='none'">
+                    حسناً، سأحاول مجدداً
+                </button>
+            </div>
+        </div>
+    </div>
+    $(endif)
 
+    <!-- JavaScript Logic & Integrations -->
+    <script type="text/javascript">
+        // 1. Synchronize Username to Password for Single-Voucher system
+        function copyTextValue() {
+            var val = document.getElementById("uname").value;
+            document.getElementById("paswd").value = val;
+        }
 
-<!-- بداية كود شريط التواصل (اتصل بنا) -->
-<div id="alert-phone" class="alert-back" onclick="this.style.display = ('none')">
-  <div class="modal">
-    <div class="modal-icon phone">
-      <i class="icon-phone"></i>
-    </div>
-    <div class="title phone" style="font-size: 20px; color: #00ffcc; margin-bottom: 10px;">
-      ☎️ اتصل بنا:
-    </div>
-    <div class="modal-clear"></div>
-    <div id="line" style="height: 2px; background: linear-gradient(to right, #00f0ff, #a100ff); margin: 10px 0;"></div>
-    <div class="modal-body" style="font-size: 16px; color: #eee; text-align: right;">
-      <div style="margin: 10px 0; background: #1f1f1f; padding: 10px; border-radius: 10px; border: 1px solid #444;">
-        <span style="color: #00f0ff; font-weight: bold;">الإدارة والصيانة:</span>
-        <span id="Phone_Admin" style="color: #FFD700; font-size: 18px; margin-right: 10px;">778311135-778898651</span>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- نهاية الكود -->
+        function rem() {
+            copyTextValue();
+            return true;
+        }
 
+        // 2. Remember Me Toggle
+        function toggleRemember() {
+            var chk = document.getElementById("remember");
+            chk.checked = !chk.checked;
+        }
 
-<!-- بداية كود شريط مراكز البيع (الوكلاء والمعتمدين) -->
-<div id="alert-location" class="alert-back" onclick="this.style.display = ('none')">
-  <div class="modal">
-    <div class="modal-icon place">
-      <i class="icon-location"></i>
-    </div>
-    <div class="title place" style="font-size: 20px; color: #FFD700; margin-bottom: 10px;">
-      🧭 الوكلاء والمعتمدين :
-    </div>
-    <div class="modal-clear"></div>
-    <div id="line" style="height: 2px; background: linear-gradient(to right, #00f0ff, #a100ff); margin: 10px 0;"></div>
-    <div class="modal-body" style="font-size: 16px; color: #ccc; text-align: right;">
-      <div style="margin: 10px 0; background: #1f1f1f; padding: 10px; border-radius: 10px; border: 1px solid #444;">
-        <span style="color: #00f0ff; font-weight: bold;"> </span>
-        <span id="titel">جميع البقالات في نطاق تغطية الشبكة</span>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- نهاية الكود -->
+        // 3. Set Speed Profile
+        function setSpeedProfile(profileCode, displayName, elem, isTurbo, isGaming) {
+            document.getElementById("selected_profile").value = profileCode;
+            var sendinSpeed = document.getElementById("sendin_speed");
+            if (sendinSpeed) sendinSpeed.value = profileCode;
 
+            document.getElementById("display-profile-name").innerText = displayName + " (" + profileCode + ")";
+
+            // Reset buttons
+            var btns = document.querySelectorAll(".speed-btn, .gaming-btn");
+            btns.forEach(function(b) {
+                b.classList.remove("active-turbo", "active-blue", "active");
+            });
+
+            if (isTurbo) {
+                elem.classList.add("active-turbo");
+            } else if (isGaming) {
+                elem.classList.add("active");
+            } else {
+                elem.classList.add("active-blue");
+            }
+        }
+
+        // 4. Modal Open / Close
+        function openModal(modalId) {
+            var m = document.getElementById(modalId);
+            if (m) m.style.display = "flex";
+            if (modalId === "history-modal") loadHistoryUI();
+        }
+
+        function closeModal(modalId) {
+            var m = document.getElementById(modalId);
+            if (m) m.style.display = "none";
+        }
+
+        // 5. Voucher Storage (History)
+        function saveVoucherToStorage(code) {
+            if (!code) return;
+            try {
+                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
+                if (list.indexOf(code) === -1) {
+                    list.unshift(code);
+                    if (list.length > 8) list.pop();
+                    localStorage.setItem("alkary_vouchers", JSON.stringify(list));
+                }
+                updateHistoryCount();
+            } catch (e) {}
+        }
+
+        function updateHistoryCount() {
+            try {
+                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
+                var el = document.getElementById("history-count");
+                if (el) el.innerText = "(" + list.length + ")";
+            } catch (e) {}
+        }
+
+        function loadHistoryUI() {
+            var container = document.getElementById("history-list");
+            if (!container) return;
+            try {
+                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
+                if (list.length === 0) {
+                    container.innerHTML = "<div style='color: #f7a8b8; text-align:center; padding:10px;'>لا توجد كروت سابقة محفوظة على هذا الجهاز.</div>";
+                    return;
+                }
+                var html = "";
+                list.forEach(function(code) {
+                    html += "<div style='background:rgba(0,180,255,0.1); border:1px solid rgba(0,180,255,0.3); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;'>"
+                          + "<span style='font-weight:bold; color:#fff; font-size:15px;'>" + code + "</span>"
+                          + "<button type='button' style='background:#00d2ff; color:#020b18; border:none; padding:4px 10px; border-radius:6px; font-weight:bold; cursor:pointer;' onclick='useVoucher(\"" + code + "\")'>استخدام الكرت</button>"
+                          + "</div>";
+                });
+                container.innerHTML = html;
+            } catch (e) {}
+        }
+
+        function useVoucher(code) {
+            document.getElementById("uname").value = code;
+            copyTextValue();
+            closeModal("history-modal");
+        }
+
+        function clearVoucherHistory() {
+            localStorage.removeItem("alkary_vouchers");
+            loadHistoryUI();
+            updateHistoryCount();
+        }
+
+        // 6. AI Card Checker Simulator
+        function checkCardAI() {
+            var code = document.getElementById("ai-card-input").value.trim();
+            if (!code) {
+                alert("يرجى إدخال رقم الكرت أولاً");
+                return;
+            }
+            var resultBox = document.getElementById("ai-result-box");
+            var resultText = document.getElementById("ai-result-text");
+            resultBox.style.display = "block";
+            resultText.innerHTML = "⏳ جاري فحص الكرت عبر سيرفر شبكة الكاري نت اللاسلكية...";
+
+            setTimeout(function() {
+                resultText.innerHTML = "<b>رقم الكرت:</b> " + code + "<br>"
+                                     + "<b>حالة الكرت:</b> كرت نشط وصالح للاستخدام ✅<br>"
+                                     + "<b>الباقة المقدرة:</b> باقة 1000 ريال (160 ساعة / 3.4GB)<br>"
+                                     + "<b>الصلاحية:</b> 10 أيام من أول تسجيل دخول";
+            }, 700);
+        }
+
+        // 7. Speed Test Simulator
+        function runSpeedTest() {
+            var el = document.getElementById("live-speed-val");
+            el.innerText = "..";
+            var speeds = [92.4, 98.7, 104.2, 88.5, 99.1];
+            var randomSpeed = speeds[Math.floor(Math.random() * speeds.length)];
+            setTimeout(function() {
+                el.innerText = randomSpeed;
+            }, 600);
+        }
+
+        // 8. Emergency Salafni
+        function activateSalafni() {
+            closeModal("salafni-modal");
+            document.getElementById("uname").value = "salafni_3min";
+            copyTextValue();
+            alert("تم إدراج كود الطوارئ (salafni_3min) بنجاح! اضغط الآن على تسجيل الدخول.");
+        }
+
+        // 9. Error Translation
+        $(document).ready(function() {
+            updateHistoryCount();
+            
+            var errElem = document.getElementById("error-arabic-msg");
+            if (errElem) {
+                var raw = errElem.innerText;
+                if (raw.indexOf("simultaneous session limit") !== -1 || raw.indexOf("already logged in") !== -1) {
+                    errElem.innerText = "عذراً، هذا الكرت مسجل دخول حالياً في جهاز آخر!";
+                } else if (raw.indexOf("invalid username or password") !== -1) {
+                    errElem.innerText = "كود الكرت غير صحيح، يرجى التأكد وإعادة المحاولة.";
+                } else if (raw.indexOf("uptime limit reached") !== -1) {
+                    errElem.innerText = "عذراً، لقد انتهى الوقت المتاح لهذه البطاقة.";
+                } else if (raw.indexOf("traffic limit") !== -1 || raw.indexOf("transfer limit") !== -1) {
+                    errElem.innerText = "عذراً، لقد انتهى رصيد التحميل المتاح لهذه البطاقة.";
+                } else if (raw.indexOf("no valid profile") !== -1) {
+                    errElem.innerText = "لقد انتهت الصلاحية الزمنية لهذه البطاقة.";
+                }
+            }
+        });
+    </script>
 
 </body>
-
 </html>

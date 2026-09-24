@@ -127,8 +127,50 @@ function renderMikrotikTemplate(htmlContent, vars = {}) {
     'var _clk = document.getElementById("clock"); if (_clk) { _clk.innerHTML = $1; }'
   );
 
+  // Ensure slideit() and safe error suppression in browser runtime
+  const safeScript = `<head><script>
+window.slideit = window.slideit || function(){};
+window.addEventListener('error', function(e) {
+  if (e.message && (e.message.includes('addEventListener') || e.message.includes('null'))) {
+    e.preventDefault();
+  }
+});
+</script>`;
+  if (output.includes('<head>')) {
+    output = output.replace('<head>', safeScript);
+  } else if (output.includes('<HEAD>')) {
+    output = output.replace('<HEAD>', safeScript);
+  }
+
   return output;
 }
+
+// Serve safe label.js with null guards dynamically (keeps original file untouched on disk)
+app.get('/assets/js/label.js', (req, res) => {
+  const filePath = path.join(__dirname, 'assets', 'js', 'label.js');
+  fs.readFile(filePath, 'utf-8', (err, data) => {
+    if (err) return res.status(404).send('Not found');
+    let safeData = data
+      .replace(
+        'document.getElementById("submit_btn").addEventListener',
+        'var _sb = document.getElementById("submit_btn"); if (_sb) _sb.addEventListener'
+      )
+      .replace(
+        'menu_btn.addEventListener',
+        'if (menu_btn && menu) menu_btn.addEventListener'
+      )
+      .replace(
+        "window.addEventListener('click', function(e){",
+        "window.addEventListener('click', function(e){ if (!menu || !menu_btn) return;"
+      )
+      .replace(
+        /this\.parentNode\.querySelector\(['"]label['"]\)\.classList/g,
+        '(this.parentNode.querySelector("label") && this.parentNode.querySelector("label").classList)'
+      );
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    res.send(safeData);
+  });
+});
 
 // Serve static directory files (assets, css, fonts, images, img, xml, etc.)
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
@@ -186,11 +228,6 @@ app.get(['/', '/login.html', '/login'], (req, res) => {
       'logged-in': session ? 'yes' : 'no',
       'link-login-only': '/login'
     });
-
-    // Ensure slideit() safe definition is present in browser runtime without modifying the original template file
-    if (!rendered.includes('function slideit')) {
-      rendered = rendered.replace('<head>', '<head><script>window.slideit = window.slideit || function(){};</script>');
-    }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(rendered);

@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>لوحة التحكم الشاملة | إدارة إعدادات وهوية الشبكة</title>
+  
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <!-- استدعاء الخطوط والملف التكويني الرئيسي -->
+  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+  <script src="config.js"></script>
+  
+  <style>
+    :root {
+      --bg-body: #0a0409;
+      --bg-surface: rgba(26, 6, 17, 0.75);
+      --bg-surface-hover: rgba(38, 10, 26, 0.9);
+      --bg-card: rgba(30, 8, 20, 0.82);
+      --bg-input: rgba(15, 3, 10, 0.8);
+      --primary: #00d2ff;
+      --primary-glow: rgba(0, 210, 255, 0.35);
+      --gold: #F5D77F;
+      --gold-glow: rgba(245, 215, 127, 0.35);
+      --crimson-grad: linear-gradient(135deg, #780022 0%, #380010 100%);
+      --cyan-grad: linear-gradient(135deg, #00d2ff 0%, #0077aa 100%);
+      --gold-grad: linear-gradient(135deg, #F5D77F 0%, #d4a737 100%);
+      --emerald-grad: linear-gradient(135deg, #00e676 0%, #00a854 100%);
+      --danger-grad: linear-gradient(135deg, #ff3366 0%, #c20033 100%);
+      --text-main: #ffffff;
+      --text-muted: #c9b3c4;
+      --text-dim: #8a7082;
+      --border-color: rgba(245, 215, 127, 0.18);
+      --border-active: rgba(0, 210, 255, 0.6);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(120, 0, 34, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(0, 210, 255, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(245, 215, 127, 0.05) 0%, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .dash-header {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 30px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dash-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 3.5px;
+      background: linear-gradient(90deg, #F5D77F, #00d2ff, #ff3366, #F5D77F);
+      background-size: 300% 100%;
+      animation: headerGradAnim 8s ease infinite;
+    }
+
+    @keyframes headerGradAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: var(--crimson-grad);
+      border: 1px solid rgba(245, 215, 127, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--gold);
+      box-shadow: 0 0 25px rgba(120, 0, 34, 0.6);
+    }
+
+    .brand-text h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-text h1 span.gold {
+      color: var(--gold);
+    }
+
+    .brand-text p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--cyan-grad);
+      color: #020b18;
+      box-shadow: 0 4px 18px rgba(0, 210, 255, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 210, 255, 0.55);
+    }
+
+    .btn-gold {
+      background: var(--gold-grad);
+      color: #1a0611;
+      box-shadow: 0 4px 18px rgba(245, 215, 127, 0.35);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 215, 127, 0.55);
+    }
+
+    .btn-success {
+      background: var(--emerald-grad);
+      color: #011d0e;
+      box-shadow: 0 4px 18px rgba(0, 230, 118, 0.3);
+    }
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 230, 118, 0.5);
+    }
+
+    .btn-danger {
+      background: var(--danger-grad);
+      color: #fff;
+    }
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(255, 51, 102, 0.45);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--gold);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .btn-sm {
+      padding: 7px 13px;
+      font-size: 0.82rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Stats Overview */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+    .stat-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .stat-info .stat-num {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .stat-info .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .col-12 { grid-column: span 12; }
+    .col-6  { grid-column: span 6; }
+    .col-4  { grid-column: span 4; }
+
+    @media (max-width: 1024px) {
+      .col-6, .col-4 { grid-column: span 12; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      border-color: rgba(245, 215, 127, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-title i {
+      color: var(--gold);
+      font-size: 1.25rem;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .form-label i {
+      color: var(--gold);
+      font-size: 0.95rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(20, 4, 14, 0.95);
+      box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .form-hint i {
+      color: var(--gold);
+    }
+
+    /* Switch and Feature Toggle Card */
+    .feature-toggle-card {
+      background: rgba(20, 4, 14, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: var(--transition);
+    }
+    .feature-toggle-card:hover {
+      border-color: rgba(245, 215, 127, 0.4);
+      background: rgba(26, 6, 18, 0.85);
+    }
+
+    .feature-toggle-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .feature-toggle-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(245, 215, 127, 0.12);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 1px solid rgba(245, 215, 127, 0.25);
+    }
+
+    .feature-toggle-title {
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: #fff;
+    }
+    .feature-toggle-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .switch-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-weight: 800;
+    }
+    .status-badge.active {
+      background: rgba(0, 230, 118, 0.18);
+      color: #00e676;
+      border: 1px solid rgba(0, 230, 118, 0.35);
+    }
+    .status-badge.inactive {
+      background: rgba(255, 51, 102, 0.18);
+      color: #ff3366;
+      border: 1px solid rgba(255, 51, 102, 0.35);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #381122;
+      transition: 0.3s;
+      border-radius: 34px;
+      border: 1px solid var(--border-color);
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 3px;
+      background-color: #fff;
+      transition: 0.3s;
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    input:checked + .slider {
+      background: var(--emerald-grad);
+      border-color: #00e676;
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Packages Grid */
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .package-item {
+      background: rgba(20, 4, 14, 0.75);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .package-item:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      background: rgba(26, 6, 18, 0.9);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .pkg-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pkg-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .pkg-input {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+    .pkg-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .pkg-price-input {
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .pkg-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(20, 4, 14, 0.6);
+      font-size: 0.92rem;
+    }
+    .custom-table th {
+      background: rgba(45, 10, 26, 0.85);
+      padding: 14px 16px;
+      text-align: right;
+      font-weight: 800;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    .custom-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: middle;
+    }
+    .custom-table tr:hover td {
+      background: rgba(245, 215, 127, 0.04);
+    }
+    .custom-table input[type="text"] {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      color: #fff;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 30px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      position: sticky;
+      bottom: 16px;
+      z-index: 100;
+    }
+
+    .bottom-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .bottom-info-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(0, 230, 118, 0.15);
+      color: #00e676;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: 1px solid rgba(0, 230, 118, 0.3);
+    }
+    .bottom-info-text h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .bottom-info-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.show {
+      display: flex;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-box {
+      background: #1e0714;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+    .modal-head {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 2, 6, 0.6);
+    }
+    .modal-head h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-head h3 i {
+      color: var(--gold);
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-foot {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      background: rgba(10, 2, 6, 0.6);
+    }
+
+    .code-preview {
+      background: #0d0208;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      color: #c9e6ff;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      max-height: 380px;
+      overflow: auto;
+      direction: ltr;
+      text-align: left;
+      white-space: pre;
+    }
+
+    /* Toast Container */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      background: #240816;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      color: #fff;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 280px;
+      animation: toastSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .toast.success { border-right: 4px solid #00e676; }
+    .toast.info    { border-right: 4px solid var(--primary); }
+    .toast.warning { border-right: 4px solid var(--gold); }
+    .toast.error   { border-right: 4px solid #ff3366; }
+
+    @keyframes toastSlideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .dash-header { padding: 18px 20px; }
+      .brand-text h1 { font-size: 1.3rem; }
+      .header-actions { width: 100%; justify-content: stretch; }
+      .header-actions .btn { flex: 1; }
+      .bottom-bar { flex-direction: column; text-align: center; }
+      .bottom-info { flex-direction: column; }
+      .bottom-bar .btn { width: 100%; }
+      .toast-container { left: 16px; right: 16px; bottom: 16px; }
+      .toast { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- 1. HEADER -->
+    <header class="dash-header">
+      <div class="header-brand">
+        <div class="brand-icon">
+          <i class="fas fa-sliders-h"></i>
+        </div>
+        <div class="brand-text">
+          <h1 id="headerNetworkName">
+            لوحة تحكم <span class="gold">شبكة الكاري نت</span>
+            <span style="font-size: 0.85rem; color: #00e676; font-weight: 700; vertical-align: middle; background: rgba(0,230,118,0.12); padding: 3px 9px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.3);">
+              <i class="fas fa-circle-check"></i> جاهز ومزامن
+            </span>
+          </h1>
+          <p>التحكم الشامل في هوية المنظومة، السرعات، الباقات، نقاط البيع، والشريط الإخباري مع تصدير ملف config.js فوري</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="login.html" target="_blank" class="btn btn-outline btn-sm">
+          <i class="fas fa-external-link-alt"></i> فتح بوابة الدخول
+        </a>
+        <button class="btn btn-outline btn-sm" onclick="openImportModal()">
+          <i class="fas fa-file-import"></i> استيراد ملف
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="openCodeModal()">
+          <i class="fas fa-code"></i> عرض الكود
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="openLivePreviewModal()">
+          <i class="fas fa-eye"></i> معاينة حية
+        </button>
+        <button class="btn btn-gold" onclick="downloadConfigFile()">
+          <i class="fas fa-download"></i> تحميل ملف config.js
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. STATS BAR -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--cyan-grad);">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="statSpeedsCount">0</div>
+          <div class="stat-label">سرعات التصفح المعرفة</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--gold-grad); color: #1a0611;">
+          <i class="fas fa-tags"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="statPackagesCount">0</div>
+          <div class="stat-label">باقات وكروت الإنترنت</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--emerald-grad); color: #011d0e;">
+          <i class="fas fa-store"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="statPosStatus">مفعلة</div>
+          <div class="stat-label">حالة نافذة نقاط البيع</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--crimson-grad);">
+          <i class="fas fa-tv"></i>
+        </div>
+        <div class="stat-info">
+          <div class="stat-num" id="statCinemaStatus">معطل</div>
+          <div class="stat-label">سيرفر السينما والبث 4K</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAIN CARDS GRID -->
+    <div class="dashboard-grid">
+
+      <!-- SECTION 1: هوية الشبكة -->
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-network-wired"></i> هوية الشبكة والفوتر (Network Identity)</h2>
+          </div>
+          <div class="card-body">
+            
+            <div class="form-group">
+              <label class="form-label" for="inp_network_name"><i class="fas fa-wifi"></i> اسم الشبكة الرئيسي (Network Name)</label>
+              <input type="text" class="form-control" id="inp_network_name" placeholder="مثال: شبكة الكاري نت اللاسلكية" oninput="updateConfig('network.name', this.value); updateHeaderBrand();">
+              <div class="form-hint"><i class="fas fa-info-circle"></i> يتزامن تلقائياً في شريط العنوان والشعار وكافة النوافذ المنبثقة</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_network_subtitle"><i class="fas fa-align-right"></i> الوصف الفرعي (Subtitle)</label>
+              <input type="text" class="form-control" id="inp_network_subtitle" placeholder="منظومة توزيع إنترنت فائق السرعة..." oninput="updateConfig('network.subtitle', this.value)">
+              <div class="form-hint"><i class="fas fa-info-circle"></i> يظهر أعلى كرت تسجيل الدخول وتحت اسم الشبكة</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_network_welcomeTitle"><i class="fas fa-door-open"></i> عنوان الترحيب (Welcome Title)</label>
+              <input type="text" class="form-control" id="inp_network_welcomeTitle" placeholder="أهلاً بك في شبكة الكاري نت اللاسلكية" oninput="updateConfig('network.welcomeTitle', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_network_footerCopyright"><i class="fas fa-copyright"></i> نص حقوق الفوتر (Footer Copyright)</label>
+              <input type="text" class="form-control" id="inp_network_footerCopyright" placeholder="جميع الحقوق محفوظة © شبكة الكاري نت اللاسلكية" oninput="updateConfig('network.footerCopyright', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_network_logoPath"><i class="fas fa-image"></i> مسار الشعار (Logo Path)</label>
+              <input type="text" class="form-control" id="inp_network_logoPath" placeholder="assets/img/logo.svg" oninput="updateConfig('network.logoPath', this.value)">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: أرقام التواصل والدعم الفني -->
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-headset"></i> أرقام التواصل والدعم الفني (Contact Info)</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="form-group">
+              <label class="form-label" for="inp_contact_phone"><i class="fas fa-phone-alt"></i> رقم الاتصال المباشر (Phone Call)</label>
+              <input type="text" class="form-control" id="inp_contact_phone" placeholder="مثال: 778898651" oninput="updateConfig('contact.phone', this.value); updateConfig('contact.phoneDisplay', this.value);">
+              <div class="form-hint"><i class="fas fa-info-circle"></i> الرقم الذي يتم الاتصال به عند الضغط على أزرار الاتصال</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_contact_phoneSecondary"><i class="fas fa-phone-volume"></i> رقم اتصال إضافي (Secondary Phone)</label>
+              <input type="text" class="form-control" id="inp_contact_phoneSecondary" placeholder="مثال: 778311135" oninput="updateConfig('contact.phoneSecondary', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_contact_whatsapp"><i class="fab fa-whatsapp" style="color: #00e676;"></i> رقم الواتساب مع الرمز الدولي (WhatsApp Phone)</label>
+              <input type="text" class="form-control" id="inp_contact_whatsapp" placeholder="مثال: 967778311135" oninput="updateConfig('contact.whatsapp', this.value)">
+              <div class="form-hint"><i class="fas fa-info-circle"></i> مهم: اكتب الرمز الدولي في البداية (مثل 967) لفتح محادثة واتساب المباشرة</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_contact_whatsappDisplay"><i class="fas fa-eye"></i> الرقم المعروض للواتساب (Display)</label>
+              <input type="text" class="form-control" id="inp_contact_whatsappDisplay" placeholder="مثال: 778311135" oninput="updateConfig('contact.whatsappDisplay', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_contact_supportText"><i class="fas fa-comment-alt"></i> نص الدعم الفني المشترك (Support Bar Text)</label>
+              <input type="text" class="form-control" id="inp_contact_supportText" placeholder="خدمة العملاء والدعم الفني: 778311135 - 778898651" oninput="updateConfig('contact.supportText', this.value)">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: الشريط الإخباري المتحرك -->
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-bullhorn"></i> الشريط الإخباري التفاعلي (News Ticker)</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="feature-toggle-card">
+              <div class="feature-toggle-info">
+                <div class="feature-toggle-icon"><i class="fas fa-bullhorn"></i></div>
+                <div>
+                  <div class="feature-toggle-title">تفعيل الشريط الإخباري</div>
+                  <div class="feature-toggle-desc">إظهار شريط متحرك بالأخبار والتنبيهات في الصفحة</div>
+                </div>
+              </div>
+              <div class="switch-container">
+                <span class="status-badge active" id="badge_newsTicker">مفعل</span>
+                <label class="switch">
+                  <input type="checkbox" id="chk_newsTicker_enabled" onchange="updateToggleConfig('newsTicker.enabled', this.checked, 'badge_newsTicker')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_newsTicker_badgeText"><i class="fas fa-tag"></i> نص شارة الخبر (Badge Text)</label>
+              <input type="text" class="form-control" id="inp_newsTicker_badgeText" placeholder="مثال: جديد الأخبار أو تنبيه هام" oninput="updateConfig('newsTicker.badgeText', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_newsTicker_headline"><i class="fas fa-scroll"></i> نص الخبر أو الإعلان المتحرك (Headline)</label>
+              <textarea class="form-control" id="inp_newsTicker_headline" rows="3" placeholder="أدخل نص الخبر المتحرك..." oninput="updateConfig('newsTicker.headline', this.value)"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_newsTicker_speed"><i class="fas fa-tachometer-alt"></i> سرعة حركة الشريط (بالثواني)</label>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <input type="range" class="form-control" id="inp_newsTicker_speed_range" min="8" max="40" step="1" value="18" style="padding: 0; cursor: pointer;" oninput="document.getElementById('inp_newsTicker_speed').value = this.value; updateConfig('newsTicker.scrollDurationSeconds', parseInt(this.value));">
+                <input type="number" class="form-control" id="inp_newsTicker_speed" min="5" max="60" style="width: 85px; text-align: center; font-weight: bold;" oninput="document.getElementById('inp_newsTicker_speed_range').value = this.value; updateConfig('newsTicker.scrollDurationSeconds', parseInt(this.value));">
+                <span style="font-size: 0.85rem; color: var(--gold); white-space: nowrap;">ثانية (أقل = أسرع)</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: التذكير والموعظة اليومية والشكاوى -->
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-heart"></i> الموعظة اليومية والشكاوى (Spiritual & Feedback)</h2>
+          </div>
+          <div class="card-body">
+
+            <!-- Daily Reminder -->
+            <div class="feature-toggle-card">
+              <div class="feature-toggle-info">
+                <div class="feature-toggle-icon" style="color: var(--gold); background: rgba(245, 215, 127, 0.12);"><i class="fas fa-quote-right"></i></div>
+                <div>
+                  <div class="feature-toggle-title">تفعيل كرت التذكير والموعظة</div>
+                  <div class="feature-toggle-desc">إظهار كرت حكمة أو تذكير يومي للمستخدمين</div>
+                </div>
+              </div>
+              <div class="switch-container">
+                <span class="status-badge active" id="badge_dailyReminder">مفعل</span>
+                <label class="switch">
+                  <input type="checkbox" id="chk_dailyReminder_enabled" onchange="updateToggleConfig('dailyReminder.enabled', this.checked, 'badge_dailyReminder')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_dailyReminder_title"><i class="fas fa-heading"></i> عنوان التذكير</label>
+              <input type="text" class="form-control" id="inp_dailyReminder_title" placeholder="تذكير وموعظة" oninput="updateConfig('dailyReminder.title', this.value)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_dailyReminder_quote"><i class="fas fa-feather-alt"></i> نص الحكمة أو الموعظة</label>
+              <textarea class="form-control" id="inp_dailyReminder_quote" rows="2" placeholder="« استخدم الإنترنت فيما ينفعك .. »" oninput="updateConfig('dailyReminder.quote', this.value)"></textarea>
+            </div>
+
+            <!-- Complaints -->
+            <div class="feature-toggle-card" style="margin-top: 20px;">
+              <div class="feature-toggle-info">
+                <div class="feature-toggle-icon" style="color: #00d2ff; background: rgba(0, 210, 255, 0.12);"><i class="fas fa-comments"></i></div>
+                <div>
+                  <div class="feature-toggle-title">تفعيل نافذة الشكاوى والمقترحات</div>
+                  <div class="feature-toggle-desc">توجيه العملاء مباشرة للواتساب مع رسالة جاهزة</div>
+                </div>
+              </div>
+              <div class="switch-container">
+                <span class="status-badge active" id="badge_complaints">مفعل</span>
+                <label class="switch">
+                  <input type="checkbox" id="chk_complaints_enabled" onchange="updateToggleConfig('complaints.enabled', this.checked, 'badge_complaints')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inp_complaints_msg"><i class="fab fa-whatsapp"></i> رسالة واتساب التلقائية للشكاوى</label>
+              <input type="text" class="form-control" id="inp_complaints_msg" placeholder="السلام عليكم، أريد تقديم ملاحظة بخصوص..." oninput="updateConfig('complaints.whatsappMessage', this.value)">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: سيرفر السينما والبث المباشر -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-video"></i> سيرفر السينما وبث المباريات 4K (Live Cinema Server)</h2>
+          </div>
+          <div class="card-body">
+            
+            <div class="feature-toggle-card">
+              <div class="feature-toggle-info">
+                <div class="feature-toggle-icon" style="color: #ff3366; background: rgba(255, 51, 102, 0.12);"><i class="fas fa-tv"></i></div>
+                <div>
+                  <div class="feature-toggle-title">إظهار كرت السينما والبث المباشر</div>
+                  <div class="feature-toggle-desc">إظهار أو إخفاء كرت السينما فورياً في صفحتي الدخول والحالة (Status)</div>
+                </div>
+              </div>
+              <div class="switch-container">
+                <span class="status-badge inactive" id="badge_liveCinema">معطل</span>
+                <label class="switch">
+                  <input type="checkbox" id="chk_liveCinema_enabled" onchange="updateToggleConfig('liveCinema.enabled', this.checked, 'badge_liveCinema'); updateStats();">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+              <div class="form-group">
+                <label class="form-label" for="inp_liveCinema_title"><i class="fas fa-heading"></i> عنوان كرت السينما</label>
+                <input type="text" class="form-control" id="inp_liveCinema_title" placeholder="بث المباريات والسينما" oninput="updateConfig('liveCinema.title', this.value)">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inp_liveCinema_badge"><i class="fas fa-tag"></i> شارة الكرت</label>
+                <input type="text" class="form-control" id="inp_liveCinema_badge" placeholder="مثال: LIVE HD أو 4K" oninput="updateConfig('liveCinema.badge', this.value)">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inp_liveCinema_subtitle"><i class="fas fa-align-right"></i> النص الترويجي الفرعي</label>
+                <input type="text" class="form-control" id="inp_liveCinema_subtitle" placeholder="بث رياضي مباشر • سينما ومسلسلات 4K" oninput="updateConfig('liveCinema.subtitle', this.value)">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inp_liveCinema_buttonText"><i class="fas fa-mouse-pointer"></i> نص زر الدخول</label>
+                <input type="text" class="form-control" id="inp_liveCinema_buttonText" placeholder="مشاهدة" oninput="updateConfig('liveCinema.buttonText', this.value)">
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 14px;">
+              <label class="form-label" for="inp_liveCinema_url"><i class="fas fa-link"></i> رابط سيرفر البث أو القناة (URL)</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="url" class="form-control" id="inp_liveCinema_url" placeholder="http://live.alkary.net أو رابط خارجي" oninput="updateConfig('liveCinema.url', this.value)">
+                <button class="btn btn-outline btn-icon" onclick="testLink('inp_liveCinema_url')" title="تجربة فتح الرابط"><i class="fas fa-external-link-alt"></i></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: باقات وأسعار الكروت -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-tags"></i> باقات وأسعار كروت الإنترنت (Internet Packages)</h2>
+            <button class="btn btn-gold btn-sm" onclick="addNewPackage()"><i class="fas fa-plus"></i> إضافة باقة جديدة</button>
+          </div>
+          <div class="card-body">
+            <div class="packages-grid" id="packagesGrid">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 7: سرعات التصفح وتحديد السرعة -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> سرعات التصفح وبروفايلات المايكروتك (Speed Profiles)</h2>
+            <button class="btn btn-primary btn-sm" onclick="addNewSpeed()"><i class="fas fa-plus"></i> إضافة سرعة جديدة</button>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="custom-table" id="speedTable">
+                <thead>
+                  <tr>
+                    <th style="width: 50px; text-align: center;">#</th>
+                    <th style="width: 20%;">اسم السرعة</th>
+                    <th style="width: 25%;">قيمة السرعة في المايكروتك (Rate Limit)</th>
+                    <th style="width: 25%;">التسمية الكاملة المعروضة</th>
+                    <th style="width: 15%;">الوصف</th>
+                    <th style="width: 80px; text-align: center;">الافتراضية</th>
+                    <th style="width: 60px; text-align: center;">إجراء</th>
+                  </tr>
+                </thead>
+                <tbody id="speedTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 8: نقاط البيع والموزعين المعتمدين -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title"><i class="fas fa-store"></i> نقاط البيع والموزعين المعتمدين (Points of Sale)</h2>
+          </div>
+          <div class="card-body">
+            
+            <div class="feature-toggle-card">
+              <div class="feature-toggle-info">
+                <div class="feature-toggle-icon" style="color: #00e676; background: rgba(0, 230, 118, 0.12);"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                  <div class="feature-toggle-title">تفعيل نافذة نقاط البيع</div>
+                  <div class="feature-toggle-desc">إظهار نافذة أماكن بيع الكروت والموزعين عند ضغط العميل</div>
+                </div>
+              </div>
+              <div class="switch-container">
+                <span class="status-badge active" id="badge_pos">مفعل</span>
+                <label class="switch">
+                  <input type="checkbox" id="chk_pos_enabled" onchange="updateToggleConfig('pointsOfSale.enabled', this.checked, 'badge_pos')">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div style="background: rgba(0, 180, 255, 0.08); border: 1px solid #00d2ff; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+              <div class="form-group">
+                <label class="form-label" for="inp_pos_title"><i class="fas fa-shopping-cart" style="color: #00d2ff;"></i> عنوان صندوق مراكز البيع</label>
+                <input type="text" class="form-control" id="inp_pos_title" placeholder="مراكز البيع المعتمدة:" oninput="updateConfig('pointsOfSale.title', this.value)">
+              </div>
+
+              <div class="form-group" style="margin-top: 10px;">
+                <label class="form-label" for="inp_pos_desc"><i class="fas fa-align-right" style="color: #00d2ff;"></i> نص ونطاق توفر الكروت</label>
+                <textarea class="form-control" id="inp_pos_desc" rows="2" placeholder="كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة." oninput="updateConfig('pointsOfSale.description', this.value)"></textarea>
+              </div>
+            </div>
+
+            <div style="background: rgba(255, 215, 0, 0.08); border: 1px solid #ffd700; padding: 16px; border-radius: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="inp_pos_adminTitle"><i class="fas fa-phone" style="color: #ffd700;"></i> عنوان صندوق طلب نقاط البيع</label>
+                <input type="text" class="form-control" id="inp_pos_adminTitle" placeholder="للإدارة والاستفسار وطلب نقاط بيع:" oninput="updateConfig('pointsOfSale.adminTitle', this.value)">
+              </div>
+
+              <div class="form-group" style="margin-top: 10px;">
+                <label class="form-label" for="inp_pos_phones"><i class="fas fa-mobile-alt" style="color: #ffd700;"></i> أرقام التواصل للإدارة ونقاط البيع</label>
+                <input type="text" class="form-control" id="inp_pos_phones" placeholder="778898651 - 778311135" oninput="updateConfig('pointsOfSale.phones', this.value)">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. STICKY BOTTOM ACTIONS BAR -->
+    <div class="bottom-bar">
+      <div class="bottom-info">
+        <div class="bottom-info-icon">
+          <i class="fas fa-check-double"></i>
+        </div>
+        <div class="bottom-info-text">
+          <h3>جاهز للحفظ والتصدير التلقائي</h3>
+          <p>يمكنك حفظ الملف وتطبيقه على السيرفر مباشرة أو تحميل ملف <code>config.js</code> ورفعه للراوتر</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="btn btn-outline" onclick="copyConfigCode()">
+          <i class="fas fa-copy"></i> نسخ كود الملف
+        </button>
+        <button class="btn btn-success" onclick="saveConfigToServer()">
+          <i class="fas fa-save"></i> حفظ وتطبيق فوري بالسيرفر
+        </button>
+        <button class="btn btn-gold" onclick="downloadConfigFile()">
+          <i class="fas fa-file-arrow-down"></i> تحميل ملف config.js
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal 1: Code Modal -->
+  <div class="modal" id="codeModal">
+    <div class="modal-box" style="max-width: 800px;">
+      <div class="modal-head">
+        <h3><i class="fas fa-code"></i> كود ملف config.js المولد</h3>
+        <button class="modal-close" onclick="closeModal('codeModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="code-preview" id="codeContainer"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" onclick="closeModal('codeModal')">إغلاق</button>
+        <button class="btn btn-success" onclick="copyConfigCode()"><i class="fas fa-copy"></i> نسخ الكود</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Import Modal -->
+  <div class="modal" id="importModal">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-head">
+        <h3><i class="fas fa-file-import"></i> استيراد ملف config.js</h3>
+        <button class="modal-close" onclick="closeModal('importModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+          اختر ملف <code>config.js</code> من جهازك أو الصق محتواه ليتم استيراد كافة التكوينات تلقائياً:
+        </p>
+        <input type="file" id="fileUploadInput" accept=".js,.json" class="form-control" onchange="handleFileImport(event)">
+        <div style="margin-top: 16px;">
+          <label class="form-label">أو الصق كود config.js هنا مباشرة:</label>
+          <textarea class="form-control" id="rawCodeImport" style="min-height: 140px; font-family: monospace; font-size: 0.85rem;" placeholder="window.HOTSPOT_CONFIG = { ... }"></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" onclick="closeModal('importModal')">إلغاء</button>
+        <button class="btn btn-primary" onclick="importFromRawText()"><i class="fas fa-check"></i> استيراد وتطبيق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Live Preview Modal -->
+  <div class="modal" id="livePreviewModal">
+    <div class="modal-box" style="max-width: 540px;">
+      <div class="modal-head">
+        <h3><i class="fas fa-eye"></i> معاينة حية لشاشات الشبكة</h3>
+        <button class="modal-close" onclick="closeModal('livePreviewModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div style="background: rgba(45, 10, 20, 0.9); border: 1px solid rgba(245, 215, 127, 0.35); border-radius: 16px; padding: 18px; margin-bottom: 16px; text-align: center;">
+          <div style="font-size: 1.25rem; font-weight: 900; color: var(--gold); margin-bottom: 4px;" id="prev_network_name">شبكة الكاري نت اللاسلكية</div>
+          <div style="font-size: 0.82rem; color: #fff; opacity: 0.85;" id="prev_network_sub">منظومة توزيع إنترنت فائق السرعة</div>
+        </div>
+
+        <!-- News Ticker Preview -->
+        <div id="prev_ticker_wrap" style="background: rgba(45, 10, 20, 0.85); border: 1px solid rgba(255, 75, 110, 0.35); border-radius: 12px; padding: 8px 12px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span style="background: #00d2ff; color: #020b18; font-size: 10.5px; font-weight: 900; padding: 2px 8px; border-radius: 6px;" id="prev_ticker_badge">جديد الأخبار</span>
+          <span style="color: #fff; font-size: 12px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="prev_ticker_text">نص الخبر المتحرك...</span>
+        </div>
+
+        <!-- Cinema Card Preview -->
+        <div id="prev_cinema_wrap" style="background: rgba(220, 38, 38, 0.12); border: 1px solid rgba(220, 38, 38, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-tv" style="color: #ff3366; font-size: 20px;"></i>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: #fff;" id="prev_cinema_title">بث المباريات والسينما</div>
+              <div style="font-size: 0.78rem; color: #fecdd3;" id="prev_cinema_sub">بث رياضي مباشر • سينما ومسلسلات 4K</div>
+            </div>
+          </div>
+          <span style="background: #dc2626; color: #fff; font-size: 11.5px; font-weight: 800; padding: 5px 12px; border-radius: 8px;" id="prev_cinema_btn">مشاهدة</span>
+        </div>
+
+        <!-- Daily Reminder Preview -->
+        <div id="prev_reminder_wrap" style="background: rgba(245, 215, 127, 0.08); border: 1px solid rgba(245, 215, 127, 0.3); border-radius: 12px; padding: 12px 14px; font-size: 0.88rem; color: #fff; text-align: center;">
+          <div style="font-weight: 800; color: var(--gold); font-size: 0.82rem; margin-bottom: 4px;" id="prev_reminder_title">تذكير وموعظة</div>
+          <div style="font-style: italic;" id="prev_reminder_quote">« استخدم الإنترنت فيما ينفعك »</div>
+        </div>
+
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-primary" onclick="closeModal('livePreviewModal')">إغلاق المعاينة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- استدعاء ملف الإعدادات الأصلي -->
+  <script src="config.js"></script>
+
+  <!-- سكربت التحكم وتوليد ملف config.js المماثل 100% -->
+  <script>
+    // النسخة الحية من التكوين
+    let currentConfig = {
+      network: {
+        name: "شبكة الكاري نت اللاسلكية",
+        subtitle: "منظومة توزيع إنترنت فائق السرعة عبر شبكات الأقمار الصناعية ستاربينك وكروت ميكروتك الذكية",
+        welcomeTitle: "أهلاً بك في شبكة الكاري نت اللاسلكية",
+        footerCopyright: "جميع الحقوق محفوظة © شبكة الكاري نت اللاسلكية",
+        logoPath: "assets/img/logo.svg"
+      },
+      contact: {
+        phone: "778898651",
+        phoneDisplay: "778898651",
+        phoneSecondary: "778311135",
+        whatsapp: "967778311135",
+        whatsappDisplay: "778311135",
+        supportText: "خدمة العملاء والدعم الفني: 778311135 - 778898651"
+      },
+      newsTicker: {
+        enabled: true,
+        badgeText: "جديد الأخبار",
+        headline: "أهلاً وسهلاً بكم في شبكة الكاري نت اللاسلكية • تصفح سريع واستقرار ممتاز • باقات مرنة تناسب جميع الاحتياجات • احتفظ بمعلومات الدخول حتى انتهاء المدة • نشكركم على اختياركم لنا.",
+        scrollDurationSeconds: 18
+      },
+      dailyReminder: {
+        enabled: true,
+        title: "تذكير وموعظة",
+        quote: "« استخدم الإنترنت فيما ينفعك .. واحذر أن تجعل الله أهون الناظرين إليك »",
+        source: ""
+      },
+      complaints: {
+        enabled: true,
+        title: "خدمة العملاء والشكاوى",
+        description: "نسعد بخدمتكم وتلقي ملاحظاتكم ومقترحاتكم على مدار 24 ساعة لتحسين الخدمة.",
+        whatsappMessage: "السلام عليكم، أريد تقديم ملاحظة/استفسار بخصوص خدمة شبكة الكاري نت:"
+      },
+      liveCinema: {
+        enabled: false,
+        title: "بث المباريات والسينما",
+        badge: "LIVE HD",
+        subtitle: "بث رياضي مباشر • سينما ومسلسلات 4K",
+        buttonText: "مشاهدة",
+        url: "http://live.alkary.net"
+      },
+      packages: [
+        {
+          name: "باقة 200 ريال",
+          badge: "",
+          details: "10 ساعات • صلاحية 24 ساعة • 1.5GB",
+          price: "200 ر.ي"
+        },
+        {
+          name: "باقة 500 ريال",
+          badge: "",
+          details: "35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 3GB",
+          price: "500 ر.ي"
+        },
+        {
+          name: "باقة 1000 ريال",
+          badge: "الأكثر طلباً",
+          details: "160 ساعة (6 أيام و 16 ساعة) • صلاحية 10 أيام • 6GB",
+          price: "1000 ر.ي"
+        },
+        {
+          name: "باقة 2500 ريال",
+          badge: "الشهرية الفائقة",
+          details: "شهر كامل • صلاحية 30 يوم • 15GB",
+          price: "2500 ر.ي"
+        },
+        {
+          name: "باقة 5000 ريال",
+          badge: "الشهرية الفائقة",
+          details: "شهر كامل • صلاحية 30 يوم • 40GB",
+          price: "5000 ر.ي"
+        }
+      ],
+      speeds: [
+        {
+          id: "turbo",
+          name: "سرعة قوية",
+          value: "100M/100M",
+          label: "⚡ سرعة قوية (100M/100M)",
+          desc: "100M/100M (افتراضي)",
+          icon: "fa-bolt",
+          isDefault: true
+        },
+        {
+          id: "eco",
+          name: "سرعة ضعيفة",
+          value: "512K/512K",
+          label: "سرعة ضعيفة (512K/512K)",
+          desc: "512K/512K",
+          icon: "fa-leaf",
+          isDefault: false
+        }
+      ],
+      pointsOfSale: {
+        enabled: true,
+        title: "مراكز البيع المعتمدة:",
+        description: "كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.",
+        adminTitle: "للإدارة والاستفسار وطلب نقاط بيع:",
+        phones: "778898651 - 778311135"
+      }
+    };
+
+    // تحميل الإعدادات الأولية
+    function initDashboard() {
+      if (window.HOTSPOT_CONFIG && typeof window.HOTSPOT_CONFIG === 'object') {
+        currentConfig = JSON.parse(JSON.stringify(window.HOTSPOT_CONFIG));
+      }
+
+      // محاولة قراءة التخزين المحلي الاحتياطي
+      const local = localStorage.getItem('alkary_hotspot_dashboard_cfg');
+      if (local) {
+        try {
+          const parsed = JSON.parse(local);
+          if (parsed && typeof parsed === 'object') {
+            currentConfig = Object.assign({}, currentConfig, parsed);
+          }
+        } catch (e) {}
+      }
+
+      renderFormValues();
+      renderPackagesGrid();
+      renderSpeedsTable();
+      updateHeaderBrand();
+      updateStats();
+    }
+
+    // حفظ في التخزين المحلي
+    function saveLocal() {
+      try {
+        localStorage.setItem('alkary_hotspot_dashboard_cfg', JSON.stringify(currentConfig));
+      } catch (e) {}
+    }
+
+    // تعبئة حقول النموذج
+    function renderFormValues() {
+      // 1. هوية الشبكة
+      setVal('inp_network_name', currentConfig.network?.name);
+      setVal('inp_network_subtitle', currentConfig.network?.subtitle);
+      setVal('inp_network_welcomeTitle', currentConfig.network?.welcomeTitle);
+      setVal('inp_network_footerCopyright', currentConfig.network?.footerCopyright);
+      setVal('inp_network_logoPath', currentConfig.network?.logoPath);
+
+      // 2. التواصل
+      setVal('inp_contact_phone', currentConfig.contact?.phone);
+      setVal('inp_contact_phoneSecondary', currentConfig.contact?.phoneSecondary);
+      setVal('inp_contact_whatsapp', currentConfig.contact?.whatsapp);
+      setVal('inp_contact_whatsappDisplay', currentConfig.contact?.whatsappDisplay);
+      setVal('inp_contact_supportText', currentConfig.contact?.supportText);
+
+      // 3. الشريط الإخباري
+      setVal('inp_newsTicker_badgeText', currentConfig.newsTicker?.badgeText);
+      setVal('inp_newsTicker_headline', currentConfig.newsTicker?.headline);
+      const scrollSec = currentConfig.newsTicker?.scrollDurationSeconds || 18;
+      setVal('inp_newsTicker_speed', scrollSec);
+      setVal('inp_newsTicker_speed_range', scrollSec);
+      setToggleState('chk_newsTicker_enabled', 'badge_newsTicker', currentConfig.newsTicker?.enabled !== false);
+
+      // 4. التذكير والشكاوى
+      setToggleState('chk_dailyReminder_enabled', 'badge_dailyReminder', currentConfig.dailyReminder?.enabled !== false);
+      setVal('inp_dailyReminder_title', currentConfig.dailyReminder?.title);
+      setVal('inp_dailyReminder_quote', currentConfig.dailyReminder?.quote);
+
+      setToggleState('chk_complaints_enabled', 'badge_complaints', currentConfig.complaints?.enabled !== false);
+      setVal('inp_complaints_msg', currentConfig.complaints?.whatsappMessage);
+
+      // 5. السينما
+      setToggleState('chk_liveCinema_enabled', 'badge_liveCinema', !!currentConfig.liveCinema?.enabled);
+      setVal('inp_liveCinema_title', currentConfig.liveCinema?.title);
+      setVal('inp_liveCinema_badge', currentConfig.liveCinema?.badge);
+      setVal('inp_liveCinema_subtitle', currentConfig.liveCinema?.subtitle);
+      setVal('inp_liveCinema_buttonText', currentConfig.liveCinema?.buttonText);
+      setVal('inp_liveCinema_url', currentConfig.liveCinema?.url);
+
+      // 6. نقاط البيع
+      const pos = currentConfig.pointsOfSale || {};
+      setToggleState('chk_pos_enabled', 'badge_pos', pos.enabled !== false);
+      setVal('inp_pos_title', pos.title || 'مراكز البيع المعتمدة:');
+      setVal('inp_pos_desc', pos.description || '');
+      setVal('inp_pos_adminTitle', pos.adminTitle || 'للإدارة والاستفسار وطلب نقاط بيع:');
+      setVal('inp_pos_phones', pos.phones || '');
+    }
+
+    function setVal(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.value = val || '';
+    }
+
+    function setToggleState(chkId, badgeId, isChecked) {
+      const chk = document.getElementById(chkId);
+      const badge = document.getElementById(badgeId);
+      if (chk) chk.checked = !!isChecked;
+      if (badge) {
+        badge.textContent = isChecked ? 'مفعل' : 'معطل';
+        badge.className = 'status-badge ' + (isChecked ? 'active' : 'inactive');
+      }
+    }
+
+    // تحديث قيمة حقل متداخل عبر Dot-Notation
+    function updateConfig(path, value) {
+      const parts = path.split('.');
+      let obj = currentConfig;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (!obj[parts[i]]) obj[parts[i]] = {};
+        obj = obj[parts[i]];
+      }
+      obj[parts[parts.length - 1]] = value;
+      saveLocal();
+    }
+
+    // تحديث مفتاح التفعيل
+    function updateToggleConfig(path, isChecked, badgeId) {
+      updateConfig(path, isChecked);
+      const badge = document.getElementById(badgeId);
+      if (badge) {
+        badge.textContent = isChecked ? 'مفعل' : 'معطل';
+        badge.className = 'status-badge ' + (isChecked ? 'active' : 'inactive');
+      }
+      showToast(`تم ${isChecked ? 'تفعيل' : 'تعطيل'} الإعداد بنجاح`, 'info');
+    }
+
+    // تحديث الهيدر
+    function updateHeaderBrand() {
+      const el = document.getElementById('headerNetworkName');
+      if (el) {
+        const name = currentConfig.network?.name || 'شبكة الكاري نت';
+        el.innerHTML = `لوحة تحكم <span class="gold">${name}</span> <span style="font-size: 0.85rem; color: #00e676; font-weight: 700; vertical-align: middle; background: rgba(0,230,118,0.12); padding: 3px 9px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.3);"><i class="fas fa-circle-check"></i> متصل</span>`;
+      }
+    }
+
+    // تحديث الإحصائيات
+    function updateStats() {
+      document.getElementById('statSpeedsCount').textContent = (currentConfig.speeds || []).length;
+      document.getElementById('statPackagesCount').textContent = (currentConfig.packages || []).length;
+      
+      const isPos = currentConfig.pointsOfSale?.enabled !== false;
+      document.getElementById('statPosStatus').textContent = isPos ? 'مفعلة' : 'معطلة';
+
+      const isCinema = !!currentConfig.liveCinema?.enabled;
+      document.getElementById('statCinemaStatus').textContent = isCinema ? 'مفعل 4K' : 'معطل';
+    }
+
+    // ==================== الباقات ====================
+    function renderPackagesGrid() {
+      const grid = document.getElementById('packagesGrid');
+      grid.innerHTML = '';
+      const pkgs = currentConfig.packages || [];
+
+      if (pkgs.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 30px; color: var(--text-muted);"><i class="fas fa-tags" style="font-size: 35px; margin-bottom: 10px; color: var(--gold); display: block;"></i>لا توجد باقات مضافة بعد</div>';
+        return;
+      }
+
+      pkgs.forEach((pkg, idx) => {
+        const card = document.createElement('div');
+        card.className = 'package-item';
+        card.innerHTML = `
+          <div class="pkg-row">
+            <span class="pkg-label">اسم الباقة</span>
+            <input type="text" class="pkg-input" value="${pkg.name || ''}" placeholder="مثال: باقة 500 ريال" oninput="editPackage(${idx}, 'name', this.value)">
+          </div>
+
+          <div class="pkg-row">
+            <span class="pkg-label">الشارة الاختيارية (Badge)</span>
+            <input type="text" class="pkg-input" value="${pkg.badge || ''}" placeholder="مثال: الأكثر طلباً أو الشهرية الفائقة" oninput="editPackage(${idx}, 'badge', this.value)">
+          </div>
+
+          <div class="pkg-row">
+            <span class="pkg-label">التفاصيل والصلاحية والرصيد</span>
+            <input type="text" class="pkg-input" value="${pkg.details || ''}" placeholder="35 ساعة • صلاحية 10 أيام • 3GB" oninput="editPackage(${idx}, 'details', this.value)">
+          </div>
+
+          <div class="pkg-row">
+            <span class="pkg-label">السعر المعروض</span>
+            <input type="text" class="pkg-input pkg-price-input" value="${pkg.price || ''}" placeholder="500 ر.ي" oninput="editPackage(${idx}, 'price', this.value)">
+          </div>
+
+          <div class="pkg-actions">
+            <button class="btn btn-danger btn-sm" onclick="deletePackage(${idx})"><i class="fas fa-trash"></i> حذف الباقة</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function addNewPackage() {
+      if (!currentConfig.packages) currentConfig.packages = [];
+      currentConfig.packages.push({
+        name: `باقة جديدة ${currentConfig.packages.length + 1}`,
+        badge: "",
+        details: "ساعات محددة • صلاحية أيام • رصيد جيجا",
+        price: "1000 ر.ي"
+      });
+      saveLocal();
+      renderPackagesGrid();
+      updateStats();
+      showToast("تمت إضافة باقة جديدة", "success");
+    }
+
+    function editPackage(idx, field, val) {
+      if (currentConfig.packages && currentConfig.packages[idx]) {
+        currentConfig.packages[idx][field] = val;
+        saveLocal();
+      }
+    }
+
+    function deletePackage(idx) {
+      if (confirm("هل أنت متأكد من حذف هذه الباقة؟")) {
+        currentConfig.packages.splice(idx, 1);
+        saveLocal();
+        renderPackagesGrid();
+        updateStats();
+        showToast("تم حذف الباقة", "warning");
+      }
+    }
+
+    // ==================== السرعات ====================
+    function renderSpeedsTable() {
+      const tbody = document.getElementById('speedTableBody');
+      tbody.innerHTML = '';
+      const speeds = currentConfig.speeds || [];
+
+      if (speeds.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 30px; color: var(--text-muted);"><i class="fas fa-bolt" style="font-size: 30px; margin-bottom: 8px; color: var(--primary); display: block;"></i>لا توجد سرعات معرفة</td></tr>';
+        return;
+      }
+
+      speeds.forEach((sp, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; color: var(--text-muted); font-weight: 700;">${idx + 1}</td>
+          <td>
+            <input type="text" value="${sp.name || ''}" placeholder="اسم السرعة" oninput="editSpeed(${idx}, 'name', this.value)">
+          </td>
+          <td>
+            <input type="text" value="${sp.value || ''}" placeholder="مثال: 100M/100M" oninput="editSpeed(${idx}, 'value', this.value)">
+          </td>
+          <td>
+            <input type="text" value="${sp.label || ''}" placeholder="⚡ سرعة قوية (100M/100M)" oninput="editSpeed(${idx}, 'label', this.value)">
+          </td>
+          <td>
+            <input type="text" value="${sp.desc || ''}" placeholder="الوصف" oninput="editSpeed(${idx}, 'desc', this.value)">
+          </td>
+          <td style="text-align: center;">
+            <input type="radio" name="defaultSpeedRadio" ${sp.isDefault ? 'checked' : ''} onchange="setDefaultSpeed(${idx})" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+          </td>
+          <td style="text-align: center;">
+            <button class="btn btn-danger btn-sm btn-icon" onclick="deleteSpeed(${idx})" title="حذف"><i class="fas fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addNewSpeed() {
+      if (!currentConfig.speeds) currentConfig.speeds = [];
+      const num = currentConfig.speeds.length + 1;
+      currentConfig.speeds.push({
+        id: `speed_${num}`,
+        name: `سرعة مخصصة ${num}`,
+        value: "20M/20M",
+        label: `سرعة ${num} (20M/20M)`,
+        desc: "20M/20M",
+        icon: "fa-bolt",
+        isDefault: currentConfig.speeds.length === 0
+      });
+      saveLocal();
+      renderSpeedsTable();
+      updateStats();
+      showToast("تمت إضافة سرعة جديدة", "success");
+    }
+
+    function editSpeed(idx, field, val) {
+      if (currentConfig.speeds && currentConfig.speeds[idx]) {
+        currentConfig.speeds[idx][field] = val;
+        saveLocal();
+      }
+    }
+
+    function setDefaultSpeed(idx) {
+      if (currentConfig.speeds) {
+        currentConfig.speeds.forEach((s, i) => {
+          s.isDefault = (i === idx);
+        });
+        saveLocal();
+        showToast(`تم تعيين "${currentConfig.speeds[idx].name}" كسرعة افتراضية`, "info");
+      }
+    }
+
+    function deleteSpeed(idx) {
+      if (confirm("هل أنت متأكد من حذف هذه السرعة؟")) {
+        currentConfig.speeds.splice(idx, 1);
+        if (currentConfig.speeds.length > 0 && !currentConfig.speeds.some(s => s.isDefault)) {
+          currentConfig.speeds[0].isDefault = true;
+        }
+        saveLocal();
+        renderSpeedsTable();
+        updateStats();
+        showToast("تم حذف السرعة", "warning");
+      }
+    }
+
+    // ==================== توليد وتصدير ملف config.js المماثل 100% ====================
+    function generateConfigFileContent() {
+      const cfg = currentConfig;
+
+      return `/**
+ * ====================================================================
+ *                 إعدادات ${cfg.network?.name || 'شبكة الكاري نت اللاسلكية'}
+ *                   HOTSPOT CONFIGURATION FILE
+ * ====================================================================
+ * يمكنك تعديل أي قيمة في هذا الملف لتتحدث فورياً في جميع صفحات المنظومة:
+ * (صفحة تسجيل الدخول، صفحة الحالة، صفحة الخروج، الحظر، النوافذ، الإعلانات)
+ * دون الحاجة لتعديل أي كود HTML أو CSS.
+ */
+
+window.HOTSPOT_CONFIG = ${JSON.stringify(cfg, null, 2)};
+
+// ====================================================================
+//            محرك المزامنة الفوري الخالي من أي وميض (Zero-FOUC Engine)
+// ====================================================================
+(function applyCriticalStylesInstantly() {
+  var cfg = window.HOTSPOT_CONFIG || {};
+  var css = '';
+  if (cfg.liveCinema && cfg.liveCinema.enabled === false) {
+    css += '.cfg-cinema-card, #cfg-cinema-card { display: none !important; }\\n';
+  }
+  if (cfg.newsTicker && cfg.newsTicker.enabled === false) {
+    css += '.cfg-ticker-card, #cfg-ticker-card { display: none !important; }\\n';
+  }
+  if (cfg.dailyReminder && cfg.dailyReminder.enabled === false) {
+    css += '.cfg-reminder-card, #cfg-reminder-card { display: none !important; }\\n';
+  }
+  if (cfg.pointsOfSale && cfg.pointsOfSale.enabled === false) {
+    css += '.cfg-pos-card, #cfg-pos-card { display: none !important; }\\n';
+  }
+  if (css) {
+    var styleEl = document.getElementById('cfg-instant-sync-style');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'cfg-instant-sync-style';
+      (document.head || document.documentElement).appendChild(styleEl);
+    }
+    styleEl.textContent = css;
+  }
+})();
+
+(function applyConfigToPage() {
+  function apply() {
+    var cfg = window.HOTSPOT_CONFIG;
+    if (!cfg) return;
+
+    // تحديث نمط الإخفاء الفوري
+    var css = '';
+    if (cfg.liveCinema && cfg.liveCinema.enabled === false) {
+      css += '.cfg-cinema-card, #cfg-cinema-card { display: none !important; }\\n';
+    }
+    if (cfg.newsTicker && cfg.newsTicker.enabled === false) {
+      css += '.cfg-ticker-card, #cfg-ticker-card { display: none !important; }\\n';
+    }
+    if (cfg.dailyReminder && cfg.dailyReminder.enabled === false) {
+      css += '.cfg-reminder-card, #cfg-reminder-card { display: none !important; }\\n';
+    }
+    var instantStyle = document.getElementById('cfg-instant-sync-style');
+    if (instantStyle) {
+      instantStyle.textContent = css;
+    }
+
+    // 1. مزامنة هوية واسم الشبكة في كل الصفحات
+    document.querySelectorAll('[data-cfg="network.name"]').forEach(function(el) {
+      if (el.textContent !== cfg.network.name) {
+        el.textContent = cfg.network.name;
+      }
+    });
+    document.querySelectorAll('[data-cfg="network.subtitle"]').forEach(function(el) {
+      if (el.textContent !== cfg.network.subtitle) {
+        el.textContent = cfg.network.subtitle;
+      }
+    });
+    document.querySelectorAll('[data-cfg="network.footerCopyright"]').forEach(function(el) {
+      if (el.textContent !== cfg.network.footerCopyright) {
+        el.textContent = cfg.network.footerCopyright;
+      }
+    });
+
+    // 2. تحديث عناوين النوافذ والصفحات في المتصفح
+    if (document.title && cfg.network.name && document.title.indexOf('شبكة') !== -1) {
+      var currentPart = document.title.split('|')[1] || '';
+      if (currentPart) {
+        document.title = cfg.network.name + ' | ' + currentPart.trim();
+      }
+    }
+
+    // 3. أرقام الاتصال والواتساب والدعم الفني
+    document.querySelectorAll('[data-cfg="contact.supportText"]').forEach(function(el) {
+      el.textContent = cfg.contact.supportText;
+    });
+
+    document.querySelectorAll('[data-cfg="contact.phone"]').forEach(function(el) {
+      el.textContent = cfg.contact.phoneDisplay || cfg.contact.phone;
+      var anchor = el.tagName === 'A' ? el : el.closest('a');
+      if (anchor) {
+        anchor.href = "tel:" + cfg.contact.phone;
+      }
+    });
+
+    document.querySelectorAll('[data-cfg="contact.whatsapp"]').forEach(function(el) {
+      el.textContent = cfg.contact.whatsappDisplay || cfg.contact.whatsapp;
+      var anchor = el.tagName === 'A' ? el : el.closest('a');
+      if (anchor) {
+        var msg = encodeURIComponent(cfg.complaints.whatsappMessage || "السلام عليكم");
+        anchor.href = "https://wa.me/" + cfg.contact.whatsapp + "?text=" + msg;
+      }
+    });
+
+    // 4. الشريط الإخباري
+    var tickerCard = document.getElementById('cfg-ticker-card');
+    if (tickerCard) {
+      if (cfg.newsTicker && cfg.newsTicker.enabled === false) {
+        tickerCard.style.display = 'none';
+      } else {
+        tickerCard.style.display = '';
+        var tickerTextEl = document.getElementById('cfg-ticker-text');
+        if (tickerTextEl && cfg.newsTicker) {
+          tickerTextEl.textContent = cfg.newsTicker.headline;
+        }
+        var tickerBadgeEl = document.getElementById('cfg-ticker-badge');
+        if (tickerBadgeEl && cfg.newsTicker) {
+          tickerBadgeEl.textContent = cfg.newsTicker.badgeText || "جديد الأخبار";
+        }
+        var marqueeContent = tickerCard.querySelector('.marquee-content');
+        if (marqueeContent && cfg.newsTicker && cfg.newsTicker.scrollDurationSeconds) {
+          marqueeContent.style.animationDuration = cfg.newsTicker.scrollDurationSeconds + 's';
+        }
+      }
+    }
+
+    // 5. التذكير والموعظة اليومية
+    var reminderCard = document.getElementById('cfg-reminder-card');
+    if (reminderCard) {
+      if (cfg.dailyReminder && cfg.dailyReminder.enabled === false) {
+        reminderCard.style.display = 'none';
+      } else {
+        reminderCard.style.display = '';
+        var reminderQuoteEl = document.getElementById('cfg-reminder-quote');
+        if (reminderQuoteEl && cfg.dailyReminder) {
+          reminderQuoteEl.textContent = cfg.dailyReminder.quote;
+        }
+        var reminderTitleEl = document.getElementById('cfg-reminder-title');
+        if (reminderTitleEl && cfg.dailyReminder && cfg.dailyReminder.title) {
+          reminderTitleEl.textContent = cfg.dailyReminder.title;
+        }
+      }
+    }
+
+    // 6. سيرفر السينما والبث المباشر (إخفاء/إظهار وتحديث الرابط)
+    var cinemaCards = document.querySelectorAll('.cfg-cinema-card, #cfg-cinema-card');
+    cinemaCards.forEach(function(card) {
+      if (cfg.liveCinema && cfg.liveCinema.enabled === false) {
+        card.style.display = 'none';
+      } else {
+        card.style.display = '';
+        var cinemaBtn = card.querySelector('.service-action-btn') || card.querySelector('a');
+        if (cinemaBtn && cfg.liveCinema && cfg.liveCinema.url) {
+          cinemaBtn.href = cfg.liveCinema.url;
+          var btnText = cinemaBtn.querySelector('span');
+          if (btnText && cfg.liveCinema.buttonText) {
+            btnText.textContent = cfg.liveCinema.buttonText;
+          }
+        }
+        var cinemaTitleEl = card.querySelector('.service-title') || card.querySelector('.service-title-row span:not(.sports-badge-tag)');
+        if (cinemaTitleEl && cfg.liveCinema.title) {
+          cinemaTitleEl.textContent = cfg.liveCinema.title;
+        }
+        var cinemaDescEl = card.querySelector('.service-desc span');
+        if (cinemaDescEl && cfg.liveCinema.subtitle) {
+          cinemaDescEl.textContent = cfg.liveCinema.subtitle;
+        }
+      }
+    });
+
+    // 7. توليد قائمة الأسعار والباقات ديناميكياً
+    var pricesContainers = document.querySelectorAll('.cfg-packages-container');
+    if (pricesContainers.length > 0 && Array.isArray(cfg.packages)) {
+      pricesContainers.forEach(function(container) {
+        var html = '';
+        cfg.packages.forEach(function(pkg) {
+          var titleWithBadge = pkg.name + (pkg.badge ? ' (' + pkg.badge + ')' : '');
+          html += '<div class="modal-price-item">' +
+                    '<div class="mpi-right">' +
+                      '<span class="mpi-title">' + titleWithBadge + '</span>' +
+                      '<span class="mpi-details">' + (pkg.details || '') + '</span>' +
+                    '</div>' +
+                    '<span class="mpi-price">' + (pkg.price || '').replace(/ /g, '&nbsp;') + '</span>' +
+                  '</div>';
+        });
+        container.innerHTML = html;
+      });
+    }
+
+    // 8. توليد نقاط البيع ديناميكياً
+    var posContainers = document.querySelectorAll('.cfg-pos-container');
+    if (posContainers.length > 0 && cfg.pointsOfSale) {
+      posContainers.forEach(function(container) {
+        var html = '';
+        if (Array.isArray(cfg.pointsOfSale)) {
+          cfg.pointsOfSale.forEach(function(pos) {
+            var icon = pos.isMain ? 'fa-star' : 'fa-map-marker';
+            var iconColor = pos.isMain ? '#FFD54F' : '#00e676';
+            var badgeHtml = pos.isMain ? '<span style="font-size: 10px; background: rgba(255, 213, 79, 0.2); color: #FFD54F; padding: 2px 6px; border-radius: 6px; margin-right: 6px;">المركز الرئيسي</span>' : '';
+            
+            html += '<div class="pos-item" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px;">' +
+                      '<div style="display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1;">' +
+                        '<div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">' +
+                          '<i class="fa ' + icon + '" style="color: ' + iconColor + '; font-size: 14px;"></i>' +
+                        '</div>' +
+                        '<div style="display: flex; flex-direction: column; min-width: 0;">' +
+                          '<div style="font-size: 13.5px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + pos.name + badgeHtml + '</div>' +
+                          '<div style="font-size: 11px; color: #F5D77F; margin-top: 2px;">' + pos.location + '</div>' +
+                        '</div>' +
+                      '</div>' +
+                      (pos.phone ? '<a href="tel:' + pos.phone + '" style="padding: 6px 12px; background: rgba(0, 230, 118, 0.15); border: 1px solid rgba(0, 230, 118, 0.4); color: #00e676; border-radius: 8px; font-size: 11.5px; font-weight: 700; text-decoration: none; flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px;"><i class="fa fa-phone"></i><span>اتصال</span></a>' : '') +
+                    '</div>';
+          });
+        } else {
+          // عرض كرت الموزعين ومراكز البيع المعتمدة مع صندوق الإدارة والاستفسار
+          var pos = cfg.pointsOfSale;
+          html += '<div style="background: rgba(0, 180, 255, 0.08); border: 1px solid #00d2ff; padding: 14px 12px; border-radius: 12px; margin-bottom: 12px; text-align: right;">' +
+                    '<div style="font-weight: 800; color: #ffffff; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">' +
+                      '<i class="fa fa-shopping-cart" style="color: #00d2ff; font-size: 15px;"></i>' +
+                      '<span>' + (pos.title || 'مراكز البيع المعتمدة:') + '</span>' +
+                    '</div>' +
+                    '<div style="color: #ffffff; font-size: 13px; line-height: 1.6; font-weight: 500;">' + (pos.description || '') + '</div>' +
+                  '</div>' +
+                  '<div style="background: rgba(255, 215, 0, 0.08); border: 1px solid #ffd700; padding: 14px 12px; border-radius: 12px; text-align: center;">' +
+                    '<div style="font-weight: 800; color: #FFE082; font-size: 13.5px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 6px;">' +
+                      '<i class="fa fa-phone" style="color: #ffd700; font-size: 14px;"></i>' +
+                      '<span>' + (pos.adminTitle || 'للإدارة والاستفسار وطلب نقاط بيع:') + '</span>' +
+                    '</div>' +
+                    '<div style="color: #ffffff; font-weight: 900; font-size: 15px; direction: ltr; letter-spacing: 0.5px;">' + (pos.phones || '') + '</div>' +
+                  '</div>';
+        }
+        container.innerHTML = html;
+      });
+    }
+
+    // 9. توليد محدد السرعات ديناميكياً في صفحة تسجيل الدخول
+    var speedGrid = document.getElementById('cfg-speeds-grid');
+    if (speedGrid && Array.isArray(cfg.speeds) && cfg.speeds.length > 0) {
+      var speedHtml = '';
+      var defaultSpeedVal = '';
+      var defaultSpeedLabel = '';
+
+      cfg.speeds.forEach(function(sp, idx) {
+        var isDefault = sp.isDefault || (idx === 0 && !cfg.speeds.some(function(s){ return s.isDefault; }));
+        if (isDefault) {
+          defaultSpeedVal = sp.value;
+          defaultSpeedLabel = sp.label || sp.name;
+        }
+        var activeClass = isDefault ? 'active-turbo' : '';
+        var iconClass = sp.icon || 'fa-bolt';
+
+        speedHtml += '<div class="speed-btn ' + activeClass + '" id="btn-speed-' + (sp.id || idx) + '" onclick="setSpeedProfile(\\'' + sp.value + '\\', \\'' + (sp.label || sp.name) + '\\', this, ' + (isDefault ? 'true' : 'false') + ')">' +
+                       '<span class="s-title"><i class="fa ' + iconClass + '" style="margin-left: 4px;"></i>' + sp.name + '</span>' +
+                       '<span class="s-profile">' + (sp.desc || sp.value) + '</span>' +
+                     '</div>';
+      });
+      speedGrid.innerHTML = speedHtml;
+
+      // ضبط الحقل المخفي والاسم المعروض
+      var sendinSpeed = document.getElementById('sendin_speed');
+      if (sendinSpeed && defaultSpeedVal) {
+        sendinSpeed.value = defaultSpeedVal;
+      }
+      var selectedProfile = document.getElementById('selected_profile');
+      if (selectedProfile && defaultSpeedVal) {
+        selectedProfile.value = defaultSpeedVal;
+      }
+      var displayProfile = document.getElementById('display-profile-name');
+      if (displayProfile && defaultSpeedLabel) {
+        displayProfile.textContent = defaultSpeedLabel;
+      }
+    }
+  }
+
+  // تطبيق فوري
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply);
+  } else {
+    apply();
+  }
+
+  // نافذة عامة لإعادة التطبيق عند أي تعديل فوري
+  window.refreshHotspotConfig = apply;
+})();
+`;
+    }
+
+    // تنزيل الملف
+    function downloadConfigFile() {
+      const code = generateConfigFileContent();
+      const blob = new Blob([code], { type: 'application/javascript;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'config.js';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("تم تحميل ملف config.js بنجاح!", "success");
+    }
+
+    // نسخ الكود
+    function copyConfigCode() {
+      const code = generateConfigFileContent();
+      navigator.clipboard.writeText(code).then(() => {
+        showToast("تم نسخ كود config.js كاملاً إلى الحافظة!", "success");
+      }).catch(() => {
+        showToast("تعذر النسخ تلقائياً، يرجى نسخه من نافذة عرض الكود", "warning");
+      });
+    }
+
+    // حفظ في السيرفر
+    function saveConfigToServer() {
+      const code = generateConfigFileContent();
+      fetch('/api/save-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: code })
+      }).then(res => res.json()).then(data => {
+        if (data && data.success) {
+          showToast("تم حفظ وتطبيق التعديلات في السيرفر بنجاح!", "success");
+          window.HOTSPOT_CONFIG = JSON.parse(JSON.stringify(currentConfig));
+        } else {
+          // fallback
+          downloadConfigFile();
+        }
+      }).catch(err => {
+        downloadConfigFile();
+      });
+    }
+
+    // النوافذ المنبثقة
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    function openCodeModal() {
+      document.getElementById('codeContainer').textContent = generateConfigFileContent();
+      openModal('codeModal');
+    }
+
+    function openImportModal() {
+      document.getElementById('rawCodeImport').value = '';
+      openModal('importModal');
+    }
+
+    function openLivePreviewModal() {
+      // مزامنة عناصر المعاينة الحية
+      document.getElementById('prev_network_name').textContent = currentConfig.network?.name || 'شبكة الكاري نت اللاسلكية';
+      document.getElementById('prev_network_sub').textContent = currentConfig.network?.subtitle || '';
+
+      const tickerWrap = document.getElementById('prev_ticker_wrap');
+      if (currentConfig.newsTicker?.enabled === false) {
+        tickerWrap.style.display = 'none';
+      } else {
+        tickerWrap.style.display = 'flex';
+        document.getElementById('prev_ticker_badge').textContent = currentConfig.newsTicker?.badgeText || 'جديد الأخبار';
+        document.getElementById('prev_ticker_text').textContent = currentConfig.newsTicker?.headline || '';
+      }
+
+      const cinemaWrap = document.getElementById('prev_cinema_wrap');
+      if (currentConfig.liveCinema?.enabled === false) {
+        cinemaWrap.style.display = 'none';
+      } else {
+        cinemaWrap.style.display = 'flex';
+        document.getElementById('prev_cinema_title').textContent = currentConfig.liveCinema?.title || 'بث المباريات والسينما';
+        document.getElementById('prev_cinema_sub').textContent = currentConfig.liveCinema?.subtitle || '';
+        document.getElementById('prev_cinema_btn').textContent = currentConfig.liveCinema?.buttonText || 'مشاهدة';
+      }
+
+      const reminderWrap = document.getElementById('prev_reminder_wrap');
+      if (currentConfig.dailyReminder?.enabled === false) {
+        reminderWrap.style.display = 'none';
+      } else {
+        reminderWrap.style.display = 'block';
+        document.getElementById('prev_reminder_title').textContent = currentConfig.dailyReminder?.title || 'تذكير وموعظة';
+        document.getElementById('prev_reminder_quote').textContent = currentConfig.dailyReminder?.quote || '';
+      }
+
+      openModal('livePreviewModal');
+    }
+
+    // استيراد الملف
+    function handleFileImport(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        parseAndApplyImport(evt.target.result);
+      };
+      reader.readAsText(file);
+    }
+
+    function importFromRawText() {
+      const text = document.getElementById('rawCodeImport').value;
+      if (text && text.trim().length > 0) {
+        parseAndApplyImport(text);
+      } else {
+        showToast("الرجاء إدخال الكود أو اختيار ملف", "warning");
+      }
+    }
+
+    function parseAndApplyImport(codeText) {
+      try {
+        let jsonStr = codeText;
+        if (codeText.includes("window.HOTSPOT_CONFIG")) {
+          const start = codeText.indexOf('{');
+          const end = codeText.lastIndexOf('};');
+          if (start !== -1 && end !== -1) {
+            jsonStr = codeText.substring(start, end + 1);
+          }
+        }
+        const parsed = JSON.parse(jsonStr);
+        if (parsed && typeof parsed === 'object') {
+          currentConfig = Object.assign({}, currentConfig, parsed);
+          saveLocal();
+          renderFormValues();
+          renderPackagesGrid();
+          renderSpeedsTable();
+          updateHeaderBrand();
+          updateStats();
+          closeModal('importModal');
+          showToast("تم استيراد ملف config.js وتطبيقه بنجاح!", "success");
+        } else {
+          throw new Error("Invalid object");
+        }
+      } catch (err) {
+        showToast("فشل قراءة الملف، تأكد من صحة كود config.js", "error");
+      }
+    }
+
+    function testLink(inpId) {
+      const val = document.getElementById(inpId).value;
+      if (val && val.startsWith('http')) {
+        window.open(val, '_blank');
+      } else {
+        showToast("يرجى كتابة رابط صحيح يبدأ بـ http:// أو https://", "warning");
+      }
+    }
+
+    // نظام التنبيهات
+    function showToast(msg, type = "info") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      
+      let icon = "info-circle";
+      if (type === "success") icon = "check-circle";
+      if (type === "warning") icon = "exclamation-triangle";
+      if (type === "error") icon = "times-circle";
+
+      toast.innerHTML = `<i class="fas fa-${icon}"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    document.addEventListener('DOMContentLoaded', initDashboard);
+  </script>
+</body>
+</html>

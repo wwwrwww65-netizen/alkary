@@ -34,6 +34,7 @@
 
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/font-awesome.css" />
+  <script src="config.js"></script>
   <script defer clear-hot-blocker src="assets/js/hotBlocker.min.js"></script>
 
   <style>
@@ -1466,7 +1467,7 @@
       <div class="hero-header-row">
         <div class="brand-pill">
           <i class="fa fa-bolt" style="color: #FFE082;"></i>
-          <span>شبكة الكاري نت اللاسلكية</span>
+          <span data-cfg="network.name">شبكة الكاري نت اللاسلكية</span>
         </div>
         <div class="status-badge-live">
           <span class="pulse-dot"></span>
@@ -1506,7 +1507,7 @@
     </div>
 
     <!-- Value-Added Services (Matches / Cinema) -->
-    <div class="service-card cinema-card">
+    <div class="service-card cinema-card cfg-cinema-card" id="cfg-cinema-card">
       <div class="cinema-bubbles">
         <div class="c-football"><i class="fa fa-futbol-o"></i></div>
         <div class="c-football"><i class="fa fa-futbol-o"></i></div>
@@ -1519,7 +1520,7 @@
       <div class="service-info">
         <div class="service-title-row">
           <i class="fa fa-futbol-o" style="color: #00e676; font-size: 16px;"></i>
-          <span>بث المباريات والسينما</span>
+          <span class="service-title">بث المباريات والسينما</span>
           <span class="sports-badge-tag">LIVE HD</span>
           <div class="live-dot"></div>
         </div>
@@ -1657,7 +1658,7 @@
       </div>
     </div>
 
-    <div class="footer-phones">
+    <div class="footer-phones" data-cfg="contact.supportText">
       <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651
     </div>
 
@@ -1691,9 +1692,9 @@
   <div id="install-modal" class="modal-overlay" onclick="closeModal('install-modal')">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close-btn" onclick="closeModal('install-modal')"><i class="fa fa-times"></i></button>
-      <div class="modal-title"><i class="fa fa-mobile" style="color: #00d2ff;"></i> تثبيت تطبيق شبكة الكاري نت</div>
+      <div class="modal-title"><i class="fa fa-mobile" style="color: #00d2ff;"></i> تثبيت تطبيق <span data-cfg="network.name">شبكة الكاري نت</span></div>
       <div class="modal-body-content">
-        <p>لتثبيت بوابة شبكة الكاري نت كتطبيق مباشر وسريع على شاشة هاتفك الرئيسية دون الحاجة لتحميل من المتجر:</p>
+        <p>لتثبيت بوابة <span data-cfg="network.name">شبكة الكاري نت</span> كتطبيق مباشر وسريع على شاشة هاتفك الرئيسية دون الحاجة لتحميل من المتجر:</p>
         
         <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px; margin: 12px 0; display: flex; flex-direction: column; gap: 10px;">
           <div style="display: flex; align-items: center; gap: 10px;">
@@ -1727,10 +1728,10 @@
   <div id="packages-modal" class="modal-overlay" onclick="closeModal('packages-modal')">
     <div class="modal-card" onclick="event.stopPropagation()">
       <button class="modal-close-btn" onclick="closeModal('packages-modal')"><i class="fa fa-times"></i></button>
-      <div class="modal-title"><i class="fa fa-tags" style="color: #F5D77F;"></i> باقات وأسعار كروت شبكة الكاري نت</div>
+      <div class="modal-title"><i class="fa fa-tags" style="color: #F5D77F;"></i> باقات وأسعار كروت <span data-cfg="network.name">شبكة الكاري نت</span></div>
       <div class="modal-body-content">
-        <p>اختر الباقة المناسبة لاحتياجك من قائمة كروت الكاري نت اللاسلكية:</p>
-        <div class="modal-price-grid">
+        <p>اختر الباقة المناسبة لاحتياجك من قائمة كروت <span data-cfg="network.name">شبكة الكاري نت</span> اللاسلكية:</p>
+        <div class="modal-price-grid cfg-packages-container">
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 200 ريال</span>
@@ -1741,7 +1742,7 @@
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 500 ريال</span>
-              <span class="mpi-details">35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 1500MB</span>
+              <span class="mpi-details">35 ساعة (يوم و 11 ساعة) • صلاحية 10 أيام • 3GB</span>
             </div>
             <span class="mpi-price">500&nbsp;ر.ي</span>
           </div>
@@ -1755,14 +1756,14 @@
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 2500 ريال (الشهرية الفائقة)</span>
-              <span class="mpi-details">16 يوم (أسبوعين ويومين) • صلاحية 30 يوم • 15GB</span>
+              <span class="mpi-details">شهر كامل • صلاحية 30 يوم • 15GB</span>
             </div>
             <span class="mpi-price">2500&nbsp;ر.ي</span>
           </div>
           <div class="modal-price-item">
             <div class="mpi-right">
               <span class="mpi-title">باقة 5000 ريال (الشهرية الفائقة)</span>
-              <span class="mpi-details">720 ساعة • صلاحية 30 يوم • 40GB</span>
+              <span class="mpi-details">شهر كامل • صلاحية 30 يوم • 40GB</span>
             </div>
             <span class="mpi-price">5000&nbsp;ر.ي</span>
           </div>
@@ -1777,13 +1778,21 @@
       <button class="modal-close-btn" onclick="closeModal('agents-modal')"><i class="fa fa-times"></i></button>
       <div class="modal-title"><i class="fa fa-map-marker" style="color: #F5D77F;"></i> نقاط البيع والموزعين المعتمدين</div>
       <div class="modal-body-content">
-        <div style="background: rgba(0, 180, 255, 0.1); border: 1px solid #00d2ff; padding: 12px; border-radius: 12px; margin-bottom: 12px;">
-          <div style="font-weight: bold; color: #ffffff;"><i class="fa fa-shopping-cart" style="margin-left: 5px;"></i>مراكز البيع المعتمدة:</div>
-          <div style="color: #faf8f5; margin-top: 4px;">كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.</div>
-        </div>
-        <div style="background: rgba(255, 215, 0, 0.1); border: 1px solid #ffd700; padding: 12px; border-radius: 12px;">
-          <div style="font-weight: bold; color: #FFE082;"><i class="fa fa-phone" style="margin-left: 5px;"></i>للإدارة والاستفسار وطلب نقاط بيع:</div>
-          <div style="color: #fff; margin-top: 4px; font-weight: bold;">778311135 - 778898651</div>
+        <div class="cfg-pos-container">
+          <div style="background: rgba(0, 180, 255, 0.08); border: 1px solid #00d2ff; padding: 14px 12px; border-radius: 12px; margin-bottom: 12px; text-align: right;">
+            <div style="font-weight: 800; color: #ffffff; font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <i class="fa fa-shopping-cart" style="color: #00d2ff; font-size: 15px;"></i>
+              <span>مراكز البيع المعتمدة:</span>
+            </div>
+            <div style="color: #ffffff; font-size: 13px; line-height: 1.6; font-weight: 500;">كروت شبكة الكاري نت متوفرة لدى جميع البقالات والمحلات التجارية في نطاق تغطية الشبكة.</div>
+          </div>
+          <div style="background: rgba(255, 215, 0, 0.08); border: 1px solid #ffd700; padding: 14px 12px; border-radius: 12px; text-align: center;">
+            <div style="font-weight: 800; color: #FFE082; font-size: 13.5px; margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <i class="fa fa-phone" style="color: #ffd700; font-size: 14px;"></i>
+              <span>للإدارة والاستفسار وطلب نقاط بيع:</span>
+            </div>
+            <div style="color: #ffffff; font-weight: 900; font-size: 15px; direction: ltr; letter-spacing: 0.5px;">778898651 - 778311135</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1795,7 +1804,7 @@
       <button class="modal-close-btn" onclick="closeModal('speedtest-modal')"><i class="fa fa-times"></i></button>
       <div class="modal-title"><i class="fa fa-dashboard" style="color: #00d2ff;"></i> فحص سرعة الإنترنت الحية</div>
       <div class="modal-body-content" style="text-align: center;">
-        <p>قياس سرعة اتصالك الفعلي وسرعة الاستجابة بشبكة الكاري نت اللاسلكية STARLINK:</p>
+        <p>قياس سرعة اتصالك الفعلي وسرعة الاستجابة بـ<span data-cfg="network.name">شبكة الكاري نت اللاسلكية</span> STARLINK:</p>
         <div style="font-size: 38px; font-weight: 900; color: #00e676; margin: 12px 0; text-shadow: 0 0 15px rgba(0,230,118,0.4);">
           <span id="live-speed-val">98.6</span> <span style="font-size: 14px; color: #faf8f5; font-weight: bold;">Mbps</span>
         </div>

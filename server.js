@@ -178,6 +178,7 @@ app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/xml', express.static(path.join(__dirname, 'xml')));
 app.use('/favicon.ico', express.static(path.join(__dirname, 'favicon.ico')));
 app.use('/md5.js', express.static(path.join(__dirname, 'md5.js')));
+app.use('/config.js', express.static(path.join(__dirname, 'config.js')));
 
 // Middleware to get current session
 function getSession(req) {
@@ -421,6 +422,21 @@ app.get(['/redirect.html', '/alogin.html', '/rlogin.html'], (req, res) => {
   });
 });
 
+// Route: Save config.js from Dashboard
+app.post('/api/save-config', (req, res) => {
+  const { content } = req.body;
+  if (!content) {
+    return res.status(400).json({ success: false, error: 'No content provided' });
+  }
+  const configPath = path.join(__dirname, 'config.js');
+  fs.writeFile(configPath, content, 'utf-8', (err) => {
+    if (err) {
+      return res.status(500).json({ success: false, error: err.message });
+    }
+    res.json({ success: true, message: 'config.js updated successfully' });
+  });
+});
+
 // Route: Hotspot API JSON
 app.get('/api.json', (req, res) => {
   const session = getSession(req);
@@ -444,7 +460,7 @@ app.get('/api/download-hotspot', (req, res) => {
   const filesToInclude = [
     'login.html', 'status.html', 'logout.html',
     'error.html', 'block.html', 'radvert.html', 'redirect.html',
-    'rlogin.html', 'alogin.html', 'api.json', 'md5.js', 'favicon.ico', 'errors.txt'
+    'rlogin.html', 'alogin.html', 'api.json', 'md5.js', 'config.js', 'favicon.ico', 'errors.txt'
   ];
 
   for (const f of filesToInclude) {

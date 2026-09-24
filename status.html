@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>شبكه الكاري نت اللاسلكيه</title>
+$(if refresh-timeout)
+<meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+$(endif)
+<meta charset="windows-1256" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="refresh" content="300">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0' name='viewport' />
+<link href="fonts/notofont.css" rel="stylesheet">
+<link rel="stylesheet" href="css/fontello.css">
+<script language="JavaScript">
+<!--
+$(if advert-pending == 'yes')
+    var popup = '';
+    function focusAdvert() {
+	if (window.focus) popup.focus();
+    }
+    function openAdvert() {
+	popup = open('$(link-advert)', 'hotspot_advert', '');
+	setTimeout("focusAdvert()", 1000);
+    }
+$(endif)
+    function openLogout() {
+	if (window.name != 'hotspot_status') return true;
+        open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+	window.close();
+	return false;
+    }
+//-->
+</script>
+<script language="JavaScript">
+
+function readablizeBytes(bytes) {
+var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
+var e = Math.floor(Math.log(bytes)/Math.log(1024));
+return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+}
+
+</script>
+<script language="JavaScript">
+
+function readablizeBytes(bytes) {
+var s = ['&#1576;&#1575;&#1610;&#1578;', '&#1603;&#1610;&#1604;&#1608;&#1576;&#1575;&#1610;&#1578;', '&#1605;&#1610;&#1580;&#1575;&#1576;&#1575;&#1610;&#1578;', '&#1580;&#1610;&#1580;&#1575;&#1576;&#1575;&#1610;&#1578;', '&#1578;&#1610;&#1585;&#1575;&#1576;&#1575;&#1610;&#1578;', 'PB'];
+var e = Math.floor(Math.log(bytes)/Math.log(1024));
+return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+}
+
+</script>
+<style>
+html, body {
+min-height: 100%;
+}
+body {
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(#0A7294, #032936) no-repeat; /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#0A7294, #032936) no-repeat; /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(#0A7294, #032936) no-repeat; /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#0A7294, #032936) no-repeat; /* Standard syntax (must be last) */
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Noto Kufi Arabic', sans-serif;
+transition: width 0.3s ease;
+}
+.box {
+width: 50%;
+background-color: white;
+padding: 20px;
+margin: 85px auto 70px auto;
+text-align: center;
+position: relative;
+border-bottom: 4px solid #0085DE;
+-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+}
+.box .header {
+color: black;
+}
+.icon {
+background-color: #0085DE;
+width: 70px;
+height: 70px;
+font-size: 2.2rem;
+border-radius: 50px;
+vertical-align: top;
+padding: 1px;
+position: absolute;
+top: -35px;
+left: 45%;
+}
+.icon i {
+color: white;
+}
+.hr {
+width: 90%;
+height: 1px;
+background-color: rgba(0,0,0,0.22);
+margin: 10px auto;
+}
+.section {
+direction: rtl;
+margin: 10px 0 10px 0;
+padding: 15px;
+color: white;
+font-size: 1rem;
+font-size: bold;
+}
+.username {
+background-color: #C70000;
+}
+.card {
+background-color: #006AC7;
+}
+.remain {
+background-color: #C75000;
+}
+.final {
+background-color: #A60088;
+}
+.submit button {
+width: 50%;
+border: none;
+outline: none;
+font-size: 0.9rem;
+font-weight: bold;
+background-color: #15B300;
+color: white;
+padding: 10px;
+cursor: pointer;
+border-bottom: 2px solid rgba(0,0,0,0.33);
+}
+.submit button:hover {
+background-color: #108C00;
+}
+@keyframes anime {
+from {color: #D60000;}
+to {color: #0085DE;}
+}
+@-webkit-keyframes anime {
+from {color: #D60000;}
+to {color: #0085DE;}
+}
+.animate {
+animation: anime .25s infinite alternate;
+-webkit-animation: anime .25s infinite alternate;
+}
+@media screen and (max-width:964px){
+.icon {
+left: 44%;
+}
+}
+@media screen and (max-width:781px){
+.box {
+width: 60%;
+}
+.icon {
+left: 42%;
+}
+}
+@media screen and (max-width:562px){
+.box {
+width: 90%;
+}
+}
+@media screen and (max-width:400px){
+.icon {
+left: 39%;
+}
+}
+@media screen and (max-width:284px){
+.icon {
+left: 37%;
+}
+}
+</style>
+</head>
+<body $(if advert-pending == 'yes')
+	onLoad="openAdvert()"
+$(endif)>
+ <div class="wrapper">
+ <div class="box">
+ <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+ $(if login-by == 'trial')
+ $(elif login-by != 'mac')
+ $(endif)
+ $(if session-time-left)
+ $(else)
+ $(endif)
+ $(if blocked == 'yes')
+ $(elif refresh-timeout)
+ $(endif)
+ $(if login-by-mac != 'yes')
+  <div class="icon"><i class="icon-user"></i></div>
+   <br>
+  <div class="header"><h4>
+<span lang="ar-sy">
+<font color="#000000" size="5">
+	<div id="clock"><b>Loading...</b></div>  
+
+	<script type="text/javascript">  function refrClock()  {  var d=new Date();  var s=d.getSeconds();  var m=d.getMinutes();  var h=d.getHours();  var day=d.getDay();  var date=d.getDate();  var month=d.getMonth();  var year=d.getFullYear();  var days=new Array("&#1575;&#1604;&#1575;&#1581;&#1583;","&#1575;&#1604;&#1575;&#1579;&#1606;&#1610;&#1606;","&#1575;&#1604;&#1579;&#1604;&#1575;&#1579;&#1575;&#1569;","&#1575;&#1604;&#1575;&#1585;&#1576;&#1593;&#1575;&#1569;","&#1575;&#1604;&#1582;&#1605;&#1610;&#1587;","&#1575;&#1604;&#1580;&#1605;&#1593;&#1577;","&#1575;&#1604;&#1587;&#1576;&#1578;");  var months=new Array("&#1610;&#1606;&#1575;&#1610;&#1585;","&#1601;&#1576;&#1585;&#1575;&#1610;&#1585;","&#1605;&#1575;&#1585;&#1587;","&#1575;&#1576;&#1585;&#1610;&#1604;","&#1605;&#1575;&#1610;","&#1610;&#1608;&#1606;&#1610;&#1608;","&#1610;&#1608;&#1604;&#1610;&#1608;","&#1575;&#1594;&#1587;&#1591;&#1587;","&#1587;&#1576;&#1578;&#1605;&#1576;&#1585;","&#1575;&#1603;&#1578;&#1608;&#1576;&#1585;","&#1606;&#1608;&#1601;&#1605;&#1576;&#1585;","&#1583;&#1610;&#1587;&#1605;&#1576;&#1585;");  var am_pm;  if (s<10) {s="0" + s}  if (m<10) {m="0" + m}  if (h>12) {h-=12;am_pm = "&#1605;&#1587;&#1575;&#1569;&#1611;."}  else {am_pm="&#1589;&#1576;&#1575;&#1581;&#1575;&#1611;."}  if (h<10) {h="0" + h}  document.getElementById("clock").innerHTML=days[day] + " " + date + " &#1605;&#1606; " + months[month] + " " + year + "   |   &#1575;&#1604;&#1587;&#1575;&#1593;&#1577; &#1575;&#1604;&#1575;&#1606; " + h + ":" + m + ":" + s + " " + am_pm;  setTimeout("refrClock()",1000);  }  refrClock();</script>
+	</font></span></h4></div>
+  <div class="hr"></div>
+  <div class="section card">
+  <h4>الوقت المستخدم:</h4>
+<td align="center" bgcolor="#FFFF00">
+		<b><font size="4" color="#000000">$(uptime)</font>
+  </div>
+  <div class="section remain">
+  <h4>الوقت المتبقي:</h4>
+  <h4 id="timeLeft">$(session-time-left)</h4>
+  </div>
+  <div class="section remain">
+  <h4>الحجم المستهلك في هذا الاتصال:</h4>
+  <h4><script language="JavaScript">document.write(readablizeBytes($(bytes-total)));</script></h4>
+  </div>
+   <div class="submit"><input type="hidden" name="erase-cookie" value="on">
+  <div class="section final">
+  <h4>الرصيد المتبقي:</h4>
+  <h4 id="timeLeft0"><script language="JavaScript">document.write(readablizeBytes($(remain-bytes-total)));</script></h4>
+  </div>
+  &nbsp;<p><button type="submit">تسجيل الخروج</button></div>
+   $(endif)
+   </form>
+ </div>
+ </div>
+ <script type="text/javascript">
+document.getElementById("timeLeft").innerHTML = "$(session-time-left)".replace("w", " أسبوع , ").replace("d", " يوم , ").replace("h", " ساعة , ").replace("m", " دقيقة , ").replace("s", " ثانية");
+</script>
+
+</body>
+
+</html>

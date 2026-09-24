@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/DroidKufi-Regular.eot);
+  src: url(../fonts/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/DroidKufi-Regular.woff2) format('woff2'),
+       url(../fonts/DroidKufi-Regular.woff) format('woff'),
+       url(../fonts/DroidKufi-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../fonts/DroidKufi-Bold.eot);
+  src: url(../fonts/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'),
+       url(../fonts/DroidKufi-Bold.woff2) format('woff2'),
+       url(../fonts/DroidKufi-Bold.woff) format('woff'),
+       url(../fonts/DroidKufi-Bold.ttf) format('truetype');
+}
+body         { background-color: #C0DFED;
+font-family: 'Droid Arabic Kufi', serif;
+margin:0px;
+ }
+
+#animate-area	{ 
+	width: auto; 
+	height: 400px; 
+	background-image: url(../images/bg-clouds.png);
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+	animation: animatedBackground 40s linear infinite;
+}
+.animate-area	{ 
+	width: auto; 
+	height: 99px; 
+	background-image: url(../images/bg-clouds2.png);
+
+	background-repeat: repeat-x;
+
+	animation: animatedBackground 40s linear infinite;
+}
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+#logo        { 
+color:#0099CC;
+background-position: center; 
+height: 95px; 
+text-align:center; 
+font-size:18pt; 
+direction:rtl; 
+background-repeat:no-repeat; 
+
+background-color:#ffffff 
+
+
+}
+.info {
+background-position: center; 
+text-align:center; 
+font-size:18pt; 
+direction:rtl; 
+background-repeat:no-repeat; 
+padding:5px; 
+color:#FFFFFF; 
+background-color:#0092C1 
+}
+.box {
+max-width: 380px;
+	padding: 10px 35px 30px;
+	float: none;
+	margin: 10 auto 0px auto;
+	background-color: #fff;
+	box-shadow: 0px 12px 12px 0px rgba(0,0,0,0.5); 
+}
+
+input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+}
+
+table {
+    border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+#footer{
+	padding:20px 0 10px 0;
+}
+#footer p{
+	text-align: center;
+	float: none;
+}
+
+#footer p.dev{
+	float:none;
+}
+#footer{
+	background:white;
+	padding: 10px;
+	font-family: 'Droid Arabic Kufi', serif;
+	font-size: 12px;
+	overflow: auto;
+	width: auto;
+	direction: rtl;
+}
+
+#footer p{
+	float:left;
+}
+
+#footer .dev{
+	float: right;
+}

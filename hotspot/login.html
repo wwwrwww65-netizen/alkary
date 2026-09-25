@@ -22,9 +22,10 @@
     <script src="config.js"></script>
     <script>window.$ = window.jQuery = window.$ || function(fn){ if(typeof fn==='function'){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);}else{fn();} } };</script>
     <script src="assets/js/jquery-1.11.2.min.js"></script>
-    <script defer src="assets/js/hotCookie.min.js"></script>
-    <script defer src="assets/js/hotInImprover.min.js"></script>
-    <script defer src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
+    <script src="assets/js/hotCookie.min.js"></script>
+    <script src="assets/js/hotInImprover.min.js"></script>
+    <script src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
+    <script type="text/javascript" src="assets/js/label.js"></script>
     <script type="text/javascript" src="md5.js"></script>
 
     <style>
@@ -1510,52 +1511,6 @@
     </style>
 </head>
 
-$(if chap-id)
-<form name="sendin" action="$(link-login-only)" method="post" style="display:none">
-    <input type="hidden" name="username" />
-    <input type="hidden" name="password" />
-    <input type="hidden" name="dst" value="$(link-orig)" />
-    <input type="hidden" name="popup" value="true" />
-    <input type="hidden" name="domain" value="100M/100M" />
-    <input type="hidden" name="speed" value="100M/100M" />
-</form>
-<script type="text/javascript" src="md5.js"></script>
-<script type="text/javascript">
-<!--
-    function doLogin() {
-        var u = document.getElementById("uname") ? document.getElementById("uname").value.trim() : (document.login.username ? document.login.username.value.trim() : "");
-        if (!u) return false;
-        
-        var paswdEl = document.getElementById("paswd");
-        if (paswdEl) paswdEl.value = u;
-        if (document.login && document.login.password) document.login.password.value = u;
-
-        if (typeof saveVoucherToStorage === "function") saveVoucherToStorage(u);
-        if (typeof rem === "function") rem();
-
-        var speedVal = "100M/100M";
-        var selSpeed = document.getElementById("selected_profile");
-        if (selSpeed) speedVal = selSpeed.value;
-
-        document.sendin.username.value = u;
-        document.sendin.password.value = hexMD5('$(chap-id)' + u + '$(chap-challenge)');
-        if (document.sendin.dst && document.login.dst) document.sendin.dst.value = document.login.dst.value;
-        if (document.sendin.domain) document.sendin.domain.value = speedVal;
-        if (document.sendin.speed) document.sendin.speed.value = speedVal;
-
-        var btn = document.getElementById("submit_btn");
-        if (btn) {
-            btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري الدخول...</span>';
-            btn.disabled = true;
-        }
-
-        document.sendin.submit();
-        return false;
-    }
-//-->
-</script>
-$(endif)
-
 <body style="background-color: #2b000e; background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%); min-height: 100vh; margin: 0;">
 
     <!-- Floating Top Push Notification Container for MikroTik Alerts & System Messages -->
@@ -1675,19 +1630,18 @@ $(endif)
                     <span>بث رياضي مباشر • سينما ومسلسلات 4K</span>
                 </div>
             </div>
-            <a href="http://live.alkary.net" class="service-action-btn" target="_blank" rel="noopener" style="text-decoration: none;">
+            <a href="https://f.com/fiberlive/live.html" class="service-action-btn" target="_blank" rel="noopener" style="text-decoration: none;">
                 <span>مشاهدة</span>
                 <i class="fa fa-play-circle" style="font-size: 14px;"></i>
             </a>
         </div>
 
         <!-- 7. Main Login Form -->
-        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif) style="display: flex; flex-direction: column; gap: 12px;">
+        <form name="login" action="$(link-login-only)" method="post" onSubmit="return doLogin()" style="display: flex; flex-direction: column; gap: 12px;">
             
             <input type="hidden" name="dst" value="$(link-orig)" />
             <input type="hidden" name="popup" value="true" />
             <input type="hidden" name="domain" id="selected_profile" value="100M/100M" />
-            <input type="hidden" name="speed" id="selected_speed" value="100M/100M" />
 
             <!-- Input Card Box -->
             <div class="card-input-wrapper">
@@ -1700,8 +1654,8 @@ $(endif)
                     </button>
                 </div>
                 <div class="input-box-container">
-                    <input id="uname" type="text" name="username" class="voucher-input" placeholder="أدخل كود الكرت هنا" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required oninput="copyTextValue();" improve-input rm-white-spaces to-arabic-numbers />
-                    <input id="paswd" type="hidden" name="password" />
+                    <input id="uname" type="text" name="username" class="voucher-input" placeholder="أدخل كود الكرت هنا" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" required improve-input rm-white-spaces to-arabic-numbers />
+                    <input id="paswd" type="hidden" name="password" value="" />
                 </div>
             </div>
 
@@ -1720,7 +1674,7 @@ $(endif)
                     </div>
                 </div>
                 <div class="custom-checkbox">
-                    <input type="checkbox" id="remember" checked />
+                    <input type="checkbox" name="checkbox1" id="remember" class="ios-toggle" value="ON" checked />
                     <span class="checkmark"></span>
                 </div>
             </label>
@@ -1744,8 +1698,9 @@ $(endif)
                 </div>
             </div>
 
+            <div class="spinner" style="display:none"></div>
             <!-- Main Submit Button -->
-            <button type="submit" id="submit_btn" class="main-login-btn">
+            <button onclick="return rem();" type="submit" id="submit_btn" class="main-login-btn">
                 <i class="fa fa-sign-in" style="font-size: 18px;"></i>
                 <span>تسجيل الدخول الفوري</span>
             </button>
@@ -2020,46 +1975,45 @@ $(endif)
             }
         })();
 
-        // 1. Synchronize Username to Password for Single-Voucher system
+        // 1. Password must ALWAYS be blank for MikroTik Hotspot Voucher cards in Al-Kary Net
         function copyTextValue() {
-            var unameField = document.getElementById("uname");
-            var paswdField = document.getElementById("paswd");
-            if (unameField && paswdField) {
-                paswdField.value = unameField.value;
-            }
+            var paswdEl = document.getElementById("paswd");
+            if (paswdEl) paswdEl.value = "";
+            if (document.login && document.login.password) document.login.password.value = "";
         }
 
-        // Standard MikroTik PAP / Local Emulator fallback
-        if (typeof window.doLogin !== "function") {
-            window.doLogin = function() {
-                copyTextValue();
-                var uField = document.getElementById("uname");
-                var u = (uField ? uField.value : "").trim();
-                if (!u) return false;
+        function doLogin() {
+            var uField = document.getElementById("uname");
+            var u = (uField ? uField.value : "").trim();
+            if (!u) {
+                if (uField) uField.focus();
+                return false;
+            }
 
-                var paswdEl = document.getElementById("paswd");
-                if (paswdEl) paswdEl.value = u;
-                if (document.login && document.login.password) document.login.password.value = u;
+            // في شبكة الكاري نت وراوتر المايكروتك: كلمة المرور فارغة تماماً لكروت الشبكة
+            var paswdEl = document.getElementById("paswd");
+            if (paswdEl) paswdEl.value = "";
+            if (document.login && document.login.password) document.login.password.value = "";
 
-                saveVoucherToStorage(u);
-                if (typeof rem === "function") rem();
+            if (typeof saveVoucherToStorage === "function") saveVoucherToStorage(u);
+            if (typeof rem === "function") rem();
 
-                var selSpeed = document.getElementById("selected_profile");
-                var speedVal = selSpeed ? selSpeed.value : "100M/100M";
+            var selSpeed = document.getElementById("selected_profile");
+            var speedVal = selSpeed ? selSpeed.value : "100M/100M";
 
-                var btn = document.getElementById("submit_btn");
-                if (btn) {
-                    btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري التحقق والدخول...</span>';
-                    btn.style.opacity = "0.9";
-                }
+            var btn = document.getElementById("submit_btn");
+            if (btn) {
+                btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 18px;"></i><span>جاري التحقق والدخول...</span>';
+                btn.style.opacity = "0.9";
+            }
 
-                if (document.login) {
-                    if (document.login.domain) document.login.domain.value = speedVal;
-                    if (document.login.speed) document.login.speed.value = speedVal;
-                    return true;
-                }
+            if (document.login) {
+                document.login.username.value = u;
+                document.login.password.value = "";
+                if (document.login.domain) document.login.domain.value = speedVal;
                 return true;
-            };
+            }
+            return true;
         }
 
         // 2. Remember Me Toggle

@@ -1837,20 +1837,28 @@
         </div>
     </div>
 
-    <!-- Modal 4: Card History -->
+    <!-- Modal 4: Card History (حافظة الكروت الذكية والدائمة) -->
     <div id="history-modal" class="modal-overlay" onclick="closeModal('history-modal')">
         <div class="modal-card" onclick="event.stopPropagation()">
             <button class="modal-close-btn" onclick="closeModal('history-modal')"><i class="fa fa-times"></i></button>
-            <div class="modal-title"><i class="fa fa-history" style="color: #00d2ff;"></i> سجل الكروت السابقة المحفوظة</div>
+            <div class="modal-title"><i class="fa fa-credit-card" style="color: #F5D77F;"></i> حافظة الكروت السابقة المحفوظة</div>
             <div class="modal-body-content">
-                <p>الكروت التي قمت بتسجيل الدخول بها سابقاً على <span data-cfg="network.name">شبكة الكاري نت</span>:</p>
-                <div id="history-list" style="margin: 12px 0; display: flex; flex-direction: column; gap: 8px;">
+                <p style="font-size: 12.5px; color: #ffffff; margin-bottom: 12px; line-height: 1.5;">
+                    الكروت التي قمت بتسجيل الدخول بها سابقاً على هذا الجهاز:
+                </p>
+
+                <!-- قائمة الكروت -->
+                <div id="history-list" style="margin: 10px 0; display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; padding-right: 2px;">
                     <!-- Populated dynamically -->
                 </div>
-                <button type="button" class="ai-check-btn" style="height: 38px;" onclick="clearVoucherHistory()">
-                    <i class="fa fa-trash-o" style="margin-left: 5px;"></i>
-                    <span>مسح سجل الكروت المحفوظة</span>
-                </button>
+
+                <!-- زر مسح الحافظة -->
+                <div style="margin-top: 14px;">
+                    <button type="button" class="ai-check-btn" style="width: 100%; height: 38px; font-size: 12px; border-color: rgba(255,82,82,0.4); color: #ff8a80;" onclick="clearVoucherHistory()">
+                        <i class="fa fa-trash-o" style="margin-left: 5px;"></i>
+                        <span>مسح سجل الكروت المحفوظة</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -2067,26 +2075,25 @@
             if (m) m.style.display = "none";
         }
 
-        // 5. Voucher Storage (History)
-        function saveVoucherToStorage(code) {
-            if (!code) return;
+        // 5. Enhanced Voucher Storage & Card Wallet Engine (Multi-Tier & Cross-Sync)
+        function getWalletCards() {
+            if (typeof getSavedVouchersList === "function") {
+                return getSavedVouchersList();
+            }
+            var list = [];
             try {
-                localStorage.setItem("alkary_active_voucher", code);
-                localStorage.setItem("alkary_active_user", code);
-                sessionStorage.setItem("alkary_active_voucher", code);
-                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
-                if (list.indexOf(code) === -1) {
-                    list.unshift(code);
-                    if (list.length > 8) list.pop();
-                    localStorage.setItem("alkary_vouchers", JSON.stringify(list));
+                var localData = localStorage.getItem("alkary_vouchers");
+                if (localData) {
+                    var parsed = JSON.parse(localData);
+                    if (Array.isArray(parsed)) list = parsed;
                 }
-                updateHistoryCount();
             } catch (e) {}
+            return list;
         }
 
         function updateHistoryCount() {
             try {
-                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
+                var list = getWalletCards();
                 var el = document.getElementById("history-count");
                 if (el) el.innerText = "(" + list.length + ")";
             } catch (e) {}
@@ -2096,16 +2103,23 @@
             var container = document.getElementById("history-list");
             if (!container) return;
             try {
-                var list = JSON.parse(localStorage.getItem("alkary_vouchers") || "[]");
+                var list = getWalletCards();
                 if (list.length === 0) {
-                    container.innerHTML = "<div style='color: #ffffff; text-align:center; padding:12px; background:rgba(255,255,255,0.05); border-radius:8px;'>لا توجد كروت سابقة محفوظة على هذا الجهاز.</div>";
+                    container.innerHTML = "<div style='color: #ffffff; text-align:center; padding:18px 12px; background:rgba(255,255,255,0.05); border-radius:12px; font-size:12.5px;'><i class='fa fa-info-circle' style='margin-left:5px; color:#F5D77F;'></i>لا توجد كروت محفوظة حالياً على هذا الجهاز.<br><span style='font-size:11px; color:#FFE082;'>يمكنك كتابة كرتك أعلاه والضغط على (حفظ) لإضافته فوراً.</span></div>";
                     return;
                 }
                 var html = "";
-                list.forEach(function(code) {
-                    html += "<div style='background:rgba(0,180,255,0.12); border:1px solid rgba(0,180,255,0.35); padding:10px 14px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; transition:all 0.2s ease;' onclick='useVoucher(\"" + code + "\")'>"
-                          + "<span style='font-weight:bold; color:#00e5ff; font-size:16px; letter-spacing:1px;'><i class='fa fa-ticket' style='margin-left:8px;'></i>" + code + "</span>"
-                          + "<button type='button' style='background:#00d2ff; color:#020b18; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:13px;' onclick='event.stopPropagation(); useVoucher(\"" + code + "\")'><i class='fa fa-arrow-down' style='margin-left:4px;'></i>استخدام الكرت</button>"
+                list.forEach(function(code, idx) {
+                    html += "<div style='background:rgba(36, 3, 11, 0.85); border:1px solid rgba(245, 215, 127, 0.35); padding:10px 12px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; gap:8px; transition:all 0.2s ease;'>"
+                          + "<div style='display:flex; flex-direction:column; min-width:0; flex:1;'>"
+                          + "<span style='font-weight:900; color:#F5D77F; font-size:15px; letter-spacing:1px; font-family:monospace; direction:ltr; text-align:right;'><i class='fa fa-ticket' style='margin-left:6px; color:#FFE082;'></i>" + code + "</span>"
+                          + "<span style='font-size:10px; color:#ffffff;'>كرت محفوظ #" + (idx + 1) + "</span>"
+                          + "</div>"
+                          + "<div style='display:flex; align-items:center; gap:5px; flex-shrink:0;'>"
+                          + "<button type='button' title='نسخ الكود' style='background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer;' onclick='copyCardCode(\"" + code + "\")'><i class='fa fa-copy'></i></button>"
+                          + "<button type='button' title='حذف من الحافظة' style='background:rgba(255,82,82,0.15); color:#ff8a80; border:1px solid rgba(255,82,82,0.3); width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; cursor:pointer;' onclick='deleteSingleVoucher(\"" + code + "\")'><i class='fa fa-trash'></i></button>"
+                          + "<button type='button' style='background:linear-gradient(135deg, #FFF0B3, #E6C66E); color:#29020d; border:none; padding:6px 12px; border-radius:8px; font-weight:900; cursor:pointer; font-size:12px; display:flex; align-items:center; gap:4px;' onclick='useVoucher(\"" + code + "\")'><i class='fa fa-check-circle'></i><span>استخدام</span></button>"
+                          + "</div>"
                           + "</div>";
                 });
                 container.innerHTML = html;
@@ -2117,16 +2131,125 @@
             if (unameField) {
                 unameField.value = code;
                 copyTextValue();
-                unameField.blur();
+                unameField.focus();
+                if (typeof rem === "function") rem();
             }
             closeModal("history-modal");
+            showTopToast("success", "تم اختيار الكرت", "تم تعيين الكرت (" + code + ") في خانة الدخول بنجاح!", 4000);
+        }
+
+        function addManualVoucher() {
+            var input = document.getElementById("manual-wallet-input");
+            if (!input) return;
+            var code = input.value.trim();
+            if (!code) {
+                showTopToast("warning", "حقل فارغ", "يرجى كتابة رقم الكرت أولاً لحفظه في الحافظة.", 4000);
+                return;
+            }
+            if (typeof saveVoucherToStorage === "function") {
+                saveVoucherToStorage(code);
+            }
+            input.value = "";
+            loadHistoryUI();
+            updateHistoryCount();
+            showTopToast("success", "تم حفظ الكرت بنجاح", "تمت إضافة الكرت (" + code + ") إلى حافظة كروتك الدائمة!", 4000);
+        }
+
+        function copyCardCode(code) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(function() {
+                    showTopToast("success", "تم النسخ", "تم نسخ كود الكرت (" + code + ") إلى الحافظة بنجاح!", 3500);
+                }).catch(function() {
+                    fallbackCopy(code);
+                });
+            } else {
+                fallbackCopy(code);
+            }
+        }
+
+        function copyAllVouchers() {
+            var list = getWalletCards();
+            if (list.length === 0) {
+                showTopToast("warning", "تنبيه", "لا توجد كروت محفوظة لنسخها.", 4000);
+                return;
+            }
+            var text = list.join("\n");
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showTopToast("success", "تم نسخ النسخة الاحتياطية", "تم نسخ جميع الكروت (" + list.length + " كرت) بنجاح!", 4500);
+                }).catch(function() {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(str) {
+            try {
+                var el = document.createElement('textarea');
+                el.value = str;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                showTopToast("success", "تم النسخ", "تم نسخ الكروت بنجاح!", 3500);
+            } catch (e) {
+                prompt("انسخ كروتك من هنا:", str);
+            }
+        }
+
+        function deleteSingleVoucher(code) {
+            try {
+                var list = getWalletCards();
+                var filtered = list.filter(function(c) { return c !== code; });
+                localStorage.setItem("alkary_vouchers", JSON.stringify(filtered));
+                if (typeof setHotCookie === "function") {
+                    setHotCookie("alkary_vouchers", JSON.stringify(filtered));
+                }
+                loadHistoryUI();
+                updateHistoryCount();
+                showTopToast("info", "تم الحذف", "تم حذف الكرت من الحافظة.", 3000);
+            } catch (e) {}
         }
 
         function clearVoucherHistory() {
-            localStorage.removeItem("alkary_vouchers");
-            loadHistoryUI();
-            updateHistoryCount();
+            var list = getWalletCards();
+            if (list.length === 0) {
+                showTopToast("warning", "تنبيه", "الحافظة فارغة بالفعل.", 3000);
+                return;
+            }
+            if (!confirm("هل أنت متأكد من رغبتك في مسح جميع الكروت المحفوظة من جهازك؟")) return;
+            try {
+                localStorage.removeItem("alkary_vouchers");
+                localStorage.removeItem("alkary_active_voucher");
+                if (typeof setHotCookie === "function") {
+                    setHotCookie("alkary_vouchers", "[]", 3650);
+                }
+                loadHistoryUI();
+                updateHistoryCount();
+                showTopToast("info", "تم المسح", "تم إفراغ حافظة الكروت بنجاح.", 3500);
+            } catch (e) {}
         }
+
+        // Live Auto-Save upon typing or pasting voucher
+        (function() {
+            var unameField = document.getElementById("uname");
+            if (unameField) {
+                unameField.addEventListener("input", function() {
+                    var val = this.value.trim();
+                    if (val.length >= 3 && typeof saveVoucherToStorage === "function") {
+                        saveVoucherToStorage(val);
+                    }
+                });
+                unameField.addEventListener("change", function() {
+                    var val = this.value.trim();
+                    if (val && typeof saveVoucherToStorage === "function") {
+                        saveVoucherToStorage(val);
+                    }
+                });
+            }
+        })();
 
         // 6. AI Card Checker Simulator
         function checkCardAI() {
@@ -2363,6 +2486,12 @@
                     }, 8000);
                 }
             }
+
+            // Ensure username field is clean and empty
+            var uField = document.getElementById("uname");
+            var pField = document.getElementById("paswd");
+            if (uField) uField.value = "";
+            if (pField) pField.value = "";
 
             // Check URL parameters for any redirected alerts or messages
             var urlParams = new URLSearchParams(window.location.search);

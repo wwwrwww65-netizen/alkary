@@ -35,6 +35,7 @@
   <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
   <link rel="stylesheet" href="assets/css/font-awesome.css" />
   <script src="config.js"></script>
+  <script src="assets/js/hotCookie.min.js"></script>
   <script defer clear-hot-blocker src="assets/js/hotBlocker.min.js"></script>
 
   <style>
@@ -1533,13 +1534,16 @@
       </div>
 
       <!-- Huge Success Alert Box -->
-      <div class="hero-banner-content">
-        <div class="hero-success-icon">
+      <div class="hero-banner-content" style="flex-direction: column; text-align: center; justify-content: center; padding: 18px 14px; gap: 12px;">
+        <div class="hero-success-icon" style="margin: 0 auto; width: 54px; height: 54px; min-width: 54px; font-size: 28px; border-radius: 18px;">
           <i class="fa fa-check-circle"></i>
         </div>
-        <div class="hero-text-block">
-          <div class="hero-main-title">تم تسجيل دخولك بنجاح !</div>
-          <div class="hero-sub-title">أهلاً بك، اتصالك الآن نشط بسرعة فائقة عبر STARLINK</div>
+        <div class="hero-text-block" style="align-items: center; width: 100%; gap: 10px;">
+          <div class="hero-main-title" style="font-size: 22px; font-weight: 900; color: #ffffff; line-height: 1.35; text-align: center;">تم تسجيل دخولك بنجاح !</div>
+          <div class="hero-network-highlight" style="font-size: 26px; font-weight: 900; color: #FFF0B3; text-shadow: 0 0 18px rgba(255, 215, 127, 0.85), 0 2px 4px rgba(0,0,0,0.8); margin: 6px 0; letter-spacing: 0.4px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-align: center;">
+            <i class="fa fa-wifi" style="color: #FFE082; font-size: 24px;"></i><span>في شبكة الكاري نت</span>
+          </div>
+          <div class="hero-sub-title" style="font-size: 13.5px; color: #d0f4e0; font-weight: 700; margin-top: 4px; text-align: center;">أهلاً بك، اتصالك الآن نشط بسرعة فائقة عبر STARLINK</div>
         </div>
       </div>
 
@@ -1680,7 +1684,7 @@
     </div>
 
     <!-- تفاصيل الاتصال والبيانات الإضافية (مطابقة لجدول مشروعك السابق الأصلي) -->
-    <div style="background: rgba(36, 3, 11, 0.7); border: 1px solid rgba(245, 215, 127, 0.2); border-radius: 16px; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px;">
+    <div style="display: none; background: rgba(36, 3, 11, 0.7); border: 1px solid rgba(245, 215, 127, 0.2); border-radius: 16px; padding: 12px 16px; flex-direction: column; gap: 8px; font-size: 12.5px;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 6px;">
         <span style="color: #c0d8f0;"><i class="fa fa-cloud-download" style="color: #00e676; margin-left: 6px;"></i>إجمالي التحميل (Bytes Out):</span>
         <span style="color: #fff; font-weight: 700; direction: ltr;"><script type="text/javascript">document.write(arabicBytes("$(bytes-out)"));</script></span>
@@ -2083,6 +2087,16 @@
 
     // Run dynamic calculations immediately
     updateDynamicBars();
+
+    // Auto-record active logged-in voucher into wallet
+    (function() {
+      var u = "$(username)";
+      if (u && u !== "$(username)" && u.indexOf("$") === -1 && u.trim().length > 1) {
+        if (typeof saveVoucherToStorage === "function") {
+          saveVoucherToStorage(u.trim());
+        }
+      }
+    })();
 
     // Mobile Virtual Keyboard & Viewport UX Controller (Preserves keyboard open during page scrolling)
     (function() {

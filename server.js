@@ -95,6 +95,9 @@ function renderMikrotikTemplate(htmlContent, vars = {}) {
     'session-time-left': vars['session-time-left'] || '',
     'bytes-total': vars['bytes-total'] || '0',
     'remain-bytes-total': vars['remain-bytes-total'] || '0',
+    'remain-bytes-total-nice': vars['remain-bytes-total-nice'] || '0 B',
+    'bytes-in': vars['bytes-in'] || '0',
+    'bytes-out': vars['bytes-out'] || '0',
     'bytes-in-nice': vars['bytes-in-nice'] || '0 B',
     'bytes-out-nice': vars['bytes-out-nice'] || '0 B',
     'link-login': vars['link-login'] || '/login.html',
@@ -199,6 +202,9 @@ function getSession(req) {
       'session-time-left': formatSeconds(remainingTimeSecs),
       'bytes-total': total,
       'remain-bytes-total': remaining,
+      'remain-bytes-total-nice': formatBytes(remaining),
+      'bytes-in': downloaded,
+      'bytes-out': uploaded,
       'bytes-in-nice': formatBytes(downloaded),
       'bytes-out-nice': formatBytes(uploaded),
       'logged-in': 'yes'
@@ -298,7 +304,10 @@ app.get(['/status.html', '/status'], (req, res) => {
       'session-time-left': '2h 24m 48s',
       'bytes-total': 134742016,
       'remain-bytes-total': 913842176,
-      'bytes-in-nice': '128.5 MB',
+      'remain-bytes-total-nice': '871.5 MB',
+      'bytes-in': 119851008,
+      'bytes-out': 14891008,
+      'bytes-in-nice': '114.3 MB',
       'bytes-out-nice': '14.2 MB',
       'logged-in': 'yes'
     };

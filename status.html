@@ -1093,33 +1093,107 @@
   </style>
 
   <script type="text/javascript">
-    function readablizeBytes(bytes) {
-      if (bytes === undefined || bytes === null || bytes === "" || bytes === "$(bytes-total)" || bytes === "$(remain-bytes-total)") {
+    // 1. الدالة الأصلية المطابقة لمشروعك السابق لحساب البايتات والاستهلاك
+    function arabicBytes(original) {
+      if (original === undefined || original === null || original === "" || original === "0" || original === 0) {
         return "0 بايت";
       }
-      var num = parseFloat(bytes);
-      if (isNaN(num) || num <= 0) return "0 بايت";
-      if (num < 1024) return Math.round(num) + " بايت";
-      var s = ['بايت', 'كيلوبايت', 'ميجابايت', 'جيجابايت', 'تيرابايت'];
-      var e = Math.floor(Math.log(num) / Math.log(1024));
-      if (e < 0) e = 0;
-      if (e >= s.length) e = s.length - 1;
-      return (num / Math.pow(1024, e)).toFixed(2) + " " + s[e];
+      var str = String(original).trim();
+      if (str.indexOf("$(") !== -1) return "0 بايت";
+      var int1 = parseFloat(str);
+      if (isNaN(int1) || int1 <= 0) return "0 بايت";
+      var GB = "جيجابايت", MB = "ميجابايت", KB = "كيلوبايت", B = "بايت";
+      if (int1 < 1024) return Math.round(int1) + " " + B;
+      else if (int1 < (1024 * 1024)) return (int1 / 1024).toFixed(1) + " " + KB;
+      else if (int1 < (1024 * 1024 * 1024)) return (int1 / (1024 * 1024)).toFixed(1) + " " + MB;
+      else return (int1 / (1024 * 1024 * 1024)).toFixed(2) + " " + GB;
     }
 
-    function formatQuotaRemain(bytes) {
-      if (!bytes || bytes === "0" || bytes === 0 || bytes === "$(remain-bytes-total)" || (typeof bytes === 'string' && bytes.indexOf("$(") !== -1)) {
+    function readablizeBytes(bytes) {
+      return arabicBytes(bytes);
+    }
+
+    // 2. فحص الرصيد المتبقي بدقة متطابقة 100% مع كود مشروعك السابق
+    function formatQuotaRemain(niceVal, rawBytes) {
+      var n = (niceVal !== undefined && niceVal !== null) ? String(niceVal).trim().toLowerCase() : "";
+      if (n === "unlimited" || n === "غير محدود") {
         return "مفتوح (غير محدود)";
       }
-      var num = parseFloat(bytes);
+      var bStr = String(rawBytes || "").trim();
+      if (!bStr || bStr.indexOf("$(") !== -1) {
+        // إذا كان المتغير غير معرّف أو كرت بدون سقف
+        if (n && n.indexOf("$(") === -1 && n !== "") return n;
+        return "مفتوح (غير محدود)";
+      }
+      var num = parseFloat(bStr);
       if (isNaN(num) || num <= 0) {
         return "مفتوح (غير محدود)";
       }
-      return readablizeBytes(num);
+      return arabicBytes(num);
+    }
+
+    // 3. فحص الاستهلاك الكلي (يدعم bytes-total أو مجموع الرفع والتحميل bytes-in + bytes-out)
+    function formatQuotaConsumed(totalBytes, bytesIn, bytesOut) {
+      var t = parseFloat(totalBytes);
+      if (!isNaN(t) && t > 0) return arabicBytes(t);
+      var bi = parseFloat(bytesIn) || 0;
+      var bo = parseFloat(bytesOut) || 0;
+      var sum = bi + bo;
+      if (sum > 0) return arabicBytes(sum);
+      return "0 بايت";
+    }
+
+    // 4. الدالة الأصلية المطابقة لمشروعك السابق لتحويل صيغة الوقت من المايكروتك للعربية بدقة
+    function arabicTime(original) {
+      if (!original || original === "" || original === "0" || original === "0s" || String(original).indexOf("$(") !== -1) {
+        return "غير محدد (مفتوح)";
+      }
+      var str1 = String(original).trim();
+      if (/^\d{1,2}:\d{2}:\d{2}$/.test(str1)) {
+        var parts = str1.split(':');
+        var hrs = parseInt(parts[0], 10);
+        var mins = parseInt(parts[1], 10);
+        var secs = parseInt(parts[2], 10);
+        var out = [];
+        if (hrs > 0) out.push(hrs + ' ساعة');
+        if (mins > 0) out.push(mins + ' دقيقة');
+        if (secs > 0 || out.length === 0) out.push(secs + ' ثانية');
+        return out.join(' ');
+      }
+      var remaining = str1;
+      var d_u = " يوم ", h_u = " ساعة ", m_u = " دقيقة ", s_u = " ثانية ";
+      var d = "", h = "", m = "", s = "";
+
+      if (remaining.indexOf("d") >= 0) {
+        var p = remaining.split("d");
+        d = (p[0] !== "") ? (p[0].trim() + d_u) : "";
+        remaining = p[1] || "";
+      }
+      if (remaining.indexOf("h") >= 0) {
+        var p = remaining.split("h");
+        h = (p[0] !== "") ? (p[0].trim() + h_u) : "";
+        remaining = p[1] || "";
+      }
+      if (remaining.indexOf("m") >= 0) {
+        var p = remaining.split("m");
+        m = (p[0] !== "") ? (p[0].trim() + m_u) : "";
+        remaining = p[1] || "";
+      }
+      if (remaining.indexOf("s") >= 0) {
+        var p = remaining.split("s");
+        s = (p[0] !== "") ? (p[0].trim() + s_u) : "";
+        remaining = p[1] || "";
+      }
+      var res = (d + h + m + s).trim();
+      return res || str1;
+    }
+
+    function formatTimeLeft(timeStr) {
+      return arabicTime(timeStr);
     }
 
     function formatSecondsArabic(totalSecs) {
-      if (totalSecs <= 0) return "0 ث";
+      if (totalSecs <= 0) return "0 ثانية";
       var w = Math.floor(totalSecs / 604800);
       var rem = totalSecs % 604800;
       var d = Math.floor(rem / 86400);
@@ -1130,37 +1204,12 @@
       var s = rem % 60;
       
       var parts = [];
-      if (w > 0) parts.push(w + ' أسابيع');
+      if (w > 0) parts.push(w + ' أسبوع');
       if (d > 0) parts.push(d + ' يوم');
-      if (h > 0) parts.push(h + ' س');
-      if (m > 0) parts.push(m + ' د');
-      if (s > 0 || parts.length === 0) parts.push(s + ' ث');
+      if (h > 0) parts.push(h + ' ساعة');
+      if (m > 0) parts.push(m + ' دقيقة');
+      if (s > 0 || parts.length === 0) parts.push(s + ' ثانية');
       return parts.join(' ');
-    }
-
-    function formatTimeLeft(timeStr) {
-      if (!timeStr || timeStr === "" || timeStr === "0s" || timeStr === "0" || timeStr.indexOf("$(") !== -1) {
-        return "غير محدد (مفتوح)";
-      }
-      if (/^\d{1,2}:\d{2}:\d{2}$/.test(timeStr)) {
-        var parts = timeStr.split(':');
-        var hrs = parseInt(parts[0], 10);
-        var mins = parseInt(parts[1], 10);
-        var secs = parseInt(parts[2], 10);
-        var out = [];
-        if (hrs > 0) out.push(hrs + ' س');
-        if (mins > 0) out.push(mins + ' د');
-        out.push(secs + ' ث');
-        return out.join(' ');
-      }
-      return timeStr
-        .replace(/(\d+)\s*w/g, '$1 أسابيع ')
-        .replace(/(\d+)\s*d/g, '$1 يوم ')
-        .replace(/(\d+)\s*h/g, '$1 س ')
-        .replace(/(\d+)\s*m/g, '$1 د ')
-        .replace(/(\d+)\s*s/g, '$1 ث')
-        .replace(/\s+/g, ' ')
-        .trim();
     }
 
     function parseDurationSeconds(str) {
@@ -1269,11 +1318,19 @@
     var hasTimeLimit = (liveTimeLeftSecs > 0);
     var initialTotalTime = (liveUptimeSecs + liveTimeLeftSecs) || 36000;
 
+    var rawRemainNice = "$(remain-bytes-total-nice)";
     var rawRemainStr = "$(remain-bytes-total)";
     var rawConsumedStr = "$(bytes-total)";
+    var rawBytesIn = "$(bytes-in)";
+    var rawBytesOut = "$(bytes-out)";
+
     var liveRemainBytes = parseInt(rawRemainStr, 10) || 0;
     var liveConsumedBytes = parseInt(rawConsumedStr, 10) || 0;
-    var isLimitedQuota = (liveRemainBytes > 0 && rawRemainStr.indexOf("$(") === -1);
+    if (liveConsumedBytes === 0) {
+      liveConsumedBytes = (parseInt(rawBytesIn, 10) || 0) + (parseInt(rawBytesOut, 10) || 0);
+    }
+    var isUnlimitedRemain = (rawRemainNice === "unlimited" || rawRemainNice === "غير محدود" || liveRemainBytes <= 0 || rawRemainStr.indexOf("$(") !== -1);
+    var isLimitedQuota = !isUnlimitedRemain && liveRemainBytes > 0;
     var initialTotalQuota = isLimitedQuota ? (liveRemainBytes + liveConsumedBytes) : 0;
 
     function updateDynamicBars() {
@@ -1555,7 +1612,7 @@
         <div class="card-label-txt">الرصيد المتبقي للكرت</div>
         <div id="val-remain" class="card-value-display" style="color: #00e676;">
           <script type="text/javascript">
-            document.write(formatQuotaRemain("$(remain-bytes-total)"));
+            document.write(formatQuotaRemain("$(remain-bytes-total-nice)", "$(remain-bytes-total)"));
           </script>
         </div>
         <div class="metric-progress-track">
@@ -1574,8 +1631,7 @@
         <div class="card-label-txt">الوقت والمدة المتبقية</div>
         <div id="val-timeleft" class="card-value-display card-value-time" style="color: #FFE082;">
           <script type="text/javascript">
-            var tl = "$(session-time-left)";
-            document.write(formatTimeLeft(tl));
+            document.write(arabicTime("$(session-time-left)"));
           </script>
         </div>
         <div class="metric-progress-track">
@@ -1594,12 +1650,7 @@
         <div class="card-label-txt">التحميل والاستهلاك</div>
         <div id="val-consumed" class="card-value-display" style="color: #ff758c;">
           <script type="text/javascript">
-            var cb = "$(bytes-total)";
-            if (cb && cb.indexOf("$(") === -1 && cb !== "0") {
-              document.write(readablizeBytes(cb));
-            } else {
-              document.write("0 بايت");
-            }
+            document.write(formatQuotaConsumed("$(bytes-total)", "$(bytes-in)", "$(bytes-out)"));
           </script>
         </div>
         <div class="metric-progress-track">
@@ -1618,8 +1669,7 @@
         <div class="card-label-txt">مدة الجلسة النشطة</div>
         <div id="val-uptime" class="card-value-display card-value-time" style="color: #00d2ff;">
           <script type="text/javascript">
-            var up = "$(uptime)";
-            document.write(formatTimeLeft(up));
+            document.write(arabicTime("$(uptime)"));
           </script>
         </div>
         <div class="metric-progress-track">
@@ -1627,6 +1677,22 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- تفاصيل الاتصال والبيانات الإضافية (مطابقة لجدول مشروعك السابق الأصلي) -->
+    <div style="background: rgba(36, 3, 11, 0.7); border: 1px solid rgba(245, 215, 127, 0.2); border-radius: 16px; padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 6px;">
+        <span style="color: #c0d8f0;"><i class="fa fa-cloud-download" style="color: #00e676; margin-left: 6px;"></i>إجمالي التحميل (Bytes Out):</span>
+        <span style="color: #fff; font-weight: 700; direction: ltr;"><script type="text/javascript">document.write(arabicBytes("$(bytes-out)"));</script></span>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 6px;">
+        <span style="color: #c0d8f0;"><i class="fa fa-cloud-upload" style="color: #00d2ff; margin-left: 6px;"></i>إجمالي الرفع (Bytes In):</span>
+        <span style="color: #fff; font-weight: 700; direction: ltr;"><script type="text/javascript">document.write(arabicBytes("$(bytes-in)"));</script></span>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #c0d8f0;"><i class="fa fa-hourglass-start" style="color: #FFE082; margin-left: 6px;"></i>متصل منذ:</span>
+        <span style="color: #FFE082; font-weight: 700;"><script type="text/javascript">document.write(arabicTime("$(uptime)"));</script></span>
+      </div>
     </div>
 
     <!-- 4. Modern Actions -->

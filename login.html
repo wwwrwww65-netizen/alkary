@@ -2131,7 +2131,7 @@
             if (unameField) {
                 unameField.value = code;
                 copyTextValue();
-                unameField.focus();
+                unameField.blur(); // Remove focus to keep mobile keyboard closed
                 if (typeof rem === "function") rem();
             }
             closeModal("history-modal");

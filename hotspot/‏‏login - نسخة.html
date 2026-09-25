@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="windows-1256" />
+	<meta name="theme-color" content="#673ab7" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+    <title>تسجيل الدخول</title>
+	
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
+
+	<link rel="stylesheet" href="assets/css/assets.css" />
+	<link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+	<link rel="stylesheet" href="assets/css/fontello.css" />
+    <script src="assets/js/hotCookie.min.js"></script>
+    <script src="assets/js/hotInImprover.min.js"></script>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/chik.css">
+	<script type="text/javascript" src="assets/js/label.js"></script>
+	<script src="assets/js/jquery-1.11.2.min.js"></script>
+	<script src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
+
+
+	 
+</head>
+
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-orig)" />
+		<input type="hidden" name="popup" value="true" />
+		<input type="hidden" name="speed" value="false" />
+	</form>
+	
+	<script type="text/javascript" src="/md5.js"></script>
+	<script type="text/javascript">
+	//<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.speed.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.speed.value = document.login.speed.value;
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+	</script>
+$(endif)
+
+<!-- بداية كود الوضع الليلي-->
+
+<style type='text/css'> /* Night Mode */ .nightly{color:#999;font-size:13px} .Switchbtn{position:fixed;text-align:center;display:inline-block;align-items:center;z-index:100;left:20px;top:20px} .togglenight{display:none;} .togglenight + .togglenight-btn{outline:0;display:inline-block;width:45px;height:10px;position:relative;cursor:pointer;margin-right:5px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;} .togglenight + .togglenight-btn:after,.togglenight + .togglenight-btn:before{position:relative;display:block;content:"";width:50%;height:100%} .togglenight-switch + .togglenight-btn{background:#d5d2fc;border-radius:99em;transition:all .4s ease} .togglenight-switch + .togglenight-btn:after{content:'';border-radius:100px;background:#887fff;transition:right 0.3s cubic-bezier(0.175,0.885,0.32,1.275),padding 0.3s ease,margin 0.3s ease;position:absolute;width:20px;height:20px;top:-5px;right:0;box-shadow:0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23)} .togglenight-switch:checked + .togglenight-btn{background:rgba(255,255,255,.15)} .togglenight:checked + .togglenight-btn:after{content:'';right:55%;background:#ff9f43} .nightmode{background:#202124;color:rgba(255,255,255,.7)} .nightmode a{color:rgba(255,255,255,.7)!important} .nightmode a:hover{color:rgba(255,255,255,.4)!important}
+.nightmode .class-baru{}
+.nightmode .class-baru{}
+.nightmode .form{background-color:#202124;}
+.nightmode .submit button {background:#101;}
+.nightmode .back button {background:#101;}
+.nightmode .trial {background:#101;}
+.nightmode .social-icon {background:#101;}
+.nightmode .social-icon.facebook:hover {background:#101;}
+.nightmode .social-icon.dollar:hover {background:#101;}
+.nightmode .social-icon.gplus:hover {background:#101;}
+.nightmode .social-icon.location:hover {background:#101;}
+.nightmode .copyright {background:#101;}
+.nightmode .marque {background:#101;}
+.nightmode .banner {background:#202124;}
+.nightmode .form .input-group .input-field input {color:#fff;}
+.nightmode .modal {background:#202124;}
+.nightmode .bnr {background:#202124;}
+.nightmode #speed {background:#202124;}
+
+</style>
+
+
+<!-- نهاية كود الوضع الليلي-->
+<style>
+.submit button {
+  background-color: #8E44AD;
+  font-size: 18px;
+  padding: 12px 25px;
+  border-radius: 10px;
+}
+
+#clock {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+body {
+  background: linear-gradient(135deg, #1C1C1C, #2C3E50);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.form {
+    background-color: #f4f6f7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.submit button {
+    background-color: #2980B9;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 10px 20px;
+}
+.submit button:hover {
+    background-color: #1A5276;
+}
+.banner {
+    background: linear-gradient(90deg, #2C3E50, #2980B9);
+    color: #fff;
+}
+.marque {
+    background-color: #34495E;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/*SliderShow css*/
+#hcg-slider-1 .hcg-slide-container {
+    width: auto;
+    height: auto;
+}
+
+.hcg-slider {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hcg-slide-container {
+    max-width: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+.hcg-slides {
+    display: none;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hcg-slides img {
+    max-width: 90%;
+    max-height: 100%;
+    display: inline-block;
+    border-radius: 5px;
+    border: solid 1px #a0a0a0;
+    vertical-align: middle;
+}
+
+.hcg-slide-dot-control {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.hcg-slide-dot {
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 10%;
+    display: inline-block;
+}
+
+.hcg-slide-dot.dot-active {
+    background-color: #717171;
+}
+
+
+.animated {
+    animation-name: fadeInRight;
+    animation-duration: 1s;
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fadeInRight {
+    animation-name: fadeInRight;
+}
+/*SliderShow css*/
+</style>
+
+<body>
+
+<!-- /كود لوغو خارج البنر-->
+
+                  <!--<div class="logo-basheer"><img src="assets/img/logo.svg"></div>-->
+				  
+<!-- /نهاية كود اللوغو--> 
+
+<!-- /بداية كود الايقونات-->
+        <div class="bnr">
+        <div class="banner2">
+                <div class="floated">
+                        <a href="prices.html"><div class="social-icon dollar">
+                            <i class="icon-dollar"></i>
+                        </div></a>
+                       <!-- <a href="https://www.facebook.com/00000.alkabor"><div class="social-icon facebook">
+                            <i class="icon-facebook"></i>
+                        </div></a>-->
+                        <div class="social-icon gplus" onclick="document.getElementById('alert-phone').style.display = ('block')">
+                            <i class="icon-whatsapp"></i>
+                        </div>
+                        <div class="social-icon location" onclick="document.getElementById('alert-location').style.display = ('block')">
+                            <i class="icon-location"></i>
+                        </div>
+                    </div>
+        </div>
+		<div class='Switchbtn'> <span class='nightly'>الوضع الليلي</span> <input class='togglenight togglenight-switch' id='nightmode' type='checkbox'/> <label class='togglenight-btn' for='nightmode'/></div>
+<script type='text/javascript'>
+//<![CDATA[
+// Night Mode
+$("#nightmode").click(function(){$("body").toggleClass("nightmode")}),$("body").toggleClass(localStorage.toggled),$("#nightmode").click(function(){"nightmode"!=localStorage.toggled?($("body").toggleClass("nightmode",!0),localStorage.toggled="nightmode"):($("body").toggleClass("nightmode",!1),localStorage.toggled="")});
+//]]>
+</script>
+		<!-- /نهاية كود الايقونات-->
+		</div>
+<br>
+<br>
+<br>
+<br>
+    <!-- سكربت خاص بالساعة-->
+<div id="clock">Loading...</div>  <script type="text/javascript">  function refrClock()  {  var d=new Date();  var s=d.getSeconds();  var m=d.getMinutes();  var h=d.getHours();  var day=d.getDay();  var date=d.getDate();  var month=d.getMonth();  var year=d.getFullYear();  var days=new Array("الاحد","الاثنين","الثلاثاء","الاربعاء","الخميس","الجمعة","السبت");  var months=new Array("يناير","فبراير","مارس","ابريل","ماي","يونيو","يوليو","اغسطس","سبتمبر","اكتوبر","نوفمبر","ديسمبر");  var am_pm;  if (s<10) {s="0" + s}  if (m<10) {m="0" + m}  if (h>12) {h-=12;am_pm = "مساءً."}  else {am_pm="صباحاً."}  if (h<10) {h="0" + h}  document.getElementById("clock").innerHTML=days[day] + " " + date + " من " + months[month] + " " + year + "   |   الساعة الان " + h + ":" + m + ":" + s + " " + am_pm;  setTimeout("refrClock()",1000);  }  refrClock();</script>
+
+ <!-- نهاية الكود-->
+	
+    <div class="form">
+      <div class="banner">
+	  <!-- /كود لوغو داخل البنر-->
+       <!--<div class="logo-basheer">
+        <img src="assets/img/labtop.svg" />
+    </div>-->
+	   <!-- /نهاية الكود-->
+<!-- بداية كود اسم الشبكة داخل البنر -->
+<style>
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+  background: linear-gradient(270deg, #8e2de2, #ff6ec4, #ff9a8b, #f6416c);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 8s ease-in-out infinite;
+  text-shadow: 0 0 8px rgba(255, 105, 180, 0.2), 0 0 12px rgba(255, 105, 180, 0.3);
+}
+</style>
+
+<div>
+  <h1 class="animated-title">
+    <i class="icon-signal" style="margin-left: 8px;"></i> شبكة الكاري نت اللاسلكية
+  </h1>
+</div>
+<br>
+<!-- نهاية الكود -->
+
+<!-- إضافة تأثير إضاءة بالـ CSS -->
+<style>
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFA500;
+  }
+  to {
+    text-shadow: 0 0 20px #FFF700, 0 0 30px #FFA500, 0 0 40px #FFD700;
+  }
+}
+</style>
+
+
+
+<!-- /بداية كود شريط اخباري معدل -->
+<div class="marque" style="
+  background-color: #2E003E;
+  color: #FF9A8B;
+  font-size: 17px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(255, 154, 139, 0.4);
+  font-weight: bold;
+">
+  <marquee direction="right" onMouseOver="this.stop();" onMouseOut="this.start();" scrollamount="4">
+    أهلاً وسهلاً بكم في شبكة <span style='color:#FF6EC4;'>الكاري نت</span>
+    <img width="40" src="img/new.gif" align="absmiddle" />
+    تصفح سريع واستقرار ممتاز
+    <img width="40" src="img/new.gif" align="absmiddle" />
+    باقات مرنة تناسب جميع الاحتياجات
+    <img width="40" src="img/new.gif" align="absmiddle" />
+    احتفظ بمعلومات الدخول حتى انتهاء المدة
+    <img width="40" src="img/new.gif" align="absmiddle" />
+    نشكركم على اختياركم لنا
+    <img width="40" src="img/new.gif" align="absmiddle" />
+    تصفح آمن وممتع نتمناه لكم
+    <img width="40" src="img/new.gif" align="absmiddle" />
+  </marquee>
+</div>
+<!-- /نهاية كود الشريط الاخباري -->
+
+
+	
+		
+	<!-- /بداية كود تسجيل الدخول-->
+<form name="login" action="$(link-login-only)" method="post" 
+      $(if chap-id) onSubmit="return doLogin()" $(endif)>
+    
+    <input type="hidden" name="dst" value="$(link-orig)" />
+    <input type="hidden" name="popup" value="true" />
+
+<!-- بداية قسم اختيار السرعة بتصميم ناعم -->
+<section style="
+    background: linear-gradient(135deg, rgba(75,0,130,0.6), rgba(186,85,211,0.6));
+    padding: 35px;
+    border-radius: 18px;
+    max-width: 420px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(155, 89, 182, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+"
+onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 10px 30px rgba(186,85,211,0.5)';"
+onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 25px rgba(155, 89, 182, 0.4)';">
+
+    <h2 style="
+        color: #f8f0ff;
+        font-family: 'Cairo', sans-serif;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        text-shadow: 0 0 12px rgba(255,255,255,0.4);
+    ">
+        اختيار السرعة
+    </h2>
+
+    <p style="
+        color: #f3eaff;
+        font-size: 15px;
+        font-family: 'Cairo', sans-serif;
+        margin-bottom: 25px;
+        opacity: 0.9;
+    ">
+        يرجى تحديد السرعة المناسبة من القائمة أدناه
+    </p>
+
+    <select name="domain" style="
+        height: 50px;
+        font-size: 1em;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(90deg, #ede7f6, #f3e5f5);
+        color: #333;
+        font-weight: 600;
+        width: 85%;
+        max-width: 260px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 10px rgba(255,255,255,0.3);
+        outline: none;
+        text-align: center;
+    "
+    onfocus="this.style.boxShadow='0 0 14px rgba(155,89,182,0.6)';"
+    onblur="this.style.boxShadow='inset 0 0 8px rgba(0,0,0,0.1), 0 0 10px rgba(255,255,255,0.3)';">
+        <option value="512K/512K">سرعة ضعيفة</option>
+        <option value="100M/100M" selected>سرعة قوية</option>
+    </select>
+</section>
+<!-- نهاية قسم اختيار السرعة -->
+
+    <!-- حقل الإدخال -->
+    <div class="input-group" style="max-width: 400px; margin: auto;">
+        <div class="input-field" style="margin-bottom: 15px;">
+            <input id="uname" type="text" name="username" required placeholder="أدخل الكود هنا"
+                style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" />
+        </div>
+
+        <input id="paswd" type="hidden" name="password" />
+
+        <!-- تذكرني -->
+        <div id="toggles" style="margin: 10px 0;">
+            <input type="checkbox" name="checkbox1" id="remember" class="ios-toggle" value="ON" checked />
+            <label for="remember" class="checkbox-label" data-off="لا تتذكرني" data-on="تذكرني"></label>
+        </div>
+
+        <!-- زر الدخول -->
+        <div class="submit" style="text-align: center;">
+            <button onclick="return rem();" type="submit" style="
+                background-color: #28A745;
+                color: white;
+                padding: 12px 25px;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            " onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28A745'">
+                تسجيل الدخول <i class="icon-login"></i>
+            </button>
+        </div>
+    </div>
+
+   </form>
+<!-- /نهاية كود تسجيل الدخول-->
+
+   
+$(if error)
+    <div id="alert-error" class="alert-back" onclick="this.style.display = ('none')">	
+        <div class="modal">
+            <div class="modal-icon error"><i class="icon-error"></i></div>
+            <div class="title error">
+                <script type="text/javascript">
+                    var error = "$(error)";
+                    if (error == "simultaneous session limit reached") {
+                        document.write("لا يمكن تسجيل الدخول أكثر من مرة");
+                    }
+                    else if (error == "invalid username or password") {
+                        document.write("خطأ في إسم المستخدم او كلمة المرور");
+                    }
+
+else if (error == "access denied at this time") {
+document.write("بطاقة  لا يمكن استخدامها في هذا الوقت");
+}
+else if (error == "uptime limit reached") {
+document.write("عذرا لقد انتهى الوقت المتاح لك..");
+}
+else if (error == "invalid password") {
+document.write("تأكد من كتابة كلمة المرور بشكل صحيح");
+}
+else if (error == "no more sessions are allowed for user $(username)") {
+document.write("لا يمكن تسجيل الدخول اكثر من مرة");
+}
+else if (error == "no valid profile found") {
+document.write("لقد انتهت صلاحية هذه البطاقة");
+}
+else if (error == "transfer limit reached") {
+document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
+}
+else if (error == "user $(username) has reached traffic limit") {
+document.write("لا يمكنك تسجيل الدخول , انتهى رصيد هذه البطاقة");
+}
+else if (error == "invalid Calling-Station-Id") {
+document.write("هذا الحساب مقترن بجهاز آخر ");
+}
+else if (error == "user $(username) is not allowed to log in from this MAC address") {
+document.write("هذا الحساب مقترن بجهاز آخر");
+}
+else if(error.search("not found") != -1) {
+document.write("اسم المستخدم غير موجود تأكد من كتابته بشكل صحيح");
+}
+else if (error == "radius timeout") {
+document.write("عزيزي المشترك نعتذر عن انقطاع الخدمة بسبب الصيانة");
+}
+                    else {
+                        document.write("$(error)");
+                    }
+                </script>
+            </div>
+            <div class="modal-clear"></div>
+            <div id="line"></div>
+            <div class="modal-body">
+                <p>يرجى المحاولة مرة أخرى أو مراجعة المسؤول</p>
+            </div>
+        </div>
+    </div>
+$(endif)
+    
+	
+
+
+
+<!-- بداية كود شريط التواصل (اتصل بنا) -->
+<div id="alert-phone" class="alert-back" onclick="this.style.display = ('none')">
+  <div class="modal">
+    <div class="modal-icon phone">
+      <i class="icon-phone"></i>
+    </div>
+    <div class="title phone" style="font-size: 20px; color: #00ffcc; margin-bottom: 10px;">
+      ☎️ اتصل بنا:
+    </div>
+    <div class="modal-clear"></div>
+    <div id="line" style="height: 2px; background: linear-gradient(to right, #00f0ff, #a100ff); margin: 10px 0;"></div>
+    <div class="modal-body" style="font-size: 16px; color: #eee; text-align: right;">
+      <div style="margin: 10px 0; background: #1f1f1f; padding: 10px; border-radius: 10px; border: 1px solid #444;">
+        <span style="color: #00f0ff; font-weight: bold;">الإدارة والصيانة:</span>
+        <span id="Phone_Admin" style="color: #FFD700; font-size: 18px; margin-right: 10px;">778311135-778898651</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- نهاية الكود -->
+
+
+<!-- بداية كود شريط مراكز البيع (الوكلاء والمعتمدين) -->
+<div id="alert-location" class="alert-back" onclick="this.style.display = ('none')">
+  <div class="modal">
+    <div class="modal-icon place">
+      <i class="icon-location"></i>
+    </div>
+    <div class="title place" style="font-size: 20px; color: #FFD700; margin-bottom: 10px;">
+      🧭 الوكلاء والمعتمدين :
+    </div>
+    <div class="modal-clear"></div>
+    <div id="line" style="height: 2px; background: linear-gradient(to right, #00f0ff, #a100ff); margin: 10px 0;"></div>
+    <div class="modal-body" style="font-size: 16px; color: #ccc; text-align: right;">
+      <div style="margin: 10px 0; background: #1f1f1f; padding: 10px; border-radius: 10px; border: 1px solid #444;">
+        <span style="color: #00f0ff; font-weight: bold;"> </span>
+        <span id="titel">جميع البقالات في نطاق تغطية الشبكة</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- نهاية الكود -->
+
+
+</body>
+
+</html>

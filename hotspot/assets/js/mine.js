@@ -1,0 +1,4 @@
+function toArabicTime(a){var b=a,c="",d="",e="",f="";if(""===a)return"";0<=a.indexOf("d")&&(b=a.split("d"),c=""!==b[0]?b[0]+" ÌÊ„ ":"",b=b[1]);0<=a.indexOf("h")&&(b=b.split("h"),d=""!==b[0]?b[0]+" ”«⁄… ":"",b=b[1]);0<=a.indexOf("m")&&(b=b.split("m"),e=""!==b[0]?b[0]+" œﬁÌﬁ… ":"",b=b[1]);0<=a.indexOf("s")&&(a=b.split("s"),f=""!==a[0]?a[0]+" À«‰Ì… ":"");return c+d+e+f}
+function toArabicBytes(a){return 1024>a?a+" „› ÊÕ ":1048576>a?Math.round(a/1024)+" ﬂÌ·Ê»«Ì  ":1073741824>a?Math.round(a/1048576)+" „ÌÃ«»«Ì  ":(a / 1073741824).toFixed(2)+" ÃÌÃ«»«Ì  "}
+function hideHalfCard(a){a=a.toLowerCase();if(0<=a.indexOf("T-"))return" Ã—»… „Ã«‰Ì…";if(0<=a.indexOf(":"))return"«‘ —«ﬂ";var b=Math.ceil(a.length/2);a=a.substring(0,b);return a+="*".repeat(b)};
+var c=window.pageYOffset;window.addEventListener("scroll",function(){var b=window.pageYOffset;document.getElementById("navbar").style.top=c>b?"0":"-50px";c=b});

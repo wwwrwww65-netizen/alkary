@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="windows-1256" />
+    <meta name="theme-color" content="#673ab7" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+	
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)">
+    $(endif)
+    <meta http-equiv="refresh" content="300">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>معلومات الإشتراك</title>
+	
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
+
+    <link rel="stylesheet" href="assets/css/assets.css" />
+    <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+    <link rel="stylesheet" href="assets/css/fontello.css" />
+    <script src="assets/js/mine.js"></script>
+
+    <script>
+        function openLogout() {
+            if (window.name !== 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+        
+        $(if advert-pending == 'yes')
+        var popup = '';
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+    </script>
+
+    <script language="JavaScript">
+        function nameCard() {
+            let card = document.getElementById("card");
+            card.style.direction = "ltr"
+            card.innerHTML = card.innerHTML.slice(0,4) + "****";
+        }
+        
+        function readablizeBytes(bytes) {
+            var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
+            var e = Math.floor(Math.log(bytes)/Math.log(1024));
+            return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+        }
+        
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // الدوال من الكود الثاني
+        function arabicBytes(original) {
+            var rv;
+            var int1 = original;
+            var GB = "جيجابايت", MB = "ميجابايت", KB = "كيلوبايت", B = "بايت";
+            if(int1 < 1024) rv = int1 + " " + B;
+            else if(int1 < (1024 * 1024)) rv = Math.round(int1 / 1024) + " " + KB; 
+            else if(int1 < (1024 * 1024 * 1024)) rv = Math.round(int1 / (1024 * 1024)) + " " + MB;
+            else rv = Math.round(int1 / (1024 * 1024 * 1024)) + " " + GB;
+            return rv;					 
+        }
+
+        function arabicTime(original) {						
+            var str1 = original, remaining = original;
+            var rv = "";
+            var d_u = "يوم ", h_u = "ساعة ", m_u = "دقيقة ", s_u = "ثانية ";
+            var d = "", h = "", m = "", s = "";
+            
+            if(str1 == "") return "";
+            
+            if(str1.indexOf("d") >= 0) {
+                var str = str1.split("d");
+                d = (str[0] != "") ? (str[0] + d_u) : "";
+                remaining = str[1];
+            }
+            if(str1.indexOf("h") >= 0) {
+                var str = remaining.split("h");
+                h = (str[0] != "") ? (str[0] + h_u) : "";
+                remaining = str[1];
+            }
+            if(str1.indexOf("m") >= 0) {
+                var str = remaining.split("m");
+                m = (str[0] != "") ? (str[0] + m_u) : "";
+                remaining = str[1];
+            }
+            if(str1.indexOf("s") >= 0) {
+                var str = remaining.split("s");
+                s = (str[0] != "") ? (str[0] + s_u) : "";
+                remaining = str[1];
+            }
+            return d + h + m + s;
+        }
+    </script>
+	
+    <!-- Start Cookies-->
+    <script type=text/javascript>
+        function delrem(){
+            document.cookie = "uname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+    </script>
+    <!-- End Cookies-->
+    
+    <style>
+        /* تحسينات التصميم */
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Almarai', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            background: rgba(25, 25, 46, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* تأثيرات زخرفية */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(103, 58, 183, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 0 25px 0;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(103, 58, 183, 0.5);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .info-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #673ab7, transparent);
+            border-radius: 3px;
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .info:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .red::before {
+            background: linear-gradient(to bottom, #ff416c, #ff4b2b);
+        }
+        
+        .green::before {
+            background: linear-gradient(to bottom, #42e695, #3bb2b8);
+        }
+        
+        .blue::before {
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+        }
+        
+        .purple::before {
+            background: linear-gradient(to bottom, #a18cd1, #fbc2eb);
+        }
+        
+        .orange::before {
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+        }
+        
+        .floateed {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .floateed i {
+            font-size: 1.8rem;
+            margin-left: 10px;
+            color: #673ab7;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(103, 58, 183, 0.3);
+        }
+        
+        .header {
+            font-size: 1.1rem;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .valuee {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(103, 58, 183, 0.4);
+        }
+        
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .info-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .info-table td {
+            padding: 12px 15px;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+        
+        .info-table td:first-child {
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.8);
+            border-left: 3px solid #673ab7;
+        }
+        
+        .info-table td:last-child {
+            color: #fff;
+            text-align: left;
+        }
+        
+        .service-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .service-button {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .submit {
+            margin-top: 20px;
+        }
+        
+        .submit button {
+            background: linear-gradient(to right, #673ab7, #7e57c2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(103, 58, 183, 0.4);
+        }
+        
+        .submit button i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .submit button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(103, 58, 183, 0.6);
+        }
+        
+        .submit button:hover i {
+            transform: translateX(5px);
+        }
+        
+        .ether_cart {
+            margin-top: 15px;
+        }
+        
+        .ether_cart input {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(103, 58, 183, 0.5);
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .ether_cart input:hover {
+            background: rgba(103, 58, 183, 0.1);
+            border-color: rgba(103, 58, 183, 0.8);
+            color: #fff;
+        }
+        
+        .contact-info {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* تأثيرات الرسوم المتحركة */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* تصميم متجاوب */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .info-title {
+                font-size: 1.5rem;
+            }
+            
+            .valuee {
+                font-size: 1.5rem;
+            }
+            
+            .submit button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .info-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
+    <div class="container floating">
+        <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+            <p class="info-title">تفاصيل الاتصال</p>
+            
+            <!-- معلومات الاتصال -->
+            <table class="info-table">
+                <tr>
+                    <td>متصل منذ:</td>
+                    <td><script type="text/javascript">document.write(arabicTime("$(uptime)"));</script></td>
+                </tr>
+                <tr>
+                    <td>اجمالي التحميل:<br>اجمالي الرفع:</td>
+                    <td>
+                        <script type="text/javascript">document.write(arabicBytes("$(bytes-out)"));</script><br>
+                        <script type="text/javascript">document.write(arabicBytes("$(bytes-in)"));</script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>تحميل هذه الجلسة:</td>
+                    <td><script type="text/javascript">document.write(arabicBytes("$(bytes-total)"));</script></td>
+                </tr>
+            </table>
+
+            <!-- معلومات الرصيد -->
+            <div class="info red">
+                <div class="floateed">
+                    <i class="icon-download-1"></i>
+                    <p class="header">التحميل المتبقي</p>
+                    <div class="clear"></div>
+                </div>
+                <p class="valuee">
+                    <script type=text/javascript>
+                        var INFO="$(remain-bytes-total-nice)";
+                        if(INFO=="unlimited"){
+                            document.write("غير محدود");
+                        }else{
+                            document.write(arabicBytes($(remain-bytes-total)));
+                        }
+                    </script>
+                </p>
+            </div>
+            
+            <div class="info green">
+                <div class="floateed">
+                    <i class="icon-clock-1"></i>
+                    <p class="header">الوقت المتبقي</p>
+                    <div class="clear"></div>
+                </div>
+                <p class="valuee">
+                    <script type="text/javascript">document.write(arabicTime("$(session-time-left)"));</script>
+                </p>
+            </div>
+            
+            <div class="clear"></div>
+            
+            <!-- زر تسجيل الخروج -->
+            <div class="submit">
+                <input type="hidden" name="erase-cookie" value="on">
+                <button type="submit">
+                    تسجيل الخروج
+                    <i class="icon-login"></i>
+                </button>
+            </div>
+            
+            <!-- زر تسجيل بكرت آخر -->
+            <div class="ether_cart">
+                <input onclick='return delrem();' type='submit' value="تسجيل بكرت اخر">
+            </div>
+            
+                  </form>
+    </div>
+	
+    <script>
+        let percentage = 100;
+        
+        // إضافة تأثيرات للعناصر عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.info, .submit button, .ether_cart input');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // تحديث الوقت المتبقي بشكل ديناميكي
+            function updateTimeLeft() {
+                const timeLeftElement = document.querySelector('.info.green .valuee');
+                if (timeLeftElement) {
+                    const currentText = timeLeftElement.textContent;
+                    // يمكن إضافة منطق لتحديث الوقت هنا إذا كان متاحًا
+                }
+            }
+            
+            setInterval(updateTimeLeft, 60000); // تحديث كل دقيقة
+        });
+    </script>
+</body>
+</html>

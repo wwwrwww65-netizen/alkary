@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="#FFD700" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    <title>تم تسجيل خروجك بنجاح</title>
+
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/assets.css">
+    <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #1A1A2E, #0F3460);
+            color: #fff;
+            font-family: 'Almarai', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background-color: #16213E;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            border: 1px solid #FFD700;
+        }
+
+        .logo img {
+            width: 70px;
+            margin-bottom: 20px;
+        }
+
+        .success p {
+            font-size: 22px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .log-in p {
+            font-size: 15px;
+            color: #ECF0F1;
+            margin-bottom: 25px;
+        }
+
+        .submit button {
+            background-color: #FFD700;
+            color: #1A1A2E;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit button:hover {
+            background-color: #FFC107;
+        }
+
+        .icon-login {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+                <div class="success">
+            <p>تم تسجيل خروجك بنجاح</p>
+        </div>
+        <div class="log-in">
+            <p>للدخول مرة أخرى، اضغط على الزر أدناه</p>
+        </div>
+        <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+            <div class="submit">
+                <button type="submit"><i class="icon-login"></i> دخول</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function openLogin() {
+            if (window.name !== 'hotspot_logout') return true;
+            open('$(link-login)', '_blank', '');
+            window.close();
+            return false;
+        }
+    </script>
+</body>
+</html>

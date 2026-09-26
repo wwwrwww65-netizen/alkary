@@ -1,101 +1,246 @@
-﻿<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" style="background-color: #2b000e;">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="theme-color" content="#FFD700" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    
-    <title>تم تسجيل خروجك بنجاح</title>
+  <meta charset="utf-8" />
+  <meta name="theme-color" content="#24020a" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>شبكة الكاري نت اللاسلكية | تم تسجيل الخروج</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <style>
+    /* Match exact background seamlessly to avoid any white flash or layout shift */
+    html, body {
+      background-color: #2b000e !important;
+      background: radial-gradient(circle at 50% 20%, #4a0018 0%, #2b000e 50%, #150007 100%) !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #ffffff;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+    }
+  </style>
+  <script type="text/javascript">
+    // Instantaneous Execution before HTML parsing
+    var target = "$(link-login)";
+    if (!target || target.indexOf("$(") !== -1) {
+      target = "login.html";
+    }
+    if (target.indexOf("?") !== -1) {
+      target += "&logout=success";
+    } else {
+      target += "?logout=success";
+    }
 
-    <link rel="icon" href="assets/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="assets/css/assets.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css">
+    // Check exit mode
+    var exitMode = "";
+    try {
+      exitMode = sessionStorage.getItem("alkary_exit_mode") || "";
+    } catch(e) {}
 
-    <style>
-        body {
-            background: linear-gradient(to bottom, #1A1A2E, #0F3460);
-            color: #fff;
-            font-family: 'Almarai', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+    // If explicit disconnect was NOT requested, redirect immediately without rendering
+    if (exitMode !== "disconnect") {
+      try {
+        sessionStorage.setItem("just_logged_out", "1");
+      } catch(e) {}
+      window.location.replace(target);
+    } else {
+      // It is a disconnect: make body visible smoothly
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.display = 'flex';
+      });
+    }
+  </script>
 
-        .box {
-            background-color: #16213E;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-            border: 1px solid #FFD700;
-        }
+  <link rel="prefetch" href="login.html" />
+  <link rel="preload" href="assets/fonts/Almarai.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" type="text/css" href="assets/fonts/Almarai.css" />
+  <link rel="stylesheet" href="assets/css/font-awesome.css" />
+  <script src="config.js"></script>
+  <script src="assets/js/hotCookie.min.js"></script>
+  <script src="assets/js/walletSync.js"></script>
 
-        .logo img {
-            width: 70px;
-            margin-bottom: 20px;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", Tahoma, sans-serif;
+    }
 
-        .success p {
-            font-size: 22px;
-            color: #FFD700;
-            margin-bottom: 10px;
-        }
+    body {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
 
-        .log-in p {
-            font-size: 15px;
-            color: #ECF0F1;
-            margin-bottom: 25px;
-        }
+    .logout-container {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(78, 8, 26, 0.9);
+      border: 1.5px solid #a81c3c;
+      border-radius: 20px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.25);
+      text-align: center;
+    }
 
-        .submit button {
-            background-color: #FFD700;
-            color: #1A1A2E;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .brand-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ff1744, #a81c3c);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(255, 23, 68, 0.45);
+    }
 
-        .submit button:hover {
-            background-color: #FFC107;
-        }
+    .logout-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+    }
 
-        .icon-login {
-            margin-right: 8px;
-        }
-    </style>
+    .logout-sub {
+      font-size: 13px;
+      color: #faf8f5;
+    }
+
+    .session-card {
+      background: rgba(75, 8, 26, 0.9);
+      border: 1px solid rgba(255, 75, 110, 0.3);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: right;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #ffe5ec;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .info-val {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .relogin-btn {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #a81c3c, #63051d);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 139, 229, 0.4);
+      transition: all 0.2s;
+    }
+
+    .relogin-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 139, 229, 0.6);
+    }
+
+    .support-text {
+      font-size: 11.5px;
+      color: #cbd5e1;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="box">
-                <div class="success">
-            <p>تم تسجيل خروجك بنجاح</p>
-        </div>
-        <div class="log-in">
-            <p>للدخول مرة أخرى، اضغط على الزر أدناه</p>
-        </div>
-        <form action="$(link-login)" name="login" onSubmit="return openLogin()">
-            <div class="submit">
-                <button type="submit"><i class="icon-login"></i> دخول</button>
-            </div>
-        </form>
+
+  <div class="logout-container">
+
+    <div class="brand-icon">
+      <i class="fa fa-power-off" style="color: #ffffff;"></i>
+    </div>
+    
+    <div>
+      <h2 class="logout-title">تم قطع الاتصال بنجاح</h2>
+      <p class="logout-sub" data-cfg="network.subtitle">شكراً لاختياركم شبكة الكاري نت اللاسلكية</p>
     </div>
 
-    <script>
-        function openLogin() {
-            if (window.name !== 'hotspot_logout') return true;
-            open('$(link-login)', '_blank', '');
-            window.close();
-            return false;
-        }
-    </script>
+    <div class="session-card">
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-user" style="margin-left: 5px;"></i>اسم المشترك:</span>
+        <span class="info-val">$(username)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-desktop" style="margin-left: 5px;"></i>عنوان IP:</span>
+        <span class="info-val" style="direction: ltr;">$(ip)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-microchip" style="margin-left: 5px;"></i>عنوان MAC:</span>
+        <span class="info-val" style="direction: ltr;">$(mac)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-clock-o" style="margin-left: 5px;"></i>مدة الاتصال:</span>
+        <span class="info-val" style="color: #00d2ff;">$(uptime)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-download" style="margin-left: 5px;"></i>البيانات المستلمة:</span>
+        <span class="info-val" style="color: #00e676;">$(bytes-in-nice)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fa fa-upload" style="margin-left: 5px;"></i>البيانات المرسلة:</span>
+        <span class="info-val" style="color: #FFE082;">$(bytes-out-nice)</span>
+      </div>
+    </div>
+
+    <a href="$(link-login)" class="relogin-btn" onclick="return handleRelogin(this, event)">
+      <i class="fa fa-sign-in" style="font-size: 16px;"></i>
+      <span>تسجيل الدخول مجدداً</span>
+    </a>
+
+    <div class="support-text" data-cfg="contact.supportText">
+      <i class="fa fa-phone" style="margin-left: 4px;"></i>خدمة العملاء والدعم الفني: 778311135 - 778898651
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    function handleRelogin(btn, e) {
+      if (btn) {
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin" style="font-size: 16px;"></i><span>جاري فتح بوابة تسجيل الدخول...</span>';
+        btn.style.opacity = '0.9';
+      }
+      var target = '$(link-login)';
+      if (!target || target.indexOf('$(') !== -1) target = 'login.html';
+      try {
+        sessionStorage.removeItem("alkary_exit_mode");
+      } catch(err) {}
+      window.location.replace(target);
+      return false;
+    }
+  </script>
+
 </body>
 </html>

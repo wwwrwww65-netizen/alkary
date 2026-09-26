@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="assets/css/font-awesome.css" />
   <script src="config.js"></script>
   <script src="assets/js/hotCookie.min.js"></script>
+  <script src="assets/js/walletSync.js"></script>
   <script defer clear-hot-blocker src="assets/js/hotBlocker.min.js"></script>
 
   <style>
@@ -1545,10 +1546,9 @@
           </div>
           <div class="hero-sub-title" style="font-size: 13.5px; color: #d0f4e0; font-weight: 700; margin-top: 4px; text-align: center;">أهلاً بك، اتصالك الآن نشط بسرعة فائقة عبر STARLINK</div>
         </div>
-      </div>
 
-      <!-- Connected Voucher & Network Bar -->
-      <div class="user-info-strip">
+      <!-- Connected Voucher & Network Bar (Hidden visually via inline CSS) -->
+      <div class="user-info-strip" style="display: none !important;">
         <div class="user-pill-tag">
           <i class="fa fa-id-card-o" style="color: #FFE082;"></i>
           <span>الكرت:</span>
@@ -1558,7 +1558,6 @@
           <span>IP: $(ip)</span> &nbsp;|&nbsp; <span>MAC: $(mac)</span>
         </div>
       </div>
-
       <!-- Live Synchronized Arabic Clock Banner (initialized immediately without delay) -->
       <div id="clock" class="status-clock-box">
         <script type="text/javascript">

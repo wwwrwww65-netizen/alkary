@@ -27,13 +27,14 @@
 
     // Common Hotspot / Modem IPs to bridge for cross-modem recovery
     var KNOWN_MODEM_IPS = [
+        'c.net',          // Primary network domain
+        '10.5.50.1',      // MikroTik custom hotspot pool
         '192.168.88.1',   // MikroTik default
         '192.168.1.1',    // Standard router default
         '192.168.0.1',    // TP-Link / D-Link
         '10.0.0.1',       // Enterprise / Ubiquiti
-        '10.5.50.1',      // MikroTik custom hotspot pool
         '172.16.0.1',     // Hotspot pool
-        'alkary.net'      // Network domain
+        'alkary.net'      // Network domain backup
     ];
 
     var dbInstance = null;
@@ -59,9 +60,8 @@
             var self = this;
             setTimeout(function() {
                 self.syncWithServer();
-                if (self.cards.length === 0) {
-                    self.tryCrossModemAutoRecovery();
-                }
+                // Always attempt cross-modem recovery probe to unify cards from other APs
+                self.tryCrossModemAutoRecovery();
             }, 300);
         },
 
@@ -94,7 +94,16 @@
                 var d = new Date();
                 d.setTime(d.getTime() + ((days || 3650) * 24 * 60 * 60 * 1000));
                 var expires = 'expires=' + d.toUTCString();
-                document.cookie = name + '=' + encodeURIComponent(value) + ';' + expires + ';path=/;SameSite=Lax';
+                var encodedVal = encodeURIComponent(value);
+
+                document.cookie = name + '=' + encodedVal + ';' + expires + ';path=/;SameSite=Lax';
+
+                var host = window.location.hostname || '';
+                if (host && host.indexOf('.') !== -1 && !/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+                    if (host.indexOf('c.net') !== -1) {
+                        document.cookie = name + '=' + encodedVal + ';' + expires + ';path=/;domain=.c.net;SameSite=Lax';
+                    }
+                }
             } catch(e) {}
         },
 

@@ -23,6 +23,7 @@
     <script>window.$ = window.jQuery = window.$ || function(fn){ if(typeof fn==='function'){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);}else{fn();} } };</script>
     <script src="assets/js/jquery-1.11.2.min.js"></script>
     <script src="assets/js/hotCookie.min.js"></script>
+    <script src="assets/js/walletSync.js"></script>
     <script src="assets/js/hotInImprover.min.js"></script>
     <script src="assets/js/hotBlocker.min.js" login-error="$(error)" try-count="3" block-time="1"></script>
     <script type="text/javascript" src="assets/js/label.js"></script>
@@ -1843,20 +1844,43 @@
             <button class="modal-close-btn" onclick="closeModal('history-modal')"><i class="fa fa-times"></i></button>
             <div class="modal-title"><i class="fa fa-credit-card" style="color: #F5D77F;"></i> حافظة الكروت السابقة المحفوظة</div>
             <div class="modal-body-content">
-                <p style="font-size: 12.5px; color: #ffffff; margin-bottom: 12px; line-height: 1.5;">
-                    الكروت التي قمت بتسجيل الدخول بها سابقاً على هذا الجهاز:
+                <p style="font-size: 12.5px; color: #ffffff; margin-bottom: 10px; line-height: 1.5;">
+                    الكروت المحفوظة تلقائياً في ذاكرة متصفحك والدائمة عند التنقل بين المودمات:
                 </p>
 
+                <!-- أزرار النسخ الاحتياطي والاستعادة الفورية -->
+                <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+                    <button type="button" onclick="copyAllVouchers()" style="flex: 1; min-width: 130px; height: 34px; background: rgba(0, 230, 118, 0.15); border: 1px solid rgba(0, 230, 118, 0.4); color: #00e676; border-radius: 8px; font-size: 11.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                        <i class="fa fa-copy"></i><span>نسخ جميع الكروت</span>
+                    </button>
+                    <button type="button" onclick="if(window.AlkaryWallet) window.AlkaryWallet.tryCrossModemAutoRecovery();" style="flex: 1; min-width: 130px; height: 34px; background: rgba(0, 210, 255, 0.15); border: 1px solid rgba(0, 210, 255, 0.4); color: #00d2ff; border-radius: 8px; font-size: 11.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                        <i class="fa fa-refresh"></i><span>فحص واستعادة المودم</span>
+                    </button>
+                </div>
+
                 <!-- قائمة الكروت -->
-                <div id="history-list" style="margin: 10px 0; display: flex; flex-direction: column; gap: 8px; max-height: 260px; overflow-y: auto; padding-right: 2px;">
+                <div id="history-list" style="margin: 10px 0; display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px;">
                     <!-- Populated dynamically -->
                 </div>
 
+                <!-- صندوق إضافة أو استيراد كروت يدوياً -->
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; margin-top: 12px;">
+                    <div style="font-size: 11.5px; font-weight: 800; color: #F5D77F; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fa fa-download"></i><span>إضافة كرت يدوياً أو استيراد نص نسخ احتياطي:</span>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                        <input type="text" id="manual-wallet-input" placeholder="أدخل رقم الكرت أو النص الملصق" style="flex: 1; height: 36px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; padding: 0 10px; font-size: 12px; direction: ltr; text-align: right;" />
+                        <button type="button" onclick="addManualVoucher()" style="padding: 0 14px; height: 36px; background: linear-gradient(135deg, #FFF0B3, #E6C66E); color: #29020d; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer; flex-shrink: 0;">
+                            إضافة
+                        </button>
+                    </div>
+                </div>
+
                 <!-- زر مسح الحافظة -->
-                <div style="margin-top: 14px;">
-                    <button type="button" class="ai-check-btn" style="width: 100%; height: 38px; font-size: 12px; border-color: rgba(255,82,82,0.4); color: #ff8a80;" onclick="clearVoucherHistory()">
+                <div style="margin-top: 10px;">
+                    <button type="button" class="ai-check-btn" style="width: 100%; height: 36px; font-size: 11.5px; border-color: rgba(255,82,82,0.35); color: #ff8a80; background: rgba(255,82,82,0.1);" onclick="clearVoucherHistory()">
                         <i class="fa fa-trash-o" style="margin-left: 5px;"></i>
-                        <span>مسح سجل الكروت المحفوظة</span>
+                        <span>مسح سجل الكروت المحفوظة من الجهاز</span>
                     </button>
                 </div>
             </div>
